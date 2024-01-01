@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name BlurStyle new
+// @name BlurStyle
 // @version 4.0
 // @description better user experience
 // @author Wolf Team
@@ -53,7 +53,7 @@
                 }
 
                 100% {
-                    width: 100px;
+                    width: 20rem;
                 }
             }
 
@@ -191,9 +191,9 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(10px)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "20px",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.5rem",
 					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
@@ -204,9 +204,9 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(10px)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "20px",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.5rem",
 					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
@@ -217,10 +217,10 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(100px)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-					borderRadius: "18px",
-					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.170)",
+					backdropFilter: "blur(2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.05rem rgba(0,0,0,0.170)",
 					marginBottom: "0.50%",
 					top: "0.5rem"
 				}
@@ -232,10 +232,10 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.075) 0%)",
-					backdropFilter: "blur(100px)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-					borderRadius: "18px",
-					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.170)",
+					backdropFilter: "blur(2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.05rem rgba(0,0,0,0.170)",
 					marginBottom: "0.50%",
 					top: "0.5rem"
 				}
@@ -300,7 +300,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(4px)",
+					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "3rem 3rem 3rem 3rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
@@ -402,7 +402,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 0%)",
-					backdropFilter: "blur(15px)"
+					backdropFilter: "blur(1rem)"
 				}
 			},
 
@@ -412,9 +412,9 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.2) 0%)",
-					backdropFilter: "blur(10px)",
-					border: "0.1rem solid rgba(255, 255, 255, 0.3)",
-					borderRadius: "20px",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.1rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.1rem",
 					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
@@ -606,14 +606,14 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(10px)",
+					backdropFilter: "blur(1rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "20px",
+					borderRadius: "1.5rem",
 					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
-			{ /* стилизация кнопки с премом в главном меню */
+			{ /* стилизация кнопки в шапке с премом в главном меню */
 				tag: ["QS"],
 				selector: "#root > div > div.Common-flexStartAlignStart > div.MainScreenComponentStyle-containerPanel > div.UserInfoContainerStyle-blockLeftPanel > div > div",
 				styles:
@@ -624,15 +624,15 @@
 				}
 			},
 
-			{ /* стилизация диалоговых окон с контекстом */
-				tag: ["QS", "scale", "slide"],
+			{ /* стилизация выпадающих менюшек*/
+				tag: ["QS", "slide"],
 				selector: ".ContextMenuStyle-menu",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(6px)",
+					backdropFilter: "blur(0.2rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "20px",
+					borderRadius: "1.1rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
@@ -644,8 +644,21 @@
 				{}
 			},
 
+			{ /* стилизация всплывающих подсказок */
+				tag: ["QS", "scale"],
+				selector: ".TooltipStyle-tooltip",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.1rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.5rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
 			{ /* стилизация карточек в режимах битв */
-				tag: ["QSA", "scale", "scale3d"],
+				tag: ["QSA", "BHV", "scale", "scale3d"],
 				selector: ".Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard",
 				styles:
 				{
@@ -657,8 +670,35 @@
 				}
 			},
 
-			{ /* дел бордеров из шапки в главном меню */
+			{ /* стилизация хоткеев */
 				tag: ["QSA"],
+				selector: ".HotKey-commonBlockForHotKey",
+				styles:
+				{
+					borderRadius: "1.1rem"
+				}
+			},
+
+			{ /* стилизация хоткеев */
+				tag: ["QSA"],
+				selector: ".Common-buttonQE",
+				styles:
+				{
+					borderRadius: "1.1rem"
+				}
+			},
+
+			{ /* стилизация хоткеев */
+				tag: ["QSA"],
+				selector: "div.BreadcrumbsComponentStyle-backButton > h3",
+				styles:
+				{
+					borderRadius: "1.1rem"
+				}
+			},
+
+			{ /* дел бордеров из шапки в главном меню */
+				tag: ["QSA", "RHV"],
 				selector: ".MainScreenComponentStyle-containerPanel *",
 				styles:
 				{
@@ -668,7 +708,7 @@
 			},
 
 			{ /* дел бордеров из шапки во всех разделах */
-				tag: ["QSA"],
+				tag: ["QSA", "RHV"],
 				selector: ".BreadcrumbsComponentStyle-headerContainer *",
 				styles:
 				{
@@ -692,6 +732,212 @@
 				styles:
 				{
 					display: "none",
+				}
+			},
+
+			{ /* мыло на бэкграунд модальных окон */
+				tag: ["QS", "fade"],
+				selector: ".ModalStyle-rootHover",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+				}
+			},
+
+			{ /* стилизация карточек в кнопке играть */
+				tag: ["QSA", "BHV", "scale", "scale3d"],
+				selector: ".BattlePickComponentStyle-commonStyleBlock.cardImgEvents",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					borderRadius: "1.2rem",
+				}
+			},
+
+			{ /* стилизация списка заявок в друзья */
+				tag: ["QS", "fade"],
+				selector: ".FriendRequestComponentStyle-cellName",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					marginBottom: "-1%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация списка заявок в друзья */
+				tag: ["QS", "fade"],
+				selector: ".FriendRequestComponentStyle-cellActions",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					marginBottom: "-1%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация списка заявок в друзья */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".TableComponentStyle-row",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					marginBottom: "0.50%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+
+			{ /* стилизация кнопочек в списке заявок в друзья */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".FriendRequestComponentStyle-buttonDecline",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.2) 0%, rgba(255, 0, 0, 0.150) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					marginBottom: "0.50%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация кнопочек в списке заявок в друзья */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".FriendRequestComponentStyle-buttonAccept",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(60, 179, 113, 0.2) 0%, rgba(60, 179, 113, 0.2) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					marginBottom: "0.50%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация списка заявок в друзья */
+				tag: ["QS"],
+				selector: ".TableComponentStyle-thead",
+				styles:
+				{
+					marginBottom: "0.725rem"
+				}
+			},
+
+			{ /* стилизация кнопочек в списке заявок в друзья */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".FriendRequestComponentStyle-buttonDeclineAll",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.150) 0%, rgba(255, 0, 0, 0.150) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					marginBottom: "0.50%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация кнопочек в списке заявок в друзья */
+				tag: ["QS"],
+				selector: ".FriendRequestComponentStyle-buttonDeclineAllInvisible",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					marginBottom: "0.50%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация списка друзей */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".FriendListComponentStyle-blockList.nickNameClass",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "2rem",
+					marginBottom: "-1%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация списка друзей */
+				tag: ["QSA"],
+				selector: ".FriendListComponentStyle-substrateRhombus",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)",
+				}
+			},
+
+			{ /* стилизация кнопочек в разделе друзей */
+				tag: ["QS", "fade", "BHV"],
+				selector: ".FriendListComponentStyle-buttonCloseAddFriends",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+				}
+			},
+
+			{ /* стилизация кнопочек в разделе друзей */
+				tag: ["QS", "fade", "BHV"],
+				selector: ".FriendListComponentStyle-buttonAddFriends",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
+				}
+			},
+
+			{ /* стилизация кнопочек в разделе друзей */
+				tag: ["QS"],
+				selector: "div.FriendListComponentStyle-containerButtonFriends > div > img",
+				styles:
+				{
+					filter: "invert(0)"
+				}
+			},
+
+			{ /* стилизация кнопочек в разделе друзей */
+				tag: ["QS", "fade"],
+				selector: ".FriendListComponentStyle-buttonDisableAdd",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
+				}
+			},
+
+			{ /* стилизация полосы поиска */
+				tag: ["QSA", "fade", "BHV"],
+				selector: ".SearchInputComponentStyle-searchInput .Font-normal",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
 				}
 			},
 
