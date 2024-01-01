@@ -74,6 +74,21 @@
 			.slideIn {
 				animation: slideIn 0.3s ease-out;
 			}
+
+			/* бичуганский костыль для стилизации чекбоксов */
+			.CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span) {
+				background: radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%);
+				border: 0.150rem solid rgba(255, 255, 255, 0.2);
+				border-radius: 1.2rem;
+			}
+	
+			.CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span)::before {
+				background: radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 0%);
+				margin-top: 0.2rem;
+				border-radius: 5rem;
+				height: 1.1rem;
+				width: 1rem;
+			}
         `;
 		document.head.appendChild(style);
 	}
@@ -182,6 +197,15 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgb(0, 0, 0, 1) 0%, rgb(0, 0, 0, 1) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "fade"],
+				selector: ".SettingsComponentStyle-scrollingMenu",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
 				}
 			},
 
@@ -1017,6 +1041,59 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
 					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QSA", "fade", "BHV"],
+				selector: ".SettingsMenuComponentStyle-menuItemOptions",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0.5rem 0.05rem rgba(0, 0, 0, 0.55), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					width: "17rem",
+					height: "3rem",
+					marginBottom: "0.7rem",
+					top: "3.8rem"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS"],
+				selector: ".SettingsMenuComponentStyle-slideMenuOptions",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация выпадающего списка */
+				tag: ["QSA", "fade", "BHV"],
+				selector: ".DropDownStyle-dropdownControl",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+				}
+			},
+
+			{ /* стилизация выпадающего списка */
+				tag: ["QSA", "fade", "BHV"],
+				selector: ".VerticalScrollStyle-outerContainerStyle .Common-flexStartAlignCenter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+					marginBottom: "0.4rem"
 				}
 			},
 
