@@ -53,7 +53,7 @@
                 }
 
                 100% {
-                    width: 20rem;
+                    width: 100px;
                 }
             }
 
@@ -261,6 +261,16 @@
 				}
 			},
 
+			{ /* стилизация новостного меню */
+				tag: ["QS", "fade"],
+				selector: ".NewsComponentStyle-closeArea",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)"
+				}
+			},
+
 			{ /* стилизация шапки блока с чатом */
 				tag: ["QS", "fade"],
 				selector: ".ChatComponentStyle-upMenu",
@@ -272,12 +282,12 @@
 			},
 
 			{ /* стилизация блока с чатом */
-				tag: ["QS", "scale"],
+				tag: ["QS"],
 				selector: ".ChatComponentStyle-chatWindow",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 0%)",
-					backdropFilter: "blur(10px)"
+					backdropFilter: "blur(1rem)"
 				}
 			},
 
@@ -287,12 +297,23 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(10px)",
+					backdropFilter: "blur(0.8rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "12px",
 					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 				}
 			},
+
+			{ /* стилизация блока с чатом */
+				tag: ["QS", "fade"],
+				selector: ".ChatComponentStyle-closeArea",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)"
+				}
+			},
+
 
 			{ /* стилизация кнопки играть в главном меню */
 				tag: ["QS", "BHV", "scale3d"],
@@ -613,6 +634,18 @@
 				}
 			},
 
+			{ /* стилизация кнопки купить прем */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".UserTitleComponentStyle-premiumButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0)"
+				}
+			},
+
 			{ /* стилизация кнопки в шапке с премом в главном меню */
 				tag: ["QS"],
 				selector: "#root > div > div.Common-flexStartAlignStart > div.MainScreenComponentStyle-containerPanel > div.UserInfoContainerStyle-blockLeftPanel > div > div",
@@ -925,6 +958,52 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
 					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
+				}
+			},
+
+			{ /* стилизация списка друзей в инвайт меню */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".Common-flexStartAlignCenter.Common-whiteSpaceNoWrap.nickNameClass",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "2rem",
+					marginBottom: "-1%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация списка друзей в инвайт меню */
+				tag: ["QSA"],
+				selector: ".InvitationWindowsComponentStyle-substrateRank",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация кнопочек в инвайт меню */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".InvitationWindowsComponentStyle-backButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация кнопочек в инвайт меню */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".InvitationWindowsComponentStyle-inviteButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 				}
 			},
 
