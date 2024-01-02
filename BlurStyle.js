@@ -11,98 +11,16 @@
 {
 	let observer;
 
-	function cssAnimations()
-	{
-		const style = document.createElement("style");
-		style.textContent = `
-            @keyframes fadeIn {
-                from {
-                    opacity: 0;
-                }
-                to {
-                    opacity: 1;
-                }
-            }
-
-            @keyframes scaleIn {
-                0% {
-                    transform: scale(0.9);
-                }
-                50% {
-                    transform: scale(1.025);
-                }
-                100% {
-                    transform: scale(1);
-                }
-            }
-
-			@keyframes slideIn {
-				0% {
-				  opacity: 0.8;
-				  transform: translateY(20%) perspective(50rem) rotateX(30deg);
-				}
-				100% {
-				  opacity: 1;
-				  transform: translateY(0) perspective(50rem) rotateX(0deg);
-				}
-			}			  
-
-            @keyframes logoAnim {
-                35% {
-                    width: 0%;
-                }
-
-                100% {
-                    width: 100px;
-                }
-            }
-
-            .LobbyLoaderComponentStyle-logo {
-                animation: logoAnim 3s linear forwards;
-                animation-iteration-count: 2;
-                position: relative;
-            }
-
-            .fade-animation {
-                animation: fadeIn 0.65s ease;
-            }
-
-            .scale-animation {
-                animation: scaleIn 0.7s ease-in-out;
-            }
-
-			.slideIn {
-				animation: slideIn 0.3s ease-out;
-			}
-
-			/* бичуганский костыль для стилизации чекбоксов */
-			.CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span) {
-				background: radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%);
-				border: 0.150rem solid rgba(255, 255, 255, 0.2);
-				border-radius: 1.2rem;
-			}
-	
-			.CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span)::before {
-				background: radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 0%);
-				margin-top: 0.2rem;
-				border-radius: 5rem;
-				height: 1.1rem;
-				width: 1rem;
-			}
-        `;
-		document.head.appendChild(style);
-	}
-
 	function animationTags(element, el)
 	{
 		if (element.tag.includes("fade"))
 		{
-			el.classList.add("animate", "fade-animation");
+			el.classList.add("animate", "fade");
 		}
 
 		if (element.tag.includes("scale"))
 		{
-			el.classList.add("animate", "scale-animation");
+			el.classList.add("animate", "scale");
 		}
 
 		if (element.tag.includes("scale3d"))
@@ -188,9 +106,86 @@
 		card.style.boxShadow = "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)";
 	}
 
-	function styles(mutationsList)
+	function styles()
 	{
 		const elements = [
+			{ /* logo аним кфг */
+				cssStyles: `
+					@keyframes logoAnim {
+						35% {
+							width: 0%;
+						}
+
+						100% {
+							width: 100px;
+						}
+					}
+
+					.LobbyLoaderComponentStyle-logo {
+						animation: logoAnim 3s linear forwards;
+						animation-iteration-count: 2;
+						position: relative;
+					}
+				`
+			},
+
+			{ /* fade аним кфг */
+				cssStyles: `
+					@keyframes fadeIn {
+						from {
+							opacity: 0;
+						}
+						to {
+							opacity: 1;
+						}
+					}
+
+					.fade {
+						animation: fadeIn 0.65s ease;
+					}
+				`
+			},
+
+			{ /* scale аним кфг */
+				cssStyles: `
+					@keyframes scaleIn {
+						0% {
+							transform: scale(0.9);
+						}
+						50% {
+							transform: scale(1.025);
+						}
+						100% {
+							transform: scale(1);
+						}
+					}
+
+					.scale {
+						animation: scaleIn 0.7s ease-in-out;
+					}
+				`
+			},
+
+			{ /* slide аним кфг */
+				cssStyles: `
+					@keyframes slideIn {
+						0% {
+						opacity: 0.8;
+						transform: translateY(20%) perspective(50rem) rotateX(30deg);
+						}
+						100% {
+						opacity: 1;
+						transform: translateY(0) perspective(50rem) rotateX(0deg);
+						}
+					}	
+
+					
+					.slideIn {
+						animation: slideIn 0.4s ease-out;
+					}
+				`
+			},
+
 			{ /* стилизация общего блока */
 				tag: ["QS"],
 				selector: ".Common-container",
@@ -375,6 +370,15 @@
 			},
 
 			{ /* стилизация разделов в главном меню */
+				tag: ["QSA", "fade"],
+				selector: ".PrimaryMenuItemComponentStyle-notificationIconNewNews",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация разделов в главном меню */
 				tag: ["QSA", "BHV", "scale3d"],
 				selector: ".FooterComponentStyle-containerMenu.FooterComponentStyle-newsButton",
 				styles:
@@ -531,6 +535,24 @@
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
 					backdropFilter: "blur(10px)"
 				}
+			},
+
+			{ /* стилизация чекбоксов */
+				cssStyles: `
+					.CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span) {
+						background: radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%);
+						border: 0.150rem solid rgba(255, 255, 255, 0.2);
+						border-radius: 1.2rem;
+					}
+			
+					.CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span)::before {
+						background: radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 0%);
+						margin-top: 0.2rem;
+						border-radius: 5rem;
+						height: 1.1rem;
+						width: 1rem;
+					}
+				`
 			},
 
 			{ /* стилизация меню челленджа */
@@ -1097,58 +1119,153 @@
 				}
 			},
 
+			{ /* стилизация активного раздела */
+				cssStyles: `
+					.Common-activeMenu {
+					color: rgba(222, 184, 135, 1) !important;
+					}
+
+					.MenuComponentStyle-mainMenuItem:hover {
+					color: rgba(222, 184, 135, 1) !important;
+					}
+				`
+			},
+
+			{ /* стилизация кнопок в битве */
+				tag: ["QSA", "fade", "BHV"],
+				selector: ".BattleHudComponentStyle-hudButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация всплывающих сообщений в битве */
+				tag: ["QSA"],
+				selector: ".BattleMessagesComponentStyle-message",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.1rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+				}
+			},
+
+			{ /* стилизация менюшки с паузой в битве */
+				tag: ["QS"],
+				selector: ".BattlePauseMenuComponentStyle-dialogFooter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация кнопочек в менюшке паузы */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".BattlePauseMenuComponentStyle-menuButton.BattlePauseMenuComponentStyle-enabledButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+				}
+			},
+
+			{ /* стилизация кнопочек в менюшке паузы */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".BattlePauseMenuComponentStyle-menuButton.BattlePauseMenuComponentStyle-disabledButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.1rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+				}
+			},
+
+			{ /* стилизация кнопочек в менюшке паузы */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".BattlePauseMenuComponentStyle-selectedRedMenuButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.2) 0%, rgba(255, 0, 0, 0.2) 0%)",
+					backdropFilter: "blur(0.1rem)",
+					border: "0.150rem solid rgba(255, 0, 0, 0.3)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+				}
+			},
+
 		];
 
-		mutationsList.forEach((mutation) =>
+		elements.forEach((element) =>
 		{
-			if (mutation.type === "childList")
+			let selectedElements;
+
+			if (element.tag && element.tag.includes("QSA"))
 			{
-				elements.forEach((element) =>
+				selectedElements = document.querySelectorAll(element.selector);
+			}
+			else if (element.tag && element.tag.includes("QS"))
+			{
+				const singleElement = document.querySelector(element.selector);
+				selectedElements = singleElement ? [singleElement] : [];
+			}
+
+			if (selectedElements)
+			{
+				selectedElements.forEach((el) =>
 				{
-					let selectedElements;
+					if (el && !el.classList.contains("animate") && !el.dataset.animated)
+					{
+						el.dataset.animated = true;
 
-					if (element.tag.includes("QSA"))
-					{
-						selectedElements = document.querySelectorAll(element.selector);
-					}
-					else if (element.tag.includes("QS"))
-					{
-						const singleElement = document.querySelector(element.selector);
-						selectedElements = singleElement ? [singleElement] : [];
-					}
+						animationTags(element, el);
+						mouseHover(element, el);
 
-					selectedElements.forEach((el) =>
-					{
-						if (el && !el.classList.contains("animate") && !el.dataset.animated)
+						el.addEventListener("animationend", () =>
 						{
-							el.dataset.animated = true;
+							el.classList.remove("animate");
+						},
+						{
+							once: true
+						});
 
-							animationTags(element, el);
-							mouseHover(element, el);
-
-							el.addEventListener("animationend", () =>
+						if (el.classList.contains("scale3d"))
+						{
+							el.addEventListener("mousemove", (e) => handleMouseMove(e, el));
+							el.addEventListener("mouseenter", () => el.classList.add("is-hovered"));
+							el.addEventListener("mouseleave", () =>
 							{
-								el.classList.remove("animate");
-							},
-							{
-								once: true
+								el.classList.remove("is-hovered");
+								resetTransform(el);
 							});
-
-							if (el.classList.contains("scale3d"))
-							{
-								el.addEventListener("mousemove", (e) => handleMouseMove(e, el));
-								el.addEventListener("mouseenter", () => el.classList.add("is-hovered"));
-								el.addEventListener("mouseleave", () =>
-								{
-									el.classList.remove("is-hovered");
-									resetTransform(el);
-								});
-							}
 						}
-					});
+					}
 				});
 			}
 		});
+
+
+		const style = document.createElement("style");
+		style.textContent = elements.reduce((acc, element) =>
+		{
+			if (element.cssStyles)
+			{
+				acc += element.cssStyles;
+			}
+			return acc;
+		}, '');
+		document.head.appendChild(style);
 	}
 
 	function initObserver()
@@ -1163,6 +1280,5 @@
 		observer.observe(document.body, config);
 	}
 
-	cssAnimations();
 	initObserver();
 })();
