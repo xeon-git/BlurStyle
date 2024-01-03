@@ -10,6 +10,7 @@
 (function()
 {
 	let observer;
+	let cssStyles;
 
 	function animationTags(element, el)
 	{
@@ -832,6 +833,7 @@
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
 					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75)"
 				}
 			},
 
@@ -1180,7 +1182,7 @@
 			},
 
 			{ /* стилизация кнопочек в менюшке паузы */
-				tag: ["QSA", "BHV", "fade"],
+				tag: ["QSA", "fade"],
 				selector: ".BattlePauseMenuComponentStyle-menuButton.BattlePauseMenuComponentStyle-disabledButton",
 				styles:
 				{
@@ -1256,17 +1258,22 @@
 		});
 
 
-		const style = document.createElement("style");
-		style.textContent = elements.reduce((acc, element) =>
-		{
-			if (element.cssStyles)
-			{
-				acc += element.cssStyles;
-			}
-			return acc;
-		}, '');
-		document.head.appendChild(style);
-	}
+        const checkStyles = cssStyles ? cssStyles.textContent : '';
+        const updateStyles = elements.reduce((acc, element) => {
+            if (element.cssStyles && !checkStyles.includes(element.cssStyles)) {
+                acc += element.cssStyles;
+            }
+            return acc;
+        }, '');
+
+        if (updateStyles) {
+            if (!cssStyles) {
+                cssStyles = document.createElement("style");
+                document.head.appendChild(cssStyles);
+            }
+            cssStyles.textContent = checkStyles + updateStyles;
+        }
+    }
 
 	function initObserver()
 	{
