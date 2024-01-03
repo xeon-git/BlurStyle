@@ -178,9 +178,9 @@
 						opacity: 1;
 						transform: translateY(0) perspective(50rem) rotateX(0deg);
 						}
-					}	
+					}
 
-					
+
 					.slideIn {
 						animation: slideIn 0.4s ease-out;
 					}
@@ -545,7 +545,7 @@
 						border: 0.150rem solid rgba(255, 255, 255, 0.2);
 						border-radius: 1.2rem;
 					}
-			
+
 					.CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span)::before {
 						background: radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 0%);
 						margin-top: 0.2rem;
@@ -1023,6 +1023,19 @@
 			},
 
 			{ /* стилизация списка друзей в инвайт меню */
+				tag: ["QSA", "fade"],
+				selector: ".Common-flexStartAlignCenter Common-whiteSpaceNoWrap",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "2rem",
+					marginBottom: "-1%",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация списка друзей в инвайт меню */
 				tag: ["QSA"],
 				selector: ".InvitationWindowsComponentStyle-substrateRank",
 				styles:
@@ -1257,23 +1270,26 @@
 			}
 		});
 
+		const checkStyles = cssStyles ? cssStyles.textContent : '';
+		const updateStyles = elements.reduce((acc, element) =>
+		{
+			if (element.cssStyles && !checkStyles.includes(element.cssStyles))
+			{
+				acc += element.cssStyles;
+			}
+			return acc;
+		}, '');
 
-        const checkStyles = cssStyles ? cssStyles.textContent : '';
-        const updateStyles = elements.reduce((acc, element) => {
-            if (element.cssStyles && !checkStyles.includes(element.cssStyles)) {
-                acc += element.cssStyles;
-            }
-            return acc;
-        }, '');
-
-        if (updateStyles) {
-            if (!cssStyles) {
-                cssStyles = document.createElement("style");
-                document.head.appendChild(cssStyles);
-            }
-            cssStyles.textContent = checkStyles + updateStyles;
-        }
-    }
+		if (updateStyles)
+		{
+			if (!cssStyles)
+			{
+				cssStyles = document.createElement("style");
+				document.head.appendChild(cssStyles);
+			}
+			cssStyles.textContent = checkStyles + updateStyles;
+		}
+	}
 
 	function initObserver()
 	{
