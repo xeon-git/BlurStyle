@@ -196,6 +196,15 @@
 				}
 			},
 
+			{ /* стилизация первоначального экрана */
+				tag: ["QS"],
+				selector: ".Common-entranceGradient",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgb(0, 0, 0, 1) 0%, rgb(0, 0, 0, 1) 0%)"
+				}
+			},
+
 			{ /* стилизация раздела настроек */
 				tag: ["QS", "fade"],
 				selector: ".SettingsComponentStyle-scrollingMenu",
@@ -970,7 +979,7 @@
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
-					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
 				}
 			},
 
@@ -1018,7 +1027,7 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "2rem",
 					marginBottom: "-1%",
-					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -1031,7 +1040,7 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "2rem",
 					marginBottom: "-1%",
-					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -1052,7 +1061,7 @@
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
-					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -1064,7 +1073,7 @@
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
-					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -1077,7 +1086,7 @@
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
-					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
 				}
 			},
 
@@ -1116,7 +1125,16 @@
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
-					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация выпадающего списка */
+				tag: ["QSA"],
+				selector: ".DropDownStyle-outerContainerStyle.DropDownStyle-dropdownMenu",
+				styles:
+				{
+					top: "3.5rem"
 				}
 			},
 
@@ -1129,7 +1147,7 @@
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
-					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 					marginBottom: "0.4rem"
 				}
 			},
@@ -1218,6 +1236,62 @@
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
 				}
+			},
+
+			{ /* анимированный фон */
+				cssStyles: `
+					@keyframes gradientBg {
+						from {
+							background-position: 50% 50%, 50% 50%;
+						}
+						to {
+							background-position: 350% 50%, 350% 50%;
+						}
+					}
+					
+					.Common-entranceGradient, #app-root, .Common-Container {
+						position: relative;
+						overflow: hidden;
+					}
+
+					.Common-entranceGradient::before, #app-root::before, .Common-container::before {
+						content: "";
+						position: absolute;
+						inset: 0;
+						--stripes: repeating-linear-gradient(
+							100deg,
+							#fff 0%,
+							#fff 7%,
+							transparent 10%,
+							transparent 12%,
+							#fff 16%
+						);
+						--stripesDark: repeating-linear-gradient(
+							100deg,
+							#000 0%,
+							#000 7%,
+							transparent 10%,
+							transparent 12%,
+							#000 16%
+						);
+						--rainbow: repeating-linear-gradient(
+							100deg,
+							#fff 10%,
+							#000 15%,
+							#fff 20%,
+							#000 25%,
+							#fff 30%
+						);
+						background-image: var(--stripes), var(--rainbow);
+						background-size: 200%, 100%;
+						animation: gradientBg 60s linear infinite;
+						background-attachment: fixed;
+						mix-blend-mode: difference;
+						filter: blur(14rem) invert(100%);
+						mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+						will-change: transform;
+					}
+				`
 			},
 
 		];
