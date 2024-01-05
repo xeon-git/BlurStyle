@@ -270,6 +270,15 @@
 				}
 			},
 
+			{ /* стилизация увед точек */
+				tag: ["QSA"],
+				selector: ".ItemNotificationMarkerStyle-base",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
 			{ /* стилизация шапки новостного меню */
 				tag: ["QS"],
 				selector: ".NewsComponentStyle-header",
@@ -307,6 +316,19 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
 					backdropFilter: "blur(10px)"
+				}
+			},
+
+			{ /* стилизация блока с чатом */
+				tag: ["QS", "BHV"],
+				selector: ".ChatComponentStyle-channelSelect",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.8rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "0.6rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 				}
 			},
 
@@ -962,6 +984,42 @@
 
 			{ /* стилизация списка друзей */
 				tag: ["QSA"],
+				selector: ".FriendListComponentStyle-stringCommunity",
+				styles:
+				{
+					paddingTop: "0.5rem"
+				}
+			},
+
+			{ /* стилизация прогресса возле званки */
+				cssStyles: 
+				`
+					div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn {
+						background: rgba(222, 184, 135, 0.5) !important;
+						filter: saturate(1);
+					}
+
+					div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn::after {
+						background: rgba(222, 184, 135, 1) !important;
+						filter: saturate(5);
+					}
+
+					.UserInfoContainerStyle-xpIcon {
+						filter: saturate(0);
+					}
+
+					div.UserInfoContainerStyle-progressValue {
+						color: rgba(255, 255, 255, 1) !important;
+					}
+
+					div.UserInfoContainerStyle-progressValue > span {
+						color: rgba(255, 255, 255, 1) !important;
+					}
+				`
+			},
+
+			{ /* стилизация списка друзей */
+				tag: ["QSA"],
 				selector: ".FriendListComponentStyle-substrateRhombus",
 				styles:
 				{
@@ -1033,7 +1091,7 @@
 
 			{ /* стилизация списка друзей в инвайт меню */
 				tag: ["QSA", "fade"],
-				selector: ".Common-flexStartAlignCenter Common-whiteSpaceNoWrap",
+				selector: ".Common-flexStartAlignCenter.Common-whiteSpaceNoWrap",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
@@ -1155,11 +1213,25 @@
 			{ /* стилизация активного раздела */
 				cssStyles: `
 					.Common-activeMenu {
-					color: rgba(222, 184, 135, 1) !important;
+						color: rgba(222, 184, 135, 1) !important;
 					}
 
 					.MenuComponentStyle-mainMenuItem:hover {
-					color: rgba(222, 184, 135, 1) !important;
+						color: rgba(222, 184, 135, 1) !important;
+					}
+
+					.Common-menuItemActive {
+						background: rgba(222, 184, 135, 1) !important;
+						box-shadow: rgba(222, 184, 135, 1) 0rem 0rem 0.375rem !important;
+						filter: drop-shadow(rgba(222, 184, 135, 1) 0rem 0rem 0.5rem) !important;
+					}
+				`
+			},
+
+			{ /* стилизация заголовка раздела */
+				cssStyles: `
+					div.BreadcrumbsComponentStyle-breadcrumbs > div > span {
+						color: rgba(222, 184, 135, 1) !important;
 					}
 				`
 			},
@@ -1238,60 +1310,325 @@
 				}
 			},
 
-			{ /* анимированный фон */
-				cssStyles: `
-					@keyframes gradientBg {
-						from {
-							background-position: 50% 50%, 50% 50%;
-						}
-						to {
-							background-position: 350% 50%, 350% 50%;
-						}
-					}
-					
-					.Common-entranceGradient, #app-root, .Common-Container {
-						position: relative;
-						overflow: hidden;
-					}
+			{ /* стилизация окна с полученной званкой */
+				tag: ["QS", "scale"],
+				selector: ".RankupComponentStyle-wrapper",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.8rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+					width: "60%"
+				}
+			},
 
-					.Common-entranceGradient::before, #app-root::before, .Common-container::before {
-						content: "";
-						position: absolute;
-						inset: 0;
-						--stripes: repeating-linear-gradient(
-							100deg,
-							#fff 0%,
-							#fff 7%,
-							transparent 10%,
-							transparent 12%,
-							#fff 16%
-						);
-						--stripesDark: repeating-linear-gradient(
-							100deg,
-							#000 0%,
-							#000 7%,
-							transparent 10%,
-							transparent 12%,
-							#000 16%
-						);
-						--rainbow: repeating-linear-gradient(
-							100deg,
-							#fff 10%,
-							#000 15%,
-							#fff 20%,
-							#000 25%,
-							#fff 30%
-						);
-						background-image: var(--stripes), var(--rainbow);
-						background-size: 200%, 100%;
-						animation: gradientBg 60s linear infinite;
-						background-attachment: fixed;
-						mix-blend-mode: difference;
-						filter: blur(14rem) invert(100%);
-						mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-						will-change: transform;
-					}
-				`
+			{ /* стилизация окна с полученной званкой */
+				tag: ["QS"],
+				selector: ".RankupRewardComponentStyle-buttonNext",
+				styles:
+				{
+					background: "none",
+					boxShadow: "none"
+				}
+			},
+
+			{ /* стилизация заданок в ммной стате */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".BattleResultQuestProgressComponentStyle-container",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация заданок в ммной стате */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".BattleResultQuestProgressComponentStyle-container-true",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация заданок в ммной стате */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".BattleResultQuestProgressComponentStyle-container-false",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация ммной статы */
+				tag: ["QS", "fade"],
+				selector: ".BattleResultUserInfoComponentStyle-progressVictoryContainer",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация ммной статы */
+				tag: ["QS"],
+				selector: ".BattleResultHeaderComponentStyle-flashLight",
+				styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация ммной статы */
+				tag: ["QSA", "fade"],
+				selector: ".BattleRewardsComponentStyle-normalRow",
+				styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация ммной статы */
+				tag: ["QSA", "fade"],
+				selector: ".BattleRewardsComponentStyle-selectedRow",
+				styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация ммной статы */
+				tag: ["QS"],
+				selector: ".BattleRewardsComponentStyle-selectedRow",
+				styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация ммной статы */
+				tag: ["QS"],
+				selector: ".BattleResultNavigationComponentStyle-commonBlockBattleResultNavigation",
+				styles:
+				{
+					borderBottom: "none"
+				}
+			},
+
+			{ /* стилизация списка игроков в ммной стате */
+				tag: ["QSA"],
+				selector: "#selfUserBg",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.3rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация списка игроков в ммной стате */
+				tag: ["QSA", "BHV", "fade"],
+				selector: "#blueCommand",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(32, 42, 255, 0.1) 0%, rgba(32, 42, 255, 0.05) 0%)",
+					backdropFilter: "blur(0.3rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация списка игроков в ммной стате */
+				tag: ["QSA", "BHV", "fade"],
+				selector: "#enemyCommand",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.05) 0%)",
+					backdropFilter: "blur(0.3rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация кнопочки купить премиум в ммной стате */
+				tag: ["QS", "BHV", "fade"],
+				selector: "#root > div > div > div.BattleRewardsComponentStyle-commonBlockButtonRewards > div > div > div",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+					width: "30%"
+				}
+			},
+
+			{ /* стилизация навигационных кнопочек в ммной стате */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".BattleResultNavigationComponentStyle-button",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация ммной статы */
+				tag: ["QS", "fade"],
+				selector: ".BlockResultTankComponentStyle-gsContainer",
+				styles:
+				{
+					top: "-2.5rem"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".ItemDescriptionComponentStyle-captionDevice",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".LockableContainersComponentStyle-possibleRewardsBlock",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QSA", "BHV"],
+				selector: "div.LockableContainersComponentStyle-rewards > div",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+					margin: "0.2rem"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS", "fade"],
+				selector: ".LockableContainersComponentStyle-rewards",
+				styles:
+				{
+					right: "0.5rem"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS"],
+				selector: ".LockableContainersComponentStyle-navigationBlock",
+				styles:
+				{
+					borderBottom: "none"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS"],
+				selector: ".LockableContainerInfoComponentStyle-lootBoxDescriptionContainer",
+				styles:
+				{
+					background: "none",
+					borderRight: "none"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS"],
+				selector: ".LockableContainersComponentStyle-leftPane",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS"],
+				selector: ".LockableContainersComponentStyle-rightPane",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QSA", "BHV", "fade"],
+				selector: "div.LockableContainerInfoComponentStyle-possibleRewardsContainer > div > div > div.Common-flexCenterAlignCenterColumn",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация дропа с контейнеров */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".RewardCardComponentStyle-smoothAppearance",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация дропа с контейнеров */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".RewardCardComponentStyle-fastAppearance",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
 			},
 
 		];
