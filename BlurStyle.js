@@ -525,13 +525,26 @@
 				}
 			},
 
-			{ /* стилизация туториал менюшек */
-				tag: ["QS"],
+			{ /* стилизация туториал всплывашек */
+				tag: ["QS", "fade"],
 				selector: ".TutorialModalComponentStyle-contentWrapper",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%)",
-					backdropFilter: "blur(10px)"
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)"
+				}
+			},
+
+			{ /* стилизация туториал всплывашек */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".TutorialModalComponentStyle-navigationButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -992,8 +1005,7 @@
 			},
 
 			{ /* стилизация прогресса возле званки */
-				cssStyles: 
-				`
+				cssStyles: `
 					div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn {
 						background: rgba(222, 184, 135, 0.5) !important;
 						filter: saturate(1);
@@ -1224,6 +1236,7 @@
 						background: rgba(222, 184, 135, 1) !important;
 						box-shadow: rgba(222, 184, 135, 1) 0rem 0rem 0.375rem !important;
 						filter: drop-shadow(rgba(222, 184, 135, 1) 0rem 0rem 0.5rem) !important;
+						animation: scaleIn 0.7s ease-in-out;
 					}
 				`
 			},
@@ -1579,7 +1592,7 @@
 				selector: ".LockableContainersComponentStyle-leftPane",
 				styles:
 				{
-					display: "none"
+					background: "none"
 				}
 			},
 
@@ -1588,7 +1601,7 @@
 				selector: ".LockableContainersComponentStyle-rightPane",
 				styles:
 				{
-					display: "none"
+					background: "none"
 				}
 			},
 
@@ -1628,6 +1641,317 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".ScrollingCardsComponentStyle-scrollCard.cardImg",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "RHV", "fade"],
+				selector: ".ProBattlesComponentStyle-commonBlockHotkeyV",
+				styles:
+				{
+					border: "none",
+					borderRadius: "1.1rem",
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "fade"],
+				selector: "div.QuestsComponentStyle-content > div > div > h2",
+				styles:
+				{
+					borderRadius: "1.1rem",
+					boxShadow: "inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "fade"],
+				selector: ".SuperMissionComponentStyle-descriptionSuperMission",
+				styles:
+				{
+					background: "none",
+					borderRight: "none"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS"],
+				selector: "div.SuperMissionComponentStyle-descriptionSuperMission > div",
+				styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS"],
+				selector: ".SuperMissionComponentStyle-gradientBackground",
+				styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "fade"],
+				selector: ".SuperMissionComponentStyle-buttonDisable",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".SuperMissionComponentStyle-buttonCollect",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "fade"],
+				selector: ".SuperMissionComponentStyle-rewardsContainer .Common-flexCenterAlignCenterColumn",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "fade"],
+				selector: ".MainQuestComponentStyle-rewardsContainer .Common-flexCenterAlignCenterColumn",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "fade"],
+				selector: ".TableMainQuestComponentStyle-rewardsContainerTable .Common-flexCenterAlignCenterColumn",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "fade"],
+				selector: ".MainQuestComponentStyle-rewardsInDescriptionModal .Common-flexCenterAlignCenterColumn",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".MainQuestComponentStyle-buttonContainer",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".MainQuestComponentStyle-containerButtonStore",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "scale"],
+				selector: ".MainQuestComponentStyle-cardRewardGiven",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "fade"],
+				selector: ".TableMainQuestComponentStyle-cardRewardGivenTable",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "scale", "scale3d"],
+				selector: ".MainQuestComponentStyle-colorCardPlay",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "scale", "scale3d"],
+				selector: ".MainQuestComponentStyle-commonCard",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".TableMainQuestComponentStyle-cardLockedTable",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA"],
+				selector: ".MainQuestComponentStyle-colorLockedGradient",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "scale", "scale3d"],
+				selector: ".MainQuestComponentStyle-cardPlay",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".MainQuestComponentStyle-cardPlayCommon",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "scale", "scale3d"],
+				selector: ".MainQuestComponentStyle-cardRewardCompleted",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.6rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.6)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".TableMainQuestComponentStyle-cardRewardCompletedTable",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.6rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.6)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".MainQuestComponentStyle-cardCommonLocked",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA"],
+				selector: ".TableMainQuestComponentStyle-colorLockedGradientTable",
+				styles:
+				{
+					display: "none"
 				}
 			},
 
