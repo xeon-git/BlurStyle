@@ -483,7 +483,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 0%)",
-					backdropFilter: "blur(1rem)"
+					backdropFilter: "blur(0.5rem)"
 				}
 			},
 
@@ -560,6 +560,42 @@
 					top: "6.350rem",
 					left: "0.1rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* фикс иконок в шапке */
+				tag: ["QS"],
+				selector: ".BreadcrumbsComponentStyle-iconLogout",
+				styles:
+				{
+					borderRadius: "none"
+				}
+			},
+
+			{ /* фикс иконок в шапке */
+				tag: ["QS"],
+				selector: ".Common-backgroundImageCover",
+				styles:
+				{
+					borderRadius: "none"
+				}
+			},
+
+			{ /* фикс иконок в шапке */
+				tag: ["QS"],
+				selector: ".Common-backgroundImageContain",
+				styles:
+				{
+					borderRadius: "none"
+				}
+			},
+
+			{ /* фикс иконок в шапке */
+				tag: ["QS"],
+				selector: ".IconStyle-iconLogOff",
+				styles:
+				{
+					borderRadius: "none"
 				}
 			},
 
@@ -1226,6 +1262,7 @@
 				cssStyles: `
 					.Common-activeMenu {
 						color: rgba(222, 184, 135, 1) !important;
+						animation: fadeIn 0.7s ease-in-out;
 					}
 
 					.MenuComponentStyle-mainMenuItem:hover {
@@ -1445,7 +1482,7 @@
 			},
 
 			{ /* стилизация списка игроков в ммной стате */
-				tag: ["QSA"],
+				tag: ["QSA", "fade"],
 				selector: "#selfUserBg",
 				styles:
 				{
