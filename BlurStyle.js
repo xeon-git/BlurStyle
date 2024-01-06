@@ -516,7 +516,7 @@
 			},
 
 			{ /* стилизация шапки во всех меню игры */
-				tag: ["QS"],
+				tag: ["QS", "fade"],
 				selector: ".BreadcrumbsComponentStyle-headerContainer",
 				styles:
 				{
@@ -530,8 +530,8 @@
 				selector: ".TutorialModalComponentStyle-contentWrapper",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)"
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0rem)"
 				}
 			},
 
@@ -564,7 +564,7 @@
 			},
 
 			{ /* фикс иконок в шапке */
-				tag: ["QS"],
+				tag: ["QS", "fade"],
 				selector: ".BreadcrumbsComponentStyle-iconLogout",
 				styles:
 				{
@@ -573,7 +573,7 @@
 			},
 
 			{ /* фикс иконок в шапке */
-				tag: ["QS"],
+				tag: ["QS", "fade"],
 				selector: ".Common-backgroundImageCover",
 				styles:
 				{
@@ -582,7 +582,7 @@
 			},
 
 			{ /* фикс иконок в шапке */
-				tag: ["QS"],
+				tag: ["QS", "fade"],
 				selector: ".Common-backgroundImageContain",
 				styles:
 				{
@@ -591,7 +591,7 @@
 			},
 
 			{ /* фикс иконок в шапке */
-				tag: ["QS"],
+				tag: ["QS", "fade"],
 				selector: ".IconStyle-iconLogOff",
 				styles:
 				{
@@ -677,8 +677,8 @@
 				selector: ".ItemDescriptionComponentStyle-commonBlockModal",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%)",
-					backdropFilter: "blur(10px)"
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0rem)"
 				}
 			},
 
@@ -902,6 +902,18 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
+				}
+			},
+
+			{ /* стилизация одного из модальных окон */
+				tag: ["QS", "fade"],
+				selector: "#modal-root > div > div",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "none",
+					borderRadius: "1.2rem",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0rem 0rem rgba(0,0,0,0)",
 				}
 			},
 
@@ -1262,7 +1274,7 @@
 				cssStyles: `
 					.Common-activeMenu {
 						color: rgba(222, 184, 135, 1) !important;
-						animation: fadeIn 0.7s ease-in-out;
+						animation: fadeIn 0.3s ease-in-out;
 					}
 
 					.MenuComponentStyle-mainMenuItem:hover {
@@ -1547,6 +1559,32 @@
 				}
 			},
 
+			{ /* стилизация навигационных кнопочек в ммной стате */
+				tag: ["QS", "BHV", "fade"],
+				selector: "div.Common-flexCenterAlignCenter.BattleResultNavigationComponentStyle-buttonNextWithTimer.BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация навигационных кнопочек в ммной стате */
+				tag: ["QS", "fade"],
+				selector: ".BattleResultNavigationComponentStyle-disabledButtonWithTimer",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
 			{ /* стилизация ммной статы */
 				tag: ["QS", "fade"],
 				selector: ".BlockResultTankComponentStyle-gsContainer",
@@ -1597,7 +1635,33 @@
 			},
 
 			{ /* стилизация раздела с контейнерами */
-				tag: ["QS", "fade"],
+				tag: ["QS", "BHV", "fade"],
+				selector: ".DeviceButtonComponentStyle-blockAlterations .Common-flexCenterAlignCenter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".LockableContainersComponentStyle-moreButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+				tag: ["QS"],
 				selector: ".LockableContainersComponentStyle-rewards",
 				styles:
 				{
@@ -1860,6 +1924,19 @@
 			{ /* стилизация раздела с миссиями */
 				tag: ["QSA", "fade"],
 				selector: ".TableMainQuestComponentStyle-cardRewardGivenTable",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "fade"],
+				selector: ".MainQuestComponentStyle-needRank",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
