@@ -11,7 +11,11 @@
 {
 	let observer;
 	let cssStyles;
+	let isFilterEnabled = true;
+	let saturationValue = 170;
+	let contrastValue = 110;
 
+	/* логика тегов */
 	function animationTags(element, el)
 	{
 		if (element.tag.includes("fade"))
@@ -35,6 +39,7 @@
 		}
 	}
 
+	/* логика ховер тегов */
 	function mouseHover(element, el)
 	{
 		Object.entries(element.styles).forEach(([style, value]) =>
@@ -82,6 +87,7 @@
 		}
 	}
 
+	/* логика трансформации карточек */
 	function handleMouseMove(e, card)
 	{
 		const rect = card.getBoundingClientRect();
@@ -97,20 +103,58 @@
 		card.style.transition = "box-shadow 0.7s, border-color 0.7s";
 		card.style.transformOrigin = "center center";
 		card.style.transform = `perspective(300px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1, 1, 1)`;
-		card.style.boxShadow = "0rem 0rem 1rem 0.05rem rgba(255, 255, 255, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)";
+		card.style.boxShadow = "0rem 0rem 0.7rem 0.05rem rgba(255, 255, 255, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)";
 	}
 
 	function resetTransform(card)
 	{
 		card.style.transition = "transform 0.5s ease-in-out, box-shadow 0.7s, border-color 0.7s";
 		card.style.transform = `perspective(300px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-		card.style.boxShadow = "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)";
+		card.style.boxShadow = "0rem 0rem 0.3rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)";
 	}
 
+	/* логика фильтров */
+	function toggleFilters()
+	{
+		isFilterEnabled = !isFilterEnabled;
+		updateFilters();
+	}
+
+	function updateFilters()
+	{
+		const currentURL = window.location.href;
+		const targetURL = 'https://tankionline.com/play/';
+
+		if (isFilterEnabled && currentURL.startsWith(targetURL))
+		{
+			applyFilters(saturationValue, contrastValue);
+		}
+		else
+		{
+			document.body.style.filter = '';
+		}
+	}
+
+	function applyFilters(saturation, contrast)
+	{
+		document.body.style.filter = `saturate(${saturation}%) contrast(${contrast}%)`;
+	}
+
+	updateFilters();
+
+	document.addEventListener('keydown', function(event)
+	{
+		if ((event.key === '\\' || event.key === 'Backslash') && window.location.href.startsWith('https://tankionline.com/play/'))
+		{
+			toggleFilters();
+		}
+	});
+
+	/* массив стилей */
 	function styles()
 	{
 		const elements = [
-			{ /* logo аним кфг */
+			{ /* logo аним фрейм */
 				cssStyles: `
 					@keyframes logoAnim {
 						35% {
@@ -130,7 +174,7 @@
 				`
 			},
 
-			{ /* fade аним кфг */
+			{ /* fade аним фрейм */
 				cssStyles: `
 					@keyframes fadeIn {
 						from {
@@ -147,7 +191,7 @@
 				`
 			},
 
-			{ /* scale аним кфг */
+			{ /* scale аним фрейм */
 				cssStyles: `
 					@keyframes scaleIn {
 						0% {
@@ -167,7 +211,7 @@
 				`
 			},
 
-			{ /* slide аним кфг */
+			{ /* slide аним фрейм */
 				cssStyles: `
 					@keyframes slideIn {
 						0% {
@@ -240,6 +284,15 @@
 				}
 			},
 
+			{ /* стилизация таба в битве */
+				tag: ["QS"],
+				selector: ".BattleTabStatisticComponentStyle-header",
+				styles:
+				{
+					borderBottom: "none"
+				}
+			},
+
 			{ /* стилизация игроков в табе */
 				tag: ["QSA", "BHV"],
 				selector: ".BattleTabStatisticComponentStyle-rowBackGround",
@@ -252,6 +305,24 @@
 					boxShadow: "inset 0rem 0rem 0.5rem 0.05rem rgba(0,0,0,0.170)",
 					marginBottom: "0.50%",
 					top: "0.5rem"
+				}
+			},
+
+			{ /* стилизация игроков в табе */
+				tag: ["QSA"],
+				selector: ".BattleTabStatisticComponentStyle-scoreCell",
+				styles:
+				{
+					borderLeft: "none"
+				}
+			},
+
+			{ /* стилизация игроков в табе */
+				tag: ["QSA"],
+				selector: ".BattleTabStatisticComponentStyle-dlCell",
+				styles:
+				{
+					borderLeft: "none"
 				}
 			},
 
@@ -276,6 +347,18 @@
 				styles:
 				{
 					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация кнопки забрать все в контах */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".SuperMissionComponentStyle-buttonCollect",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -364,7 +447,6 @@
 					backdropFilter: "blur(0.5rem)"
 				}
 			},
-
 
 			{ /* стилизация кнопки играть в главном меню */
 				tag: ["QS", "BHV", "scale3d"],
@@ -774,7 +856,7 @@
 			},
 
 			{ /* стилизация кнопки в шапке с премом в главном меню */
-				tag: ["QS"],
+				tag: ["QS", "RHV"],
 				selector: "#root > div > div.Common-flexStartAlignStart > div.MainScreenComponentStyle-containerPanel > div.UserInfoContainerStyle-blockLeftPanel > div > div",
 				styles:
 				{
@@ -1634,8 +1716,8 @@
 				}
 			},
 
-			{ /* стилизация раздела с контейнерами */
-				tag: ["QS", "BHV", "fade"],
+			{ /* стилизация раздела с контейнерами и гаража */
+				tag: ["QSA", "BHV", "fade"],
 				selector: ".DeviceButtonComponentStyle-blockAlterations .Common-flexCenterAlignCenter",
 				styles:
 				{
@@ -1812,19 +1894,6 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "1.1rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-				}
-			},
-
-			{ /* стилизация раздела с миссиями */
-				tag: ["QS", "BHV", "fade"],
-				selector: ".SuperMissionComponentStyle-buttonCollect",
-				styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.1rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
 				}
@@ -2066,6 +2135,371 @@
 				styles:
 				{
 					display: "none"
+				}
+			},
+
+			{ /* стилизация всплывающего инфо-окна */
+				tag: ["QS", "scale"],
+				selector: ".NotificationViewStyle-commonBlockNotification",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.5rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация всплывающего инфо-окна */
+				tag: ["QSA", "BHV", "fade"],
+				selector: "div.NotificationViewStyle-commonBlockButtonYesNo > div",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация всплывающего инфо-окна */
+				tag: ["QS"],
+				selector: ".NotificationViewStyle-positionBlock",
+				styles:
+				{
+					border: "none"
+				}
+			},
+
+			{ /* стилизация всплывающего инфо-окна */
+				tag: ["QS"],
+				selector: ".NotificationViewStyle-progressNotification",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "fade"],
+				selector: ".TankParametersStyle-leftParamsContainer",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "BHV", "fade"],
+				selector: "div.GarageSuppliesComponentStyle-containerButtons > div > div.GarageSuppliesComponentStyle-check",
+				styles:
+				{
+					backgroundSize: "initial",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "0.9rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "BHV", "fade"],
+				selector: "div.GarageSuppliesComponentStyle-containerButtons > div > div.GarageSuppliesComponentStyle-checkDown",
+				styles:
+				{
+					backgroundSize: "initial",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "0.9rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".MountedItemsStyle-commonBlockDrone",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+					width: "47%"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "scale", "scale3d"],
+				selector: ".SkinCellStyle-widthHeight",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "fade"],
+				selector: ".GarageCommonStyle-positionContentAlteration .Common-flexSpaceBetweenAlignStartColumn",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					borderRight: "none",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".MountedItemsStyle-commonBlockPaint",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+					width: "47%"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".MountedItemsComponentStyleMobile-commonBlockForTurretsHulls",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".MountedItemsComponentStyleMobile-commonBlockForTurretsHulls",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".MountedItemsStyle-commonForCellResistenceName",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".GarageProtectionsComponentStyle-equipmentResistance",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".Common-flexCenterAlignCenter.Common-borderRadius4px",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".SuppliesComponentStyle-cellAdd",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "fade"],
+				selector: "#root > div > div.GarageCommonStyle-garageContainer > div.GarageCommonStyle-positionContent > div.GarageMainScreenStyle-blockParameters > div.TanksPartBaseComponentStyle-tankPartContainer > div > div.TanksPartComponentStyle-tankPartUpgrades.GarageCommonStyle-animatedBlurredRightBlock",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "fade"],
+				selector: "#root > div > div > div.GarageCommonStyle-garageContainer > div.GarageCommonStyle-positionContent > div.GarageMainScreenStyle-blockParameters > div.TanksPartBaseComponentStyle-tankPartContainer > div > div.TanksPartComponentStyle-tankPartUpgrades.GarageCommonStyle-animatedBlurredRightBlock",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "BHV", "fade"],
+				selector: "div.GarageSuppliesComponentStyle-containerButtons > div > input",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "BHV", "fade"],
+				selector: "div.TanksPartComponentStyle-descriptionContainer > div.GarageCommonStyle-animatedBlurredLeftBlock > div:nth-child(2)",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QS", "fade"],
+				selector: ".TanksPartComponentStyle-blockForImageResistanceModule",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".SquarePriceButtonComponentStyle-commonBlockButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".Common-itemStyle.garage-item",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
+				selector: ".ListItemsComponentStyle-itemsListContainer.CssCommonAnimations-appearFromBottom",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA"],
+				selector: ".ListItemsComponentStyle-itemsWrapper .Common-flexCenterAlignCenter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
+				selector: ".GarageProtectionsComponentStyle-iconEquipResist",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
+				selector: ".MountedItemsStyle-improvementArrow",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
+				selector: ".MountedItemsStyle-improvementArrow",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
+				selector: ".MountedItemsStyle-improvementArrow",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
+				selector: ".GarageItemComponentStyle-improvementArrow",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
+				selector: "div.MountedItemsComponentStyleMobile-commonButtonUpdate > div.Common-flexCenterAlignCenter > div.Common-backgroundImage",
+				styles:
+				{
+					filter: "saturate(0)"
 				}
 			},
 
