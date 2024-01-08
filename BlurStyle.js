@@ -574,11 +574,37 @@
 				selector: ".DialogContainerComponentStyle-container",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.1rem solid rgba(255, 255, 255, 0.1)",
+					outline: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.1rem",
-					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация диалоговых окон */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".DialogContainerComponentStyle-keyButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация диалоговых окон */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".DialogContainerComponentStyle-enterButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 128, 0, 0.150) 0%, rgba(0, 128, 0, 0.150) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -987,6 +1013,89 @@
 				}
 			},
 
+			{ /* стилизация модального окна покупки в магазе */
+				tag: ["QS", "scale"],
+				selector: ".SuccessfulPurchaseComponentStyle-container",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация модального окна покупки в магазе */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".SuccessfulPurchaseComponentStyle-container .Common-flexCenterAlignCenter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".ClanInvitationsItemComponentStyle-buttonReject",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 0, 0, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS"],
+				selector: ".ClanInvitationsComponentStyle-invitationsLine",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "scale"],
+				selector: ".ClanInvitationsComponentStyle-invitationContent",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "fade"],
+				selector: "#modal-root > div > div > div.ClanCommonStyle-members.ClanInvitationsListComponentStyle-members > table > thead > tr",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA"],
+				selector: "#modal-root > div > div > div.ClanCommonStyle-members.ClanInvitationsListComponentStyle-members > table > thead > tr *",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
 			{ /* стилизация одного из модальных окон */
 				tag: ["QS", "fade"],
 				selector: "#modal-root > div > div",
@@ -1304,6 +1413,183 @@
 					height: "3rem",
 					marginBottom: "0.7rem",
 					top: "3.8rem"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".GameSettingsStyle-button",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".KeyboardSettingsComponentStyle-buttonResetAllKeys",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".KeyboardSettingsComponentStyle-keyInput",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".AccountSettingsComponentStyle-buttonChangesOptions",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".AccountSettingsComponentStyle-buttonCaptchaOptions",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".TwitchSettingsRendersStyle-button",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: "div.AccountSettingsComponentStyle-containerFormOptions > div > div.AccountSettingsComponentStyle-blockInputEmail > input",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "fade"],
+				selector: "#root > div > div > div > div > div > div.AccountSettingsComponentStyle-containerFormOptions:nth-child(1) > form > div",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".KeyMappingWithIconComponentStyle-commonBlockSupplies",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация ползунков в разделе настроек */
+				tag: ["QSA", "fade"],
+				selector: ".InputRangeComponentStyle-range",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					backdropFilter: "blur(0.2rem)"
+				}
+			},
+
+			{ /* стилизация активного раздела */
+				cssStyles: `
+	.InputRangeComponentStyle-range::-webkit-slider-thumb {
+		background: radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%) !important;
+		border-radius: 1rem !important;
+	}
+`
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".SecuritySettingsComponentStyle-button",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 0, 0, 0.2)",
+					borderRadius: "1rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".KeyMappingWithIconComponentStyle-overdrives",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела настроек */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".SettingsButtonsComponentStyle-buttonsWidthBackReset",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 0, 0, 0.2)",
+					borderRadius: "1.2rem",
+					backdropFilter: "blur(0.2rem)",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
 
@@ -2254,8 +2540,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					borderRight: "none",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+					borderRight: "none"
 				}
 			},
 
@@ -2469,6 +2754,15 @@
 
 			{ /* стилизация гаража */
 				tag: ["QSA", "fade"],
+				selector: ".SkinCellStyle-mountIcon",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация гаража */
+				tag: ["QSA", "fade"],
 				selector: ".MountedItemsStyle-improvementArrow",
 				styles:
 				{
@@ -2497,6 +2791,208 @@
 			{ /* стилизация гаража */
 				tag: ["QSA", "fade"],
 				selector: "div.MountedItemsComponentStyleMobile-commonButtonUpdate > div.Common-flexCenterAlignCenter > div.Common-backgroundImage",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "fade"],
+				selector: ".ClanHeaderComponentStyle-blockInform",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "fade"],
+				selector: ".ClanInfoComponentStyle-messageClan",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".ClanInvitationsComponentStyle-sendButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".ClanProfileEditComponentStyle-clanDescriptionEdit",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".ClanProfileEditComponentStyle-buttonCancel",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA", "fade"],
+				selector: ".ClanProfileEditComponentStyle-containerParametersClanBlockInform",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".ClanInfoComponentStyle-buttonEditProfile",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "fade"],
+				selector: "#root > div > div > div.FriendListComponentStyle-containerMembers > table > thead > tr",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA"],
+				selector: "#root > div > div > div.FriendListComponentStyle-containerMembers > table > thead > tr *",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".ClanCommonStyle-row",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					marginBottom: "0.4rem"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA"],
+				selector: ".ClanCommonStyle-rowEmpty",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS"],
+				selector: "#root > div > div > div.FriendListComponentStyle-containerMembers > table > tbody > div",
+				styles:
+				{
+					top: "0.4rem"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".ClanMembersListComponentStyle-buyClanPlaceButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".ClanCommonStyle-buttonInvite",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".PopupMessageComponentStyle-buttonsContainer .Common-flexCenterAlignCenter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QSA", "fade"],
+				selector: ".ClanStatisticsComponentStyle-areCommon",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.125rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+				tag: ["QS"],
+				selector: ".ClanHeaderComponentStyle-logo",
 				styles:
 				{
 					filter: "saturate(0)"
