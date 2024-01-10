@@ -158,17 +158,16 @@
 				cssStyles: `
 					@keyframes logoAnim {
 						35% {
-							width: 0%;
+							width: 0rem;
 						}
 
 						100% {
-							width: 100px;
+							width: 6.25rem;
 						}
 					}
 
 					.LobbyLoaderComponentStyle-logo {
-						animation: logoAnim 3s linear forwards;
-						animation-iteration-count: 2;
+						animation: logoAnim 3s linear forwards infinite;
 						position: relative;
 					}
 				`
@@ -215,12 +214,12 @@
 				cssStyles: `
 					@keyframes slideIn {
 						0% {
-						opacity: 0.8;
-						transform: translateY(20%) perspective(50rem) rotateX(30deg);
+						opacity: 0.5;
+						transform: translateY(20%);
 						}
 						100% {
 						opacity: 1;
-						transform: translateY(0) perspective(50rem) rotateX(0deg);
+						transform: translateY(0);
 						}
 					}
 
@@ -250,9 +249,9 @@
 			},
 
 			{ /* стилизация первоначального экрана */
-			tag: ["QS", "scale"],
-			selector: ".MainEntranceComponentStyle-mainContainer",
-			styles:
+				tag: ["QS", "scale"],
+				selector: ".MainEntranceComponentStyle-mainContainer",
+				styles:
 				{
 					zIndex: "999"
 				}
@@ -316,6 +315,52 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+				}
+			},
+
+			{ /* стилизация чата в битве */
+			tag: ["QS", "slide"],
+			selector: ".BattleChatComponentStyle-inputContainerAllies",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация чата в битве */
+			tag: ["QS", "slide"],
+			selector: ".BattleChatComponentStyle-inputContainerAll",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация чата в битве */
+			tag: ["QS"],
+			selector: ".BattleChatComponentStyle-btnToggleTeamAllies",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					borderRadius: "1rem"
+				}
+			},
+
+			{ /* стилизация чата в битве */
+			tag: ["QS"],
+			selector: ".BattleChatComponentStyle-btnToggleTeamAll",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					borderRadius: "1rem"
 				}
 			},
 
@@ -402,13 +447,163 @@
 				}
 			},
 
+			{ /* стилизация окна поиска битвы */
+				tag: ["QS", "slide"],
+				selector: ".MatchmakingWaitComponentStyle-container",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.5rem",
+					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					left: "36%",
+					top: "16%"
+				}
+			},
+
+			{ /* стилизация окна поиска битвы */
+				tag: ["QS", "fade"],
+				selector: ".MatchmakingWaitComponentStyle-contentContainer",
+				styles:
+				{
+					position: "absolute",
+					transform: "scale(1.1)",
+					top: "27%"
+				}
+			},
+
+			{ /* стилизация окна поиска битвы */
+				tag: ["QS"],
+				selector: "div.MatchmakingWaitComponentStyle-container > div",
+				styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация окна поиска битвы */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".MatchmakingWaitComponentStyle-cancelButton",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					position: "absolute",
+					right: "2%",
+					top: "51%",
+					height: "3rem",
+					width: "8rem"
+				}
+			},
+
+			{ /* стилизация окна поиска битвы */
+				tag: ["QS"],
+				selector: "div.MatchmakingWaitComponentStyle-cancelButton > span",
+				styles:
+				{
+					margin: "0"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "scale", "scale3d"],
+			selector: ".Common-backgroundImageCover.modeLimitIcon",
+			styles:
+				{
+					border: "0.150rem solid rgba(0, 0, 0, 1)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "scale", "scale3d"],
+			selector: ".BattleCreateComponentStyle-blockCard .Common-flexStartAlignStretchColumn .Common-backgroundImageCover",
+			styles:
+				{
+					border: "0.150rem solid rgba(0, 0, 0, 1)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "scale", "scale3d"],
+			selector: ".BattleCreateComponentStyle-scrollBattlePick .Common-flexStartAlignStretchColumn .blockCard",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			cssStyles: `
+				.ProBattlesComponentStyle-borderLineCell {
+					border-left: none !important;
+				}
+			`
+			},
+
+			{ /* стилизация увед точек */
+			tag: ["QSA", "fade"],
+			selector: "#root > div > div > div > ul > li.SettingsMenuComponentStyle-menuItemOptions > div.ItemNotificationMarkerStyle-base",
+			styles:
+				{
+					filter: "saturate(0)",
+					top: "15%"
+				}
+			},
+
+			{ /* стилизация увед точек */
+			tag: ["QSA", "fade"],
+			selector: ".MainScreenComponentStyle-new.FooterComponentStyle-marginEllips",
+			styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
 			{ /* стилизация увед точек */
 				tag: ["QSA", "fade"],
 				selector: ".ItemNotificationMarkerStyle-base",
 				styles:
 				{
-					filter: "saturate(0)",
-					top: "1.1rem"
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация увед количества в режимах */
+			tag: ["QSA", "fade"],
+			selector: ".ScrollingCardsComponentStyle-cardCount",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
+				}
+			},
+
+			{ /* стилизация увед количества каток в разделе с битвами */
+			tag: ["QSA", "fade"],
+			selector: ".FormatsSectionComponentStyle-numberBattles",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
+				}
+			},
+
+			{ /* стилизация увед точек */
+			tag: ["QSA", "fade"],
+			selector: "div.MenuComponentStyle-battleTitleCommunity > div > span",
+			styles:
+				{
+					filter: "saturate(0)"
 				}
 			},
 
@@ -620,6 +815,15 @@
 				}
 			},
 
+			{ /* стилизация иконок в табе */
+				tag: ["QSA", "fade"],
+				selector: ".Common-maskImageContain.BattleTabStatisticComponentStyle-colorIconBattleOptions",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
 			{ /* стилизация разделов в главном меню */
 				tag: ["QSA", "BHV", "fade", "scale3d"],
 				selector: ".FooterComponentStyle-containerMenu.FooterComponentStyle-newsButton",
@@ -799,6 +1003,17 @@
 			},
 
 			{ /* стилизация элементов в главном меню игры */
+			tag: ["QSA"],
+			selector: ".BattlePickComponentStyle-timerButton",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem"
+				}
+			},
+
+			{ /* стилизация элементов в главном меню игры */
 				tag: ["QSA"],
 				selector: ".PrimaryMenuItemComponentStyle-discountNotification",
 				styles:
@@ -822,6 +1037,26 @@
 			},
 
 			{ /* стилизация элементов в разделе магаза */
+				tag: ["QS", "fade"],
+				selector: ".Common-flexSpaceBetweenAlignStretchColumn.Common-flexWrapNowrap.Common-overflowScrollFriends",
+				styles:
+				{
+					background: "none",
+
+				}
+			},
+
+			{ /* стилизация элементов в разделе магаза */
+			tag: ["QS", "fade"],
+			selector: ".CoinPaymentComponentStyle-noScroll",
+			styles:
+				{
+					background: "none",
+
+				}
+			},
+
+			{ /* стилизация элементов в разделе магаза */
 				tag: ["QS", "BHV", "fade"],
 				selector: ".BasePaymentComponentStyle-backButtonContainer .Common-flexCenterAlignCenter.Common-whiteSpaceNoWrap",
 				styles:
@@ -831,6 +1066,86 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
 					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация элементов в разделе магаза */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".ChoosePaymentMethodComponentStyle-paymentModeContainer",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					height: "2.9rem"
+				}
+			},
+
+			{ /* стилизация элементов в разделе магаза */
+				tag: ["QSA"],
+				selector: ".ChoosePaymentMethodComponentStyle-paymentModeContainer .ChoosePaymentMethodComponentStyle-paymentModePreview",
+				styles:
+				{
+					borderRadius: "0.8rem"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".BattleInfoComponentStyle-commonBlockSelectedOptionsSettings",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "none",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+				cssStyles: `
+					.BattleInfoComponentStyle-blockSelectedOptionsSettings {
+						box-shadow: none !important;
+					}
+				`
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS"],
+			selector: ".BattleInfoComponentStyle-selectBattle.Common-backgroundImageCover.Common-backgroundImage",
+			styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "RHV"],
+			selector: ".BattleModesComponentStyle-button .Common-flexCenterAlignCenter",
+			styles: {}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "RHV"],
+			selector: ".Common-flexStartAlignStartColumn .BattleModesComponentStyle-button",
+			styles: {}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "RHV"],
+			selector: ".BattleModesComponentStyle-fund",
+			styles: {}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "RHV"],
+			selector: ".BattleOptionsSectionComponentStyle-checkBoxSettingsCreateBattle .Common-flexSpaceBetweenAlignCenter",
+			styles: 
+				{
+					borderBottom: "none"
 				}
 			},
 
@@ -902,7 +1217,7 @@
 			},
 
 			{ /* стилизация лобби-меню в главном меню */
-				tag: ["QS", "scale"],
+				tag: ["QS", "slide"],
 				selector: ".InvitationWindowsComponentStyle-commonItem",
 				styles:
 				{
@@ -910,8 +1225,8 @@
 					backdropFilter: "blur(10px)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.2rem",
-					top: "6.350rem",
-					left: "0.1rem",
+					top: "8.5rem",
+					left: "2.4rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
@@ -966,8 +1281,39 @@
 				selector: ".ClanCreateComponentStyle-blockCreatureClan",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-					backdropFilter: "blur(10px)"
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					width: "60%"
+				}
+			},
+
+			{ /* стилизация кланового диалогового окна */
+			tag: ["QS"],
+			selector: ".ClanCreateComponentStyle-rectangle",
+			styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация кланового диалогового окна */
+			tag: ["QS"],
+			selector: ".ClanCreateComponentStyle-descriptionInfo",
+			styles:
+				{
+					background: "none"
+				}
+			},
+
+			{ /* стилизация кланового диалогового окна */
+			tag: ["QS"],
+			selector: ".ClanCreateComponentStyle-containerButtons",
+			styles:
+				{
+					background: "none"
 				}
 			},
 
@@ -999,7 +1345,7 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					top: "3%"
+					top: "3.12%"
 				}
 			},
 
@@ -1185,7 +1531,7 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.2rem)",
-					border: "none",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.5rem",
 					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
@@ -1208,6 +1554,16 @@
 				tag: ["QSA"],
 				selector: ".HotKey-commonBlockForHotKey",
 				styles:
+				{
+					borderRadius: "1.1rem",
+					transform: "scale(0.94)"
+				}
+			},
+
+			{ /* стилизация хоткеев */
+			tag: ["QSA"],
+			selector: ".HotKey-inlineBlockForHotKey",
+			styles:
 				{
 					borderRadius: "1.1rem",
 					transform: "scale(0.94)"
@@ -1322,9 +1678,9 @@
 				selector: ".ClanInvitationsItemComponentStyle-buttonReject",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.1) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 0, 0, 0.2)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
 				}
@@ -1353,6 +1709,41 @@
 			},
 
 			{ /* стилизация раздела с кланом */
+			tag: ["QS"],
+			selector: ".ClanCommonStyle-content",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+			tag: ["QS", "BHV", "fade"],
+			selector: ".ClanInvitationsComponentStyle-buttonDeclineAll",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+			tag: ["QSA", "BHV", "fade"],
+			selector: ".ClanCommonStyle-buttonSendRequest",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
 				tag: ["QS", "fade"],
 				selector: "#modal-root > div > div > div.ClanCommonStyle-members.ClanInvitationsListComponentStyle-members > table > thead > tr",
 				styles:
@@ -1371,6 +1762,42 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+			tag: ["QS", "fade"],
+			selector: "#root > div > div > div.ksc-0.ClanCommonStyle-members > table > thead > tr",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+			tag: ["QSA"],
+			selector: "#root > div > div > div.ksc-0.ClanCommonStyle-members > table > thead > tr *",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS", "scale"],
+				selector: ".UserProgressComponentStyle-modalWrapper",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.5rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					width: "72%"
 				}
 			},
 
@@ -1636,7 +2063,8 @@
 				selector: ".InvitationWindowsComponentStyle-substrateRank",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)"
 				}
 			},
 
@@ -1673,7 +2101,7 @@
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
-					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
 				}
 			},
 
@@ -2465,6 +2893,7 @@
 				selector: "div.QuestsComponentStyle-content > div > div > h2",
 				styles:
 				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
 					borderRadius: "1.1rem",
 					boxShadow: "inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
 				}
@@ -3585,6 +4014,554 @@
 				styles:
 				{
 					zIndex: "999"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QSA", "BHV", "scale"],
+				selector: ".UserProgressComponentStyle-progressItemCompleted",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QSA", "BHV", "scale"],
+				selector: ".UserProgressComponentStyle-progressItemUncompleted",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".UserProgressComponentStyle-rankProgressBarContainerRanks .Common-flexStartAlignStart",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".UserProgressComponentStyle-rankProgressBarContainerRanks .UserProgressComponentStyle-rankProgressBarGained",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".UserProgressComponentStyle-itemContainer",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS", "BHV", "fade"],
+				selector: ".UserProgressComponentStyle-buyPremium .Common-flexCenterAlignCenter",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".UserProgressComponentStyle-buyPremium .Common-flexCenterAlignCenter > span",
+				styles:
+				{
+					position: "absolute",
+					left: "2.2rem"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".UserProgressComponentStyle-buyPremiumText",
+				styles:
+				{
+					position: "absolute",
+					width: "50rem",
+					top: "1rem",
+					left: "13rem"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".ScrollBarStyle-leftScrollArrow",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".ScrollBarStyle-rightScrollArrow",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".UserProgressComponentStyle-progressLegendPlus",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".UserProgressComponentStyle-progressLegendPlusGradient",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "fade"],
+			selector: ".Common-flexStartAlignCenter.Common-flexWrapNowrap.modeLimitIcon",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					width: "99%",
+					marginBottom: "0.50%"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".ProBattlesComponentStyle-emptyBattlesList",
+			styles:
+				{
+					marginRight: "-24.5rem",
+					transform: "scale(1.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".ProBattlesComponentStyle-mainContainer .Common-flexStartAlignCenterColumn .Common-flexStartAlignStartColumn",
+			styles:
+				{
+					borderRight: "none"
+				}
+			},
+
+			{ /* logo аним фрейм */
+			cssStyles: `
+					#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn {
+						border-left: none !important;
+					}
+				`
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".ProBattlesComponentStyle-navigationBlock",
+			styles:
+				{
+					borderBottom: "none"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "fade"],
+			selector: ".BattleModesComponentStyle-blockModesFilter .Common-flexCenterAlignCenter",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "none",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "fade"],
+			selector: ".BattleCreateComponentStyle-mainContainer .Common-flexStartAlignCenterColumn .Common-flexStartAlignStartColumn .Common-flexCenterAlignCenter",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "none",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA"],
+			selector: ".MainSectionComponentStyle-transformLinearGradientImgCard",
+			styles:
+				{
+					borderRadius: "0.8rem"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "scale", "scale3d"],
+			selector: ".InformationComponentStyle-blockCard",
+			styles:
+				{
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(0, 0, 0, 1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA"],
+			selector: ".MainSectionComponentStyle-linearGradientImgCard",
+			styles:
+				{
+					borderRadius: "1rem",
+					bottom: "-0.1rem",
+					width: "100.2%"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV"],
+			selector: ".BattleModesComponentStyle-blockModesFilter .Common-flexCenterAlignCenter .Common-maskImageContain",
+			styles:
+				{
+					position: "static",
+					border: "none",
+					borderRadius: "1rem",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".ProBattlesComponentStyle-createBattleButton",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					borderTop: "none",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".ProBattlesComponentStyle-mainContainer .Common-flexStartAlignCenterColumn",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					borderRight: "none",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".BattleInfoComponentStyle-customOptions",
+			styles:
+				{
+					border: "none",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".BattleInfoComponentStyle-invite",
+			styles:
+				{
+					border: "none",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "fade"],
+			selector: ".BattleOptionsSectionComponentStyle-checkBoxSettingsCreateBattle .Common-flexSpaceBetweenAlignCenter",
+			styles:
+				{
+					border: "none"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".ProBattlesComponentStyle-rightPanel",
+			styles:
+				{
+					border: "none"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS"],
+			selector: "div.FormatsSectionComponentStyle-selectedCard > div:nth-child(4)",
+			styles:
+				{
+					background: "linear-gradient(0deg, rgb(200 200 200 / 50%) 0%, rgba(118, 255, 51, 0) 100%)",
+					borderTop: "none",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA"],
+			selector: "div.FormatsSectionComponentStyle-unSelectedCard > div:nth-child(4)",
+			styles:
+				{
+					borderTop: "none",
+				}
+			},
+
+			{ /* стилизация раздела с режимами */
+			tag: ["QSA"],
+			selector: "div.ScrollingCardsComponentStyle-scrollCard > div:nth-child(4)",
+			styles:
+				{
+					borderTop: "none",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "fade"],
+			selector: ".FormatsSectionComponentStyle-card",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA"],
+			selector: ".BattleCreateComponentStyle-blockCard .Common-flexStartAlignStretchColumn .Common-backgroundImageCover .MapCardComponentStyle-linearGradient",
+			styles:
+				{
+					borderRadius: "0.8rem",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QS", "BHV", "fade"],
+			selector: "div.BattleCreateComponentStyle-commonInputButtons.ProBattleCommonStyleMobile-commonInputButtons > form > div > input",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "fade"],
+			selector: "div.MainSectionComponentStyle-parameters > div > input",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "fade"],
+			selector: ".NewBattleCreateInputStyle-settings .Common-backgroundImageContain",
+			styles:
+				{
+					zIndex: "1",
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "fade"],
+			selector: ".MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "fade"],
+			selector: ".SettingsComponentStyle-scrollCreateBattle.Common-scrollBarHoverVisible",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "none",
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+			tag: ["QSA", "BHV", "fade"],
+			selector: "#root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.Common-flexStartAlignStretchColumn > div > div.Common-flexCenterAlignCenter.Common-alignSelfFlexEnd",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация кнопки войти за браво */
+			tag: ["QS", "BHV", "fade"],
+			selector: "#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div.Common-flexCenterAlignCenterColumn > div",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					transform: "scale(0.98)"
+				}
+			},
+
+			{ /* стилизация кнопки войти за альфа | дм */
+			tag: ["QS", "BHV", "fade"],
+			selector: "#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					transform: "scale(0.95)"
+				}
+			},
+
+			{ /* стилизация кнопки войти за альфа | дм */
+			tag: ["QS"],
+			selector: "#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter.ProBattleCommonStyleMobile-buttonContainer > div.Common-flexCenterAlignCenter > div",
+			styles:
+				{
+					background: "none",
+					border: "none",
+					boxShadow: "none"
+				}
+			},
+
+			{ /* стилизация кнопки войти за альфа | дм */
+			tag: ["QS"],
+			selector: "#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div > div.Common-flexCenterAlignCenter.ButtonComponentStyle-disabled",
+			styles:
+				{
+					background: "none",
+					border: "none",
+					boxShadow: "none"
+				}
+			},
+
+			{ /* стилизация кнопки запуска битвы */
+			tag: ["QS", "BHV", "fade"],
+			selector: "#root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.Common-flexCenterAlignCenter.JoinToBattleComponentStyle-buttonJoin.ProBattleCommonStyleMobile-buttonContainer",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					transform: "scale(0.95)"
+				}
+			},
+
+			{ /* стилизация списка игроков в разделе битв */
+			tag: ["QSA", "BHV", "fade"],
+			selector: ".UsersTableStyle-centerCell.UsersTableStyle-fontCell.UsersTableStyle-rowBattle",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					marginBottom: "0.3rem"
+				}
+			},
+
+			{ /* стилизация списка игроков в разделе битв */
+			tag: ["QSA", "fade"],
+			selector: ".UsersTableStyle-cellName.UsersTableStyle-rowBattleEmpty.UsersTableStyle-centerCell.UsersTableStyle-fontCell",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					marginBottom: "0.3rem"
+				}
+			},
+
+			{ /* стилизация списка игроков в разделе битв */
+			tag: ["QSA", "BHV", "fade"],
+			selector: ".UsersTableStyle-row.UsersTableStyle-rowBattle.UsersTableStyle-rowWidth",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					marginBottom: "0.3rem"
+				}
+			},
+
+			{ /* стилизация списка игроков в разделе битв */
+			tag: ["QSA", "fade"],
+			selector: ".UsersTableStyle-row.UsersTableStyle-rowBattleEmpty.UsersTableStyle-rowWidth",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					marginBottom: "0.3rem"
 				}
 			},
 
