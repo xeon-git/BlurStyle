@@ -796,13 +796,13 @@
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "1.9rem 1.9rem 1.9rem 1.9rem",
+					borderRadius: "2rem 2rem 2rem 2rem",
 					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					position: "absolute",
-					height: "6.25rem",
-					width: "32.75rem",
-					top: "2.1rem",
-					left: "48.5rem",
+					position: "fixed",
+					height: "5.4vw",
+					width: "28vw",
+					top: "2vw",
+					left: "36vw"
 				}
 			},
 
@@ -827,20 +827,21 @@
 				}
 			},
 
-			{ /* стилизация разделов в главном меню */
+			{ 
 				tag: ["QSA", "BHV", "fade", "scale3d"],
 				selector: ".PrimaryMenuItemComponentStyle-itemCommonLi.PrimaryMenuItemComponentStyle-menuItemContainer",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "2rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					marginBottom: "5%",
-					height: "3.8rem",
-					width: "23.8rem",
-					right: "12%"
+					marginBottom: "1vw",
+					height: "5vw",
+					width: "20vw",
+					right: "1.88vw",
+					bottom: "5.1rem"
 				}
 			},
 
@@ -862,71 +863,101 @@
 				}
 			},
 
-			{ /* стилизация разделов в главном меню */
-				tag: ["QSA", "BHV", "fade", "scale3d"],
-				selector: ".FooterComponentStyle-containerMenu.FooterComponentStyle-newsButton",
-				styles:
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QS"],
+			selector: ".FooterComponentStyle-footer",
+			styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "5rem",
-					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					marginBottom: "2%",
-					height: "4.5rem",
-					width: "4.5rem",
-					right: "12%"
+					height: "10rem"
 				}
 			},
 
-			{ /* стилизация разделов в главном меню */
-				tag: ["QSA", "BHV", "fade", "scale3d"],
-				selector: ".FooterComponentStyle-containerMenu.FooterComponentStyle-chatButton",
-				styles:
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QS", "fade"],
+			selector: "#root > div > div.Common-blockCenter.MainScreenComponentStyle-containerForMenuGradient > footer > ul",
+			styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "5rem",
-					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					marginBottom: "2%",
-					height: "4.5rem",
-					width: "4.5rem",
-					right: "1rem"
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					position: "absolute", 
+					bottom: "1.5vw",
+					left: "-1.6vw",
+					width: "20vw",
 				}
 			},
 
-			{ /* стилизация разделов в главном меню */
-				tag: ["QSA", "BHV", "fade", "scale3d"],
-				selector: ".FooterComponentStyle-containerMenu.FooterComponentStyle-friendButton",
-				styles:
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QS", "BHV", "fade"],
+			selector: ".FooterComponentStyle-newsButton",
+			styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "5rem",
-					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					marginBottom: "2%",
-					height: "4.5rem",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "4rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					position: "absolute", 
+					left: "0.7vw",
 					width: "4.5rem",
-					left: "0.5rem"
+					height: "4.5rem",
+					bottom: "0.150rem"
 				}
 			},
 
-			{ /* стилизация разделов в главном меню */
-				tag: ["QSA", "BHV", "fade", "scale3d"],
-				selector: ".FooterComponentStyle-containerMenu.FooterComponentStyle-clanButton",
-				styles:
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QS", "BHV", "fade"],
+			selector: ".FooterComponentStyle-chatButton",
+			styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "5rem",
-					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					marginBottom: "2%",
-					height: "4.5rem",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "4rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					position: "absolute", 
+					left: "5.6vw",
 					width: "4.5rem",
-					right: "-10%"
+					height: "4.5rem",
+					bottom: "0.150rem"
+				}
+			},
+
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QS", "BHV", "fade"],
+			selector: ".FooterComponentStyle-friendButton",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "4rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					position: "absolute", 
+					left: "10.6vw",
+					width: "4.5rem",
+					height: "4.5rem",
+					bottom: "0.150rem"
+				}
+			},
+
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QS", "BHV", "fade"],
+			selector: ".FooterComponentStyle-clanButton",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "4rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					position: "absolute",
+					left: "15.5vw",
+					width: "4.5rem",
+					height: "4.5rem",
+					bottom: "0.150rem"
 				}
 			},
 
@@ -984,9 +1015,8 @@
 				selector: ".MainScreenComponentStyle-containerPanel",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					border: "none",
-					bottom: "88%"
+					background: "none",
+					border: "none"
 						/* backdropFilter: "blur(0.5rem)",
 						border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 						borderBottomLeftRadius: "2rem",
@@ -1006,8 +1036,11 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "2rem",
 					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					left: "1.8%",
-					width: "33.6rem"
+					position: "fixed",
+					left: "2vw",
+					width: "28vw",
+					height: "5.2vw",
+					top: "2vw"
 				}
 			},
 
@@ -1021,9 +1054,11 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "2rem",
 					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					right: "1.8%",
-					position: "absolute",
-					width: "33.6rem"
+					position: "fixed",
+					right: "2vw",
+					width: "28vw",
+					height: "5.2vw",
+					top: "2vw"
 				}
 			},
 
@@ -1396,12 +1431,15 @@
 				selector: ".BattlePassLobbyComponentStyle-menuBattlePass",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "1rem",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.2rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					top: "12.95rem"
+					position: "absolute",
+					margin: "0",
+					top: "16.9rem",
+					right: "2vw"
 				}
 			},
 
@@ -1411,9 +1449,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.050)",
-					borderRadius: "1.1rem",
-					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					border: "none",
 					right: "0.1rem"
 				}
 			},
@@ -1444,10 +1480,13 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "1rem",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.2rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					top: "21.5rem"
+					position: "absolute",
+					top: "33rem",
+					width: "21.5rem",
+					right: "2vw"
 				}
 			},
 
@@ -1456,7 +1495,7 @@
 				selector: ".EventBattlePassLobbyComponentStyle-commonBlockProgressBar",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
 				}
 			},
 
@@ -1465,12 +1504,12 @@
 				selector: ".AnnouncementHomeScreenComponentStyle-mainContainer",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					backdropFilter: "blur(5px)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					bottom: "0.950rem"
+					bottom: "2.79rem"
 				}
 			},
 
@@ -2443,6 +2482,11 @@
 						box-shadow: rgba(222, 184, 135, 1) 0rem 0rem 0.375rem !important;
 						filter: drop-shadow(rgba(222, 184, 135, 1) 0rem 0rem 0.5rem) !important;
 						animation: scaleIn 0.7s ease-in-out;
+					}
+
+					.MenuComponentStyle-commonBlock > span {
+						background: none !important;
+						animation: fadeIn 0.3s ease-in-out;
 					}
 				`
 			},
