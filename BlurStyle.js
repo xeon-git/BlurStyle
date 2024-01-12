@@ -473,13 +473,15 @@
 				selector: ".MatchmakingWaitComponentStyle-container",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.5rem",
 					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					left: "36%",
-					top: "16%"
+					left: "36vw",
+					top: "8vw",
+					width: "27.6vw",
+					height: "7.4vw"
 				}
 			},
 
@@ -490,7 +492,8 @@
 				{
 					position: "absolute",
 					transform: "scale(1.1)",
-					top: "27%"
+					top: "27%",
+					width: "20.75rem"
 				}
 			},
 
@@ -515,8 +518,8 @@
 					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 					position: "absolute",
 					right: "2%",
-					top: "51%",
-					height: "3rem",
+					top: "4rem",
+					height: "3.5rem",
 					width: "8rem"
 				}
 			},
@@ -527,6 +530,27 @@
 				styles:
 				{
 					margin: "0"
+				}
+			},
+
+			{ /* стилизация окна поиска битвы */
+			tag: ["QS"],
+			selector: "#root > div.Common-container > div.Common-blockCenter.MainScreenComponentStyle-containerForMenuGradient > div.Common-displayFlex > div > div.Common-backgroundImageContain",
+			styles:
+				{
+					position: "absolute",
+					top: "1.5rem",
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация окна поиска битвы */
+			tag: ["QS"],
+			selector: "#root > div.Common-container > div.Common-blockCenter.MainScreenComponentStyle-containerForMenuGradient > div.Common-displayFlex > div > h3",
+			styles:
+				{
+					top: "calc(50% - 0.5em + 2.438em)",
+					color: "rgba(255, 255, 255, 1)"
 				}
 			},
 			
@@ -891,6 +915,24 @@
 
 			{ /* стилизация нижних разделов в лобби */
 			tag: ["QS", "BHV", "fade"],
+			selector: ".FooterComponentStyle-friendButton",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "4rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					position: "absolute", 
+					left: "10.6vw",
+					width: "4.5rem",
+					height: "4.5rem",
+					bottom: "0.150rem"
+				}
+			},
+
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QS", "BHV", "fade"],
 			selector: ".FooterComponentStyle-newsButton",
 			styles:
 				{
@@ -900,7 +942,7 @@
 					borderRadius: "4rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 					position: "absolute", 
-					left: "0.7vw",
+					left: "0.7rem",
 					width: "4.5rem",
 					height: "4.5rem",
 					bottom: "0.150rem"
@@ -927,24 +969,6 @@
 
 			{ /* стилизация нижних разделов в лобби */
 			tag: ["QS", "BHV", "fade"],
-			selector: ".FooterComponentStyle-friendButton",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "4rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					position: "absolute", 
-					left: "10.6vw",
-					width: "4.5rem",
-					height: "4.5rem",
-					bottom: "0.150rem"
-				}
-			},
-
-			{ /* стилизация нижних разделов в лобби */
-			tag: ["QS", "BHV", "fade"],
 			selector: ".FooterComponentStyle-clanButton",
 			styles:
 				{
@@ -954,7 +978,7 @@
 					borderRadius: "4rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 					position: "absolute",
-					left: "15.5vw",
+					right: "0.7rem",
 					width: "4.5rem",
 					height: "4.5rem",
 					bottom: "0.150rem"
@@ -1313,11 +1337,12 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-					backdropFilter: "blur(10px)",
+					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.2rem",
-					top: "8.5rem",
-					left: "2.4rem",
+					top: "8vw",
+					left: "2vw",
+					width: "28vw",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
@@ -2211,7 +2236,7 @@
 			},
 
 			{ /* стилизация раздела настроек */
-				tag: ["QSA", "fade", "BHV"],
+				tag: ["QSA", "fade", "BHV", "scale3d"],
 				selector: ".SettingsMenuComponentStyle-menuItemOptions",
 				styles:
 				{
