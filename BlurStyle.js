@@ -166,7 +166,7 @@
 	/* массив стилей */
 	function styles()
 	{
-		const elements = [			
+		const elements = [
 			{ /* logo аним фрейм */
 				cssStyles: `
 					@keyframes logoAnim {
@@ -498,6 +498,15 @@
 			},
 
 			{ /* стилизация окна поиска битвы */
+			tag: ["QS"],
+			selector: "#root > div.MatchmakingWaitComponentStyle-container.slideIn > div.MatchmakingWaitComponentStyle-contentContainer.fade > div.MatchmakingWaitComponentStyle-currentTimeContainer > div > span",
+			styles:
+				{
+					fontSize: "1rem"
+				}
+			},
+
+			{ /* стилизация окна поиска битвы */
 				tag: ["QS"],
 				selector: "div.MatchmakingWaitComponentStyle-container > div",
 				styles:
@@ -553,7 +562,7 @@
 					color: "rgba(255, 255, 255, 1)"
 				}
 			},
-			
+
 			{ /* стилизация раздела с битвами */
 			cssStyles: `
 				.InputComponentStyle-blurBackground {
@@ -851,7 +860,7 @@
 				}
 			},
 
-			{ 
+			{
 				tag: ["QSA", "BHV", "fade", "scale3d"],
 				selector: ".PrimaryMenuItemComponentStyle-itemCommonLi.PrimaryMenuItemComponentStyle-menuItemContainer",
 				styles:
@@ -906,82 +915,31 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "2rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					position: "absolute", 
-					bottom: "1.5vw",
-					left: "-1.6vw",
-					width: "20vw",
-				}
-			},
-
-			{ /* стилизация нижних разделов в лобби */
-			tag: ["QS", "BHV", "fade"],
-			selector: ".FooterComponentStyle-friendButton",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "4rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					position: "absolute", 
-					left: "10.6vw",
-					width: "4.5rem",
-					height: "4.5rem",
-					bottom: "0.150rem"
-				}
-			},
-
-			{ /* стилизация нижних разделов в лобби */
-			tag: ["QS", "BHV", "fade"],
-			selector: ".FooterComponentStyle-newsButton",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "4rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					position: "absolute", 
-					left: "0.7rem",
-					width: "4.5rem",
-					height: "4.5rem",
-					bottom: "0.150rem"
-				}
-			},
-
-			{ /* стилизация нижних разделов в лобби */
-			tag: ["QS", "BHV", "fade"],
-			selector: ".FooterComponentStyle-chatButton",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "4rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					position: "absolute", 
-					left: "5.6vw",
-					width: "4.5rem",
-					height: "4.5rem",
-					bottom: "0.150rem"
-				}
-			},
-
-			{ /* стилизация нижних разделов в лобби */
-			tag: ["QS", "BHV", "fade"],
-			selector: ".FooterComponentStyle-clanButton",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "4rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "flex-end",
 					position: "absolute",
-					right: "0.7rem",
+					bottom: "1.5vw",
+					left: "-1.95vw",
+					width: "20.4vw",
+				}
+			},
+
+			{ /* стилизация нижних разделов в лобби */
+			tag: ["QSA", "BHV", "fade", "scale3d"],
+			selector: ".FooterComponentStyle-containerMenu",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.050)",
+					borderRadius: "4.5rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					marginRight: "0.6rem",
 					width: "4.5rem",
 					height: "4.5rem",
-					bottom: "0.150rem"
+					bottom: "0.150rem",
+					left: "0.250vw"
 				}
 			},
 
@@ -1258,7 +1216,7 @@
 			{ /* стилизация раздела с битвами */
 			tag: ["QSA", "RHV"],
 			selector: ".BattleOptionsSectionComponentStyle-checkBoxSettingsCreateBattle .Common-flexSpaceBetweenAlignCenter",
-			styles: 
+			styles:
 				{
 					borderBottom: "none"
 				}
@@ -1608,7 +1566,7 @@
 				selector: "#root > div > div.Common-flexStartAlignStart > div.MainScreenComponentStyle-containerPanel > div.UserInfoContainerStyle-blockLeftPanel > div > div",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					background: "none",
 					border: "none",
 					boxShadow: "none"
 				}
@@ -2513,6 +2471,16 @@
 						background: none !important;
 						animation: fadeIn 0.3s ease-in-out;
 					}
+
+					.MenuComponentStyle-commonBlock > span {
+						background: none !important;
+						animation: fadeIn 0.3s ease-in-out;
+					}
+
+					div.MenuComponentStyle-battleTitleCommunity > div > div > div > span {
+						background: none !important;
+						animation: fadeIn 0.3s ease-in-out;
+					}
 				`
 			},
 
@@ -2915,7 +2883,7 @@
 			},
 
 			{ /* стилизация раздела с контейнерами */
-				tag: ["QS"],
+				tag: ["QS", "fade"],
 				selector: ".LockableContainerInfoComponentStyle-lootBoxDescriptionContainer",
 				styles:
 				{
@@ -3315,7 +3283,7 @@
 			},
 
 			{ /* стилизация всплывающего инфо-окна */
-				tag: ["QS", "scale"],
+				tag: ["QS", "slide"],
 				selector: ".NotificationViewStyle-commonBlockNotification",
 				styles:
 				{
@@ -3559,7 +3527,7 @@
 			},
 
 			{ /* стилизация гаража */
-				tag: ["QS", "BHV", "fade"],
+				tag: ["QS", "fade"],
 				selector: "div.TanksPartComponentStyle-descriptionContainer > div.GarageCommonStyle-animatedBlurredLeftBlock > div:nth-child(2)",
 				styles:
 				{
@@ -3697,6 +3665,28 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.1rem",
 					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+			tag: ["QS", "BHV", "fade"],
+			selector: "#root > div > div > div.ClanCommonStyle-center.ClanCommonStyle-marginContent > div > div.ClanInfoComponentStyle-clanForeignActions > div.Common-flexCenterAlignCenter",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+			tag: ["QS", "fade"],
+			selector: ".ClanInfoComponentStyle-clanActionDescription",
+			styles:
+				{
+					background: "none"
 				}
 			},
 
@@ -5023,7 +5013,7 @@
 			{ /* стилизация сайта с рейтингами */
 				tag: ["QS", "fade"],
 				selector: ".progress-bar",
-				styles: 
+				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
@@ -5034,7 +5024,7 @@
 			{ /* стилизация сайта с рейтингами */
 			tag: ["QS", "fade"],
 			selector: "#app-root > main > div.generic-box.panel.stats-panel.fade > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div",
-			styles: 
+			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
@@ -5045,7 +5035,7 @@
 			{ /* стилизация сайта с рейтингами */
 				tag: ["QS", "fade"],
 				selector: ".progress-bar__bar",
-				styles: 
+				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
@@ -5059,7 +5049,7 @@
 			{ /* стилизация сайта с рейтингами */
 			tag: ["QS", "fade"],
 			selector: "#app-root > main > div.generic-box.panel.stats-panel.fade > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div > div.progress-bar__bar",
-			styles: 
+			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
@@ -5074,7 +5064,7 @@
 			{ /* стилизация сайта с рейтингами */
 			tag: ["QS", "slide"],
 			selector: ".lang-selector__list",
-			styles: 
+			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.2rem)",
@@ -5086,7 +5076,7 @@
 			{ /* стилизация сайта с рейтингами */
 			tag: ["QSA", "fade"],
 			selector: ".lang-selector__list-item",
-			styles: 
+			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
 				}
@@ -5234,7 +5224,7 @@
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
-			
+
 			{ /* стилизация разделов с челленджами */
 			tag: ["QSA", "fade"],
 			selector: ".Common-flexCenterAlignCenterColumn.TierItemComponentStyle-tierCommon",
@@ -5308,6 +5298,42 @@
 			styles:
 				{
 					borderLeft: "none"
+				}
+			},
+
+			{ /* стилизация увед окна с ошибкой */
+			tag: ["QS", "slide"],
+			selector: ".HeaderComponentStyle-messageContainer",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(176, 176, 176, 0.7) 0%, rgba(176, 176, 176, 0.7) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "1.2rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация избранных красок в гараже */
+			tag: ["QSA", "BHV", "fade"],
+			selector: ".PaintsCollectionComponentStyle-favoriteIconContainer",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "2rem",
+					boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+					width: "1.5rem",
+					height: "1.5rem"
+				}
+			},
+
+			{ /* стилизация избранных красок в гараже */
+			tag: ["QSA"],
+			selector: ".PaintsCollectionComponentStyle-favoriteIconContainer > img",
+			styles:
+				{
+					width: "1.5rem",
+					height: "1.5rem"
 				}
 			},
 
