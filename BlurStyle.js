@@ -3875,7 +3875,16 @@
 				selector: ".ClanHeaderComponentStyle-logo",
 				styles:
 				{
-					filter: "saturate(0)"
+					display: "none"
+				}
+			},
+
+			{ /* стилизация раздела с кланом */
+			tag: ["QS", "fade"],
+			selector: ".ClanFounderComponentStyle-infoClan",
+			styles:
+				{
+					marginLeft: "1.7em"
 				}
 			},
 
@@ -4543,6 +4552,16 @@
 			},
 
 			{ /* стилизация раздела с битвами */
+			tag: ["QS", "fade"],
+			selector: ".BattleCreateComponentStyle-imagePrivate",
+			styles:
+				{
+					zIndex: "1",
+					filter: "saturate(0)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
 			tag: ["QSA", "fade"],
 			selector: ".MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle",
 			styles:
@@ -4786,6 +4805,19 @@
 			{ /* стилизация рег формы */
 			tag: ["QSA", "BHV", "fade"],
 			selector: ".EntranceComponentStyle-styleButtons",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.2rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация рег формы */
+			tag: ["QS", "BHV", "fade"],
+			selector: "div.RegistrationComponentStyle-containerItem > input",
 			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
