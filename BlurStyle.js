@@ -243,6 +243,62 @@
 				`
 			},
 
+			{ /* background аним фрейм */
+			cssStyles: `
+					.Common-entranceGradient, #app-root, .Common-Container {
+						position: relative;
+						overflow: hidden;
+					}
+
+					.Common-entranceGradient::before, #app-root::before, .Common-container::before {
+						content: "";
+						position: absolute;
+						inset: 0;
+						--stripes: repeating-linear-gradient(
+							100deg,
+							#fff 0%,
+							#fff 7%,
+							transparent 10%,
+							transparent 12%,
+							#fff 16%
+						);
+						--stripesDark: repeating-linear-gradient(
+							100deg,
+							#000 0%,
+							#000 7%,
+							transparent 10%,
+							transparent 12%,
+							#000 16%
+						);
+						--rainbow: repeating-linear-gradient(
+							100deg,
+							#fff 10%,
+							#000 15%,
+							#fff 20%,
+							#000 25%,
+							#fff 30%
+						);
+						background-image: var(--stripes), var(--rainbow);
+						background-size: 200%, 100%;
+						animation: gradientBg 60s linear infinite;
+						background-attachment: fixed;
+						mix-blend-mode: difference;
+						filter: blur(14rem) invert(100%);
+						mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+						will-change: transform;
+					}
+
+					@keyframes gradientBg {
+						from {
+							background-position: 50% 50%, 50% 50%;
+						}
+						to {
+							background-position: 350% 50%, 350% 50%;
+						}
+					}
+				`
+			},
+
 			{ /* стилизация общего блока */
 				tag: ["QS"],
 				selector: ".Common-container",
@@ -480,7 +536,7 @@
 					boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 					left: "36vw",
 					top: "8vw",
-					width: "27.6vw",
+					width: "27.8vw",
 					height: "7.4vw"
 				}
 			},
@@ -731,8 +787,7 @@
 				selector: ".NewsComponentStyle-header",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 0%)",
-					backdropFilter: "blur(10px)"
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
 				}
 			},
 
@@ -742,9 +797,19 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 0%)",
-					backdropFilter: "blur(10px)"
+					borderRight: "0.150rem solid rgba(255, 255, 255, 0.2)"
 				}
 			},
+
+			{ /* стилизация новостного меню */
+			tag: ["QS"],
+			selector: ".NewsComponentStyle-newsItemContainer",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+				}
+			},
+
 
 			{ /* стилизация новостного меню */
 				tag: ["QS", "fade"],
@@ -762,7 +827,17 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-					backdropFilter: "blur(10px)"
+					backdropFilter: "blur(0.5rem)"
+				}
+			},
+
+			{ /* стилизация ресайз полоски с чатом */
+			tag: ["QS"],
+			selector: ".ChatComponentStyle-chatResize",
+			styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 0%)",
+					backdropFilter: "blur(0.5rem)"
 				}
 			},
 
@@ -878,6 +953,15 @@
 				}
 			},
 
+			{
+				tag: ["QSA", "fade"],
+				selector: "#root > div > div.Common-blockCenter.MainScreenComponentStyle-containerForMenuGradient > div.MainScreenComponentStyle-blockMainMenu > ul > li > div",
+				styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
+
 			{ /* стилизация разделов в главном меню */
 				tag: ["QSA", "fade"],
 				selector: ".PrimaryMenuItemComponentStyle-notificationIconNewNews",
@@ -922,6 +1006,7 @@
 					bottom: "1.5vw",
 					left: "-1.95vw",
 					width: "20.4vw",
+					filter: "saturate(0)"
 				}
 			},
 
@@ -1272,7 +1357,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					backdropFilter: "blur(0rem)"
+					borderLeft: "0.150rem solid rgba(255, 255, 255, 0.2)"
 				}
 			},
 
@@ -1524,6 +1609,7 @@
 				{
 					borderBottomLeftRadius: "1rem",
 					borderBottomRightRadius: "1rem",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)"
 				}
 			},
 
@@ -2653,6 +2739,15 @@
 			},
 
 			{ /* стилизация ммной статы */
+			tag: ["QSA"],
+			selector: ".GearScoreStyle-bestGsLight",
+			styles:
+				{
+					marginRight: "0"
+				}
+			},
+
+			{ /* стилизация ммной статы */
 				tag: ["QS"],
 				selector: ".BattleResultHeaderComponentStyle-flashLight",
 				styles:
@@ -2812,7 +2907,7 @@
 			},
 
 			{ /* стилизация раздела с контейнерами */
-				tag: ["QS", "BHV", "fade"],
+				tag: ["QS", "fade"],
 				selector: ".LockableContainersComponentStyle-possibleRewardsBlock",
 				styles:
 				{
@@ -2821,6 +2916,24 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{  /* стилизация раздела с контейнерами */
+			tag: ["QS", "fade"],
+			selector: ".DeviceButtonComponentStyle-blockAlterations",
+			styles:
+				{
+					alignItems: "flex-start"
+				}
+			},
+
+			{ /* стилизация раздела с контейнерами */
+			tag: ["QS"],
+			selector: ".LockableContainersComponentStyle-navigationBlockForCategories",
+			styles:
+				{
+					borderBottom: "none"
 				}
 			},
 
@@ -2869,7 +2982,7 @@
 				selector: ".LockableContainersComponentStyle-rewards",
 				styles:
 				{
-					right: "0.5rem"
+					justifyContent: "center"
 				}
 			},
 
@@ -4323,7 +4436,7 @@
 				}
 			},
 
-			{ /* logo аним фрейм */
+			{ /* стилизация раздела с битвами */
 			cssStyles: `
 					#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn {
 						border-left: none !important;
@@ -4399,13 +4512,13 @@
 			},
 
 			{ /* стилизация раздела с битвами */
-			tag: ["QSA", "BHV"],
+			tag: ["QSA"],
 			selector: ".BattleModesComponentStyle-blockModesFilter .Common-flexCenterAlignCenter .Common-maskImageContain",
 			styles:
 				{
 					position: "static",
 					border: "none",
-					borderRadius: "1rem",
+					borderRadius: "none"
 				}
 			},
 
