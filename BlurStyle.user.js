@@ -4,7 +4,7 @@
 // @description better user experience
 // @author xeon | xxnn
 // @match https://*.tankionline.com/*
-// @icon https://www.google.com/s2/favicons?sz=64&domain=wolf.ua
+// @icon https://media.discordapp.net/attachments/1198382685882691665/1198383109683560548/blurstyle.png
 // ==/UserScript==
 
 (function()
