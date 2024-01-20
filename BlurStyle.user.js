@@ -2,7 +2,7 @@
 // @name BlurStyle
 // @version 4.0
 // @description better user experience
-// @author Wolf Team
+// @author xeon | xxnn
 // @match https://*.tankionline.com/*
 // @icon https://www.google.com/s2/favicons?sz=64&domain=wolf.ua
 // ==/UserScript==
@@ -11,11 +11,28 @@
 {
 	let observer;
 	let cssStyles;
-	let fChatActive = false;
+	let chatActive = false;
 	let filters = true;
 	let bgEnabled = true;
 	let saturationValue = 170;
 	let contrastValue = 110;
+
+	/* логика проверки чата */
+	function checkChatState() {
+		const commons = {
+			getChatStateAll: () => document.querySelector(".BattleChatComponentStyle-inputContainerAll"),
+			getChatStateAllies: () => document.querySelector(".BattleChatComponentStyle-inputContainerAllies"),
+		};
+
+		const chatStateAll = commons.getChatStateAll();
+		const chatStateAllies = commons.getChatStateAllies();
+
+		if (chatStateAll || chatStateAllies) {
+			chatActive = true;
+		} else {
+			chatActive = false;
+		}
+	}
 
 	/* логика тегов */
 	function animationTags(element, el)
@@ -91,7 +108,7 @@
 
 	/* логика наложения кастомного тайтла */
 	function changeTitle(newTitle) {
-		
+
 		const allowedURLs = ['https://tankionline.com/play/', 'https://.*\.test-eu\.tankionline\.com/browser-public/index\.html.*'];
 
 		const currentURL = window.location.href;
@@ -177,16 +194,6 @@
 		}
 	}
 
-	/* проверка чата */
-	const commons = {
-		getChatStateAll: function() {
-			return document.querySelector(".BattleChatComponentStyle-inputContainerAll");
-		},
-		getChatStateAllies: function() {
-			return document.querySelector(".BattleChatComponentStyle-inputContainerAllies");
-		}
-	};
-
 	/* переключение состояния фильтров */
 	document.addEventListener('keydown', function(event) {
 		const allowedURLs = ['https://tankionline.com/play/', 'https://*.test-eu.tankionline.com/browser-public/index.html?*'];
@@ -195,18 +202,10 @@
 		/* проверка на то, что текущий URL соответствует хотя бы одному из разрешенных URL */
 		const isValidURL = allowedURLs.some(url => new RegExp(url.replace(/\*/g, '.*')).test(currentURL));
 
-		/* активность чата */
-		const chatStateAll = commons.getChatStateAll();
-		const chatStateAllies = commons.getChatStateAllies();
-
-		if (chatStateAll || chatStateAllies) {
-			fChatActive = true;
-		} else {
-			fChatActive = false;
-		}
+		checkChatState();
 
 		/* проверки перед включением фильтра */
-		if (!fChatActive && event.key === '\\' && isValidURL) {
+		if (!chatActive && event.key === '\\' && isValidURL) {
 			toggleFilters();
 		}
 	});
@@ -214,25 +213,19 @@
 	/* логика вариации таба с резистами */
 	function resistanceTab() {
 		let rTab = localStorage.getItem('rTab') === 'true';
-	
-		const pigmmons = {
-			getChatStateAll: () => document.querySelector(".BattleChatComponentStyle-inputContainerAll"),
-			getChatStateAllies: () => document.querySelector(".BattleChatComponentStyle-inputContainerAllies"),
-		};
-	
+
 		if (rTab) {
 			applyTab();
 		}
-	
+
 		document.addEventListener('keydown', (event) => {
-			const chatStateAll = pigmmons.getChatStateAll();
-			const chatStateAllies = pigmmons.getChatStateAllies();
-	
-			if (!chatStateAll && !chatStateAllies && event.key === '=') {
+			checkChatState();
+
+			if (!chatActive && event.key === '=') {
 				toggleScript();
 			}
 		});
-	
+
 		function applyTab() {
 			const css = `
 				.BattleTabStatisticComponentStyle-resistanceModuleCell {
@@ -240,27 +233,27 @@
 					visibility: unset;
 					right: 25rem;
 				}
-	
+
 				table > tbody > tr > td.BattleTabStatisticComponentStyle-gsCell {
 					position: absolute;
 					right: 11rem;
 				}
-	
+
 				table > tbody > tr > td.BattleTabStatisticComponentStyle-deviceCell {
 					position: absolute;
 					right: 8.5rem;
 				}
-	
+
 				table > tbody > tr > td.BattleTabStatisticComponentStyle-defenceCell {
 					position: absolute;
 					right: 5.5rem;
 				}
-	
+
 				table > tbody > tr > td.BattleTabStatisticComponentStyle-scoreCell {
 					position: absolute;
 					right: 1.4rem;
 				}
-	
+
 				table > tbody > tr > td.BattleTabStatisticComponentStyle-dlCell {
 					position: absolute;
 					right: -1.4rem;
@@ -268,33 +261,33 @@
 			`;
 			addStyle(css);
 		}
-	
+
 		function addStyle(css) {
 			const body = document.body || document.getElementsByTagName('body')[0];
 			const style = document.createElement('style');
-	
+
 			style.className = 'css';
 			if (style.styleSheet) {
 				style.styleSheet.cssText = css;
 			} else {
 				style.appendChild(document.createTextNode(css));
 			}
-	
+
 			body.appendChild(style);
 		}
-	
+
 		function toggleScript() {
 			rTab = !rTab;
-	
+
 			if (rTab) {
 				applyTab();
 			} else {
 				removeTab();
 			}
-	
+
 			localStorage.setItem('rTab', rTab.toString());
 		}
-	
+
 		function removeTab() {
 			const styleElement = document.querySelector('.css');
 			if (styleElement) {
@@ -312,7 +305,7 @@
 					position: relative;
 					overflow: hidden;
 				}
-	
+
 				.Common-entranceGradient::before, #app-root::before, .Common-container::before {
 					content: "";
 					position: absolute;
@@ -350,7 +343,7 @@
 					mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
 					will-change: transform;
 				}
-	
+
 				@keyframes gradientBg {
 					from {
 						background-position: 50% 50%, 50% 50%;
@@ -362,32 +355,36 @@
 			`;
 			return style;
 		};
-	
+
 		const toggleBG = () => {
-			bgEnabled = !bgEnabled;
-			const action = bgEnabled ? 'appendChild' : 'removeChild';
-			document.head[action](styleElement);
-			saveBgSettings();
+			checkChatState();
+
+			if (!chatActive) {
+				bgEnabled = !bgEnabled;
+				const action = bgEnabled ? 'appendChild' : 'removeChild';
+				document.head[action](styleElement);
+				saveBgSettings();
+			}
 		};
-	
+
 		const handleKeyDown = (event) => {
 			const keyCodeBracket = 221;
-	
+
 			if (event.keyCode === keyCodeBracket) {
 				toggleBG();
 			}
 		};
-	
+
 		const styleElement = createStyleElement();
 		document.head.appendChild(styleElement);
-	
+
 		document.addEventListener('keydown', handleKeyDown);
-	
+
 		/* сохранение настроек фона в локальное хранилище */
 		function saveBgSettings() {
 			localStorage.setItem('bgEnabled', bgEnabled.toString());
 		}
-	
+
 		/* восстановление настроек фона из локального хранилища */
 		function restoreBgSettings() {
 			const savedSetting = localStorage.getItem('bgEnabled');
@@ -400,11 +397,216 @@
 		restoreBgSettings();
 	}
 
+	/* логика наложения канвас анимации на загрузочный экран */
+	(function() {
+		const styleBlock = document.createElement("style");
+		styleBlock.innerHTML = `
+			.ApplicationLoaderComponentStyle-container {
+				position: fixed;
+				overflow: hidden;
+			}
+	
+			.canvasWrapper {
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 99;
+			}
+	
+			canvas {
+				display: block;
+				position: fixed;
+			}
+		`;
+		document.head.appendChild(styleBlock);
+	
+		class Star {
+			constructor(canvas) {
+				this.X = canvas.width / 2;
+				this.Y = canvas.height / 2;
+				this.SX = Math.random() * 10 - 5;
+				this.SY = Math.random() * 10 - 5;
+	
+				const start = canvas.width > canvas.height ? canvas.width : canvas.height;
+				this.X += (this.SX * start) / 10;
+				this.Y += (this.SY * start) / 10;
+	
+				this.W = 1;
+				this.H = 1;
+	
+				this.age = 0;
+				this.dies = 500;
+	
+				starIndex++;
+				stars[starIndex] = this;
+	
+				this.ID = starIndex;
+				this.C = "#ffffff";
+			}
+	
+			draw() {
+				if (!canvas) return;
+	
+				this.X += this.SX;
+				this.Y += this.SY;
+	
+				this.SX += this.SX / (50 / acceleration);
+				this.SY += this.SY / (50 / acceleration);
+	
+				this.age++;
+	
+				if (
+					this.age === Math.floor(50 / acceleration) ||
+					this.age === Math.floor(150 / acceleration) ||
+					this.age === Math.floor(300 / acceleration)
+				) {
+					this.W++;
+					this.H++;
+				}
+	
+				if (
+					this.X + this.W < 0 ||
+					this.X > canvas.width ||
+					this.Y + this.H < 0 ||
+					this.Y > canvas.height
+				) {
+					delete stars[this.ID];
+					numStars--;
+				}
+	
+				canvas.getContext("2d").fillStyle = this.C;
+				canvas.getContext("2d").fillRect(this.X, this.Y, this.W, this.H);
+			}
+		}
+	
+		const stars = {};
+		let starIndex = 0;
+		let numStars = 0;
+		let acceleration = 1;
+		let canvas;
+		let starsToDraw;
+	
+		function applyAnimationToBackground(loadBg) {
+			if (!loadBg) return;
+	
+			canvas = document.createElement("canvas");
+			canvas.id = "field";
+	
+			const canvasWrapper = document.createElement("div");
+			canvasWrapper.className = "canvasWrapper";
+			loadBg.appendChild(canvasWrapper);
+			canvasWrapper.appendChild(canvas);
+	
+			canvas.getContext("2d").fillStyle = "rgba(0, 0, 0, 0.8)";
+			canvas.getContext("2d").fillRect(0, 0, canvas.width, canvas.height);
+	
+			canvas.width = loadBg.clientWidth;
+			canvas.height = loadBg.clientHeight;
+	
+			starsToDraw = (canvas.width * canvas.height) / 5000;
+	
+			function draw() {
+				if (!loadBg) {
+					clearInterval(animationInterval);
+					return;
+				}
+	
+				if (!canvas) {
+					clearInterval(animationInterval);
+					return;
+				}
+	
+				if (!canvas.getContext) {
+					clearInterval(animationInterval);
+					return;
+				}
+	
+				if (canvas.width !== loadBg.clientWidth) {
+					canvas.width = loadBg.clientWidth;
+				}
+	
+				if (canvas.height !== loadBg.clientHeight) {
+					canvas.height = loadBg.clientHeight;
+				}
+	
+				canvas.getContext("2d").fillStyle = "rgba(0, 0, 0, 0.8)";
+				canvas.getContext("2d").fillRect(0, 0, canvas.width, canvas.height);
+	
+				for (let i = numStars; i < starsToDraw; i++) {
+					new Star(canvas);
+					numStars++;
+				}
+	
+				for (const star in stars) {
+					stars[star].draw();
+				}
+			}
+	
+			const animationInterval = setInterval(draw, 20);
+	
+			loadBg.dataset.animationInterval = animationInterval;
+			loadBg.dataset.canvasId = canvas.id;
+		}
+	
+		function removeAnimationFromBackground(loadBg) {
+			if (!loadBg) return;
+	
+			const animationInterval = loadBg.dataset.animationInterval;
+			const canvasId = loadBg.dataset.canvasId;
+	
+			clearInterval(animationInterval);
+	
+			if (canvasId) {
+				const canvasElement = document.getElementById(canvasId);
+				if (canvasElement) {
+					canvasElement.parentNode.remove();
+				}
+			}
+	
+			delete loadBg.dataset.animationInterval;
+			delete loadBg.dataset.canvasId;
+		}
+	
+		const observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+					mutation.addedNodes.forEach(function(node) {
+						if (
+							node.nodeType === 1 &&
+							node.classList.contains("ApplicationLoaderComponentStyle-container")
+						) {
+							applyAnimationToBackground(node);
+						}
+					});
+				} else if (mutation.type === "childList" && mutation.removedNodes.length > 0) {
+					mutation.removedNodes.forEach(function(node) {
+						if (
+							node.nodeType === 1 &&
+							node.classList.contains("ApplicationLoaderComponentStyle-container")
+						) {
+							removeAnimationFromBackground(node);
+						}
+					});
+				}
+			});
+		});
+	
+		const observerConfig = {
+			childList: true,
+			subtree: true,
+		};
+		observer.observe(document.body, observerConfig);
+	
+		document.querySelectorAll(".ApplicationLoaderComponentStyle-container").forEach(function(element) {
+			applyAnimationToBackground(element);
+		});
+	})();
+
 	/* массив стилей */
 	function styles()
 	{
 		const elements = [
-			{ /* logo аним фрейм */
+				{ /* logo аним фрейм */
 				cssStyles: `
 					@keyframes logoAnim {
 						35% {
@@ -983,7 +1185,7 @@
 			},
 
 			{ /* стилизация новостного меню */
-			tag: ["QS"],
+			tag: ["QSA"],
 			selector: ".NewsComponentStyle-newsItemContainer",
 			styles:
 				{
@@ -991,6 +1193,14 @@
 				}
 			},
 
+			{ /* стилизация новостного меню */
+			tag: ["QSA"],
+			selector: "div.NewsComponentStyle-newsItemDate > img",
+			styles:
+				{
+					filter: "saturate(0)"
+				}
+			},
 
 			{ /* стилизация новостного меню */
 				tag: ["QS", "fade"],
