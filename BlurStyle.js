@@ -11,7 +11,9 @@
 {
 	let observer;
 	let cssStyles;
-	let isFilterEnabled = true;
+	let fChatActive = false;
+	let filters = true;
+	let bgEnabled = true;
 	let saturationValue = 170;
 	let contrastValue = 110;
 
@@ -87,6 +89,20 @@
 		}
 	}
 
+	/* логика наложения кастомного тайтла */
+	function changeTitle(newTitle) {
+		
+		const allowedURLs = ['https://tankionline.com/play/', 'https://.*\.test-eu\.tankionline\.com/browser-public/index\.html.*'];
+
+		const currentURL = window.location.href;
+
+		const isAllowedURL = allowedURLs.some(url => new RegExp(url).test(currentURL));
+
+		if (isAllowedURL && !document.title.includes("BlurStyle")) {
+			document.title = newTitle;
+		}
+	}
+
 	/* логика трансформации карточек */
 	function handleMouseMove(e, card)
 	{
@@ -133,7 +149,7 @@
 			return regex.test(currentURL);
 		});
 
-		if (isFilterEnabled && isMatchingURL) {
+		if (filters && isMatchingURL) {
 			applyFilters(saturationValue, contrastValue);
 		} else {
 			resetFilters();
@@ -142,26 +158,247 @@
 
 	/* переключение состояния фильтров */
 	function toggleFilters() {
-		isFilterEnabled = !isFilterEnabled;
+		filters = !filters;
 		updateFilters();
+		saveFilterSettings();
 	}
+
+	/* сохранение настроек фильтров в локальное хранилище */
+	function saveFilterSettings() {
+		localStorage.setItem('filters', filters.toString());
+	}
+
+	/* восстановление настроек фильтров из локального хранилища */
+	function restoreFilterSettings() {
+		const savedSetting = localStorage.getItem('filters');
+		if (savedSetting) {
+			filters = savedSetting === 'true';
+			updateFilters();
+		}
+	}
+
+	/* проверка чата */
+	const commons = {
+		getChatStateAll: function() {
+			return document.querySelector(".BattleChatComponentStyle-inputContainerAll");
+		},
+		getChatStateAllies: function() {
+			return document.querySelector(".BattleChatComponentStyle-inputContainerAllies");
+		}
+	};
 
 	/* переключение состояния фильтров */
 	document.addEventListener('keydown', function(event) {
 		const allowedURLs = ['https://tankionline.com/play/', 'https://*.test-eu.tankionline.com/browser-public/index.html?*'];
-
 		const currentURL = window.location.href;
 
 		/* проверка на то, что текущий URL соответствует хотя бы одному из разрешенных URL */
 		const isValidURL = allowedURLs.some(url => new RegExp(url.replace(/\*/g, '.*')).test(currentURL));
 
-		if (event.key === '\\' && isValidURL) {
+		/* активность чата */
+		const chatStateAll = commons.getChatStateAll();
+		const chatStateAllies = commons.getChatStateAllies();
+
+		if (chatStateAll || chatStateAllies) {
+			fChatActive = true;
+		} else {
+			fChatActive = false;
+		}
+
+		/* проверки перед включением фильтра */
+		if (!fChatActive && event.key === '\\' && isValidURL) {
 			toggleFilters();
 		}
 	});
 
-	/* инициализация фильтров при загрузке страницы */
-	updateFilters();
+	/* логика вариации таба с резистами */
+	function resistanceTab() {
+		let rTab = localStorage.getItem('rTab') === 'true';
+	
+		const pigmmons = {
+			getChatStateAll: () => document.querySelector(".BattleChatComponentStyle-inputContainerAll"),
+			getChatStateAllies: () => document.querySelector(".BattleChatComponentStyle-inputContainerAllies"),
+		};
+	
+		if (rTab) {
+			applyTab();
+		}
+	
+		document.addEventListener('keydown', (event) => {
+			const chatStateAll = pigmmons.getChatStateAll();
+			const chatStateAllies = pigmmons.getChatStateAllies();
+	
+			if (!chatStateAll && !chatStateAllies && event.key === '=') {
+				toggleScript();
+			}
+		});
+	
+		function applyTab() {
+			const css = `
+				.BattleTabStatisticComponentStyle-resistanceModuleCell {
+					position: absolute;
+					visibility: unset;
+					right: 25rem;
+				}
+	
+				table > tbody > tr > td.BattleTabStatisticComponentStyle-gsCell {
+					position: absolute;
+					right: 11rem;
+				}
+	
+				table > tbody > tr > td.BattleTabStatisticComponentStyle-deviceCell {
+					position: absolute;
+					right: 8.5rem;
+				}
+	
+				table > tbody > tr > td.BattleTabStatisticComponentStyle-defenceCell {
+					position: absolute;
+					right: 5.5rem;
+				}
+	
+				table > tbody > tr > td.BattleTabStatisticComponentStyle-scoreCell {
+					position: absolute;
+					right: 1.4rem;
+				}
+	
+				table > tbody > tr > td.BattleTabStatisticComponentStyle-dlCell {
+					position: absolute;
+					right: -1.4rem;
+				}
+			`;
+			addStyle(css);
+		}
+	
+		function addStyle(css) {
+			const body = document.body || document.getElementsByTagName('body')[0];
+			const style = document.createElement('style');
+	
+			style.className = 'css';
+			if (style.styleSheet) {
+				style.styleSheet.cssText = css;
+			} else {
+				style.appendChild(document.createTextNode(css));
+			}
+	
+			body.appendChild(style);
+		}
+	
+		function toggleScript() {
+			rTab = !rTab;
+	
+			if (rTab) {
+				applyTab();
+			} else {
+				removeTab();
+			}
+	
+			localStorage.setItem('rTab', rTab.toString());
+		}
+	
+		function removeTab() {
+			const styleElement = document.querySelector('.css');
+			if (styleElement) {
+				styleElement.remove();
+			}
+		}
+	}
+
+	/* логика наложения анимации фона */
+	function backgroundAnimation() {
+		const createStyleElement = () => {
+			const style = document.createElement('style');
+			style.textContent = `
+				.Common-entranceGradient, #app-root, .Common-Container {
+					position: relative;
+					overflow: hidden;
+				}
+	
+				.Common-entranceGradient::before, #app-root::before, .Common-container::before {
+					content: "";
+					position: absolute;
+					inset: 0;
+					--stripes: repeating-linear-gradient(
+						100deg,
+						#fff 0%,
+						#fff 7%,
+						transparent 10%,
+						transparent 12%,
+						#fff 16%
+					);
+					--stripesDark: repeating-linear-gradient(
+						100deg,
+						#000 0%,
+						#000 7%,
+						transparent 10%,
+						transparent 12%,
+						#000 16%
+					);
+					--rainbow: repeating-linear-gradient(
+						100deg,
+						#fff 10%,
+						#000 15%,
+						#fff 20%,
+						#000 25%,
+						#fff 30%
+					);
+					background-image: var(--stripes), var(--rainbow);
+					background-size: 200%, 100%;
+					animation: gradientBg 60s linear infinite;
+					background-attachment: fixed;
+					mix-blend-mode: difference;
+					filter: blur(14rem) invert(100%);
+					mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+					will-change: transform;
+				}
+	
+				@keyframes gradientBg {
+					from {
+						background-position: 50% 50%, 50% 50%;
+					}
+					to {
+						background-position: 350% 50%, 350% 50%;
+					}
+				}
+			`;
+			return style;
+		};
+	
+		const toggleBG = () => {
+			bgEnabled = !bgEnabled;
+			const action = bgEnabled ? 'appendChild' : 'removeChild';
+			document.head[action](styleElement);
+			saveBgSettings();
+		};
+	
+		const handleKeyDown = (event) => {
+			const keyCodeBracket = 221;
+	
+			if (event.keyCode === keyCodeBracket) {
+				toggleBG();
+			}
+		};
+	
+		const styleElement = createStyleElement();
+		document.head.appendChild(styleElement);
+	
+		document.addEventListener('keydown', handleKeyDown);
+	
+		/* сохранение настроек фона в локальное хранилище */
+		function saveBgSettings() {
+			localStorage.setItem('bgEnabled', bgEnabled.toString());
+		}
+	
+		/* восстановление настроек фона из локального хранилища */
+		function restoreBgSettings() {
+			const savedSetting = localStorage.getItem('bgEnabled');
+			if (savedSetting) {
+				bgEnabled = savedSetting === 'true';
+				const action = bgEnabled ? 'appendChild' : 'removeChild';
+				document.head[action](styleElement);
+			}
+		}
+		restoreBgSettings();
+	}
 
 	/* массив стилей */
 	function styles()
@@ -239,62 +476,6 @@
 
 					.slideIn {
 						animation: slideIn 0.4s ease-out;
-					}
-				`
-			},
-
-			{ /* background аним фрейм */
-			cssStyles: `
-					.Common-entranceGradient, #app-root, .Common-Container {
-						position: relative;
-						overflow: hidden;
-					}
-
-					.Common-entranceGradient::before, #app-root::before, .Common-container::before {
-						content: "";
-						position: absolute;
-						inset: 0;
-						--stripes: repeating-linear-gradient(
-							100deg,
-							#fff 0%,
-							#fff 7%,
-							transparent 10%,
-							transparent 12%,
-							#fff 16%
-						);
-						--stripesDark: repeating-linear-gradient(
-							100deg,
-							#000 0%,
-							#000 7%,
-							transparent 10%,
-							transparent 12%,
-							#000 16%
-						);
-						--rainbow: repeating-linear-gradient(
-							100deg,
-							#fff 10%,
-							#000 15%,
-							#fff 20%,
-							#000 25%,
-							#fff 30%
-						);
-						background-image: var(--stripes), var(--rainbow);
-						background-size: 200%, 100%;
-						animation: gradientBg 60s linear infinite;
-						background-attachment: fixed;
-						mix-blend-mode: difference;
-						filter: blur(14rem) invert(100%);
-						mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-						will-change: transform;
-					}
-
-					@keyframes gradientBg {
-						from {
-							background-position: 50% 50%, 50% 50%;
-						}
-						to {
-							background-position: 350% 50%, 350% 50%;
-						}
 					}
 				`
 			},
@@ -836,7 +1017,7 @@
 			selector: ".ChatComponentStyle-chatResize",
 			styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0%)",
 					backdropFilter: "blur(0.5rem)"
 				}
 			},
@@ -1357,7 +1538,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					borderLeft: "0.150rem solid rgba(255, 255, 255, 0.2)"
+					borderLeft: "0.150rem solid rgba(255, 255, 255, 0.1)"
 				}
 			},
 
@@ -1537,7 +1718,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					backdropFilter: "blur(0rem)"
+					borderLeft: "0.150rem solid rgba(255, 255, 255, 0.1)"
 				}
 			},
 
@@ -3977,7 +4158,7 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.125rem solid rgba(255, 255, 255, 0.2)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
@@ -5480,8 +5661,7 @@
 					width: "1.5rem",
 					height: "1.5rem"
 				}
-			},
-
+			}
 		];
 
 		elements.forEach((element) =>
@@ -5565,5 +5745,11 @@
 		observer.observe(document.body, config);
 	}
 
+	/* инициализация */
+	changeTitle("BlurStyle");
+	updateFilters();
+	restoreFilterSettings();
+	backgroundAnimation();
+	resistanceTab();
 	initObserver();
 })();
