@@ -1694,10 +1694,11 @@
 			},
 
 			{ /* стилизация шапки в главном меню игры */
-				tag: ["QS", "RHV"],
+				tag: ["QSA", "RHV"],
 				selector: ".HeaderCommonStyle-icons",
 				styles:
 				{
+					justifyContent: "center",
 					border: "none"
 				}
 			},
