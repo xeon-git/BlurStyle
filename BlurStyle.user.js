@@ -10,7 +10,7 @@
 
 GM_xmlhttpRequest({
     method : "GET",
-    url : "https://github.com/xeon-git/BlurStyle/raw/main/BlurStyle.js",
+    url : "https://raw.githubusercontent.com/xeon-git/BlurStyle/main/BlurStyle.js",
     nocache: true,
     onload: (ev) =>
     {
