@@ -1763,10 +1763,10 @@
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
 					backdropFilter: "blur(0.5rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "1.2rem",
+					borderRadius: "1.5rem",
 					top: "8vw",
 					left: "2vw",
-					width: "28vw",
+					width: "33rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
 			},
@@ -1823,7 +1823,7 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.2rem",
 					boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
 					width: "60%"
@@ -2528,13 +2528,14 @@
 			{ /* стилизация прогресса возле званки */
 				cssStyles: `
 					div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn {
-						background: rgba(222, 184, 135, 0.5) !important;
-						filter: saturate(1);
+						background: rgba(222, 184, 135, 0.3) !important;
+						backdrop-filter: blur(0.1rem);
 					}
 
 					div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn::after {
 						background: rgba(222, 184, 135, 1) !important;
 						filter: saturate(5);
+						box-shadow: rgba(222, 184, 135, 1) 0em 0em 0.275em 0em;
 					}
 
 					.UserInfoContainerStyle-xpIcon {
@@ -3200,7 +3201,7 @@
 				selector: "#selfUserBg",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(128, 128, 128, 0.2) 0%, rgba(128, 128, 128, 0.2) 0%)",
 					backdropFilter: "blur(0.3rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
@@ -3213,7 +3214,7 @@
 				selector: "#blueCommand",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(32, 42, 255, 0.1) 0%, rgba(32, 42, 255, 0.05) 0%)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
 					backdropFilter: "blur(0.3rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
