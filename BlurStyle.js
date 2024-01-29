@@ -575,6 +575,54 @@
 		});
 	})();
 
+	/* логика замены картинок в формате дата юри */
+    function replaceImage(img, data) {
+        if (img.src.endsWith(data.origImage)) {
+            img.src = data.newImage;
+        }
+    }
+
+    const replaceToUri = [
+        { 	/* лого в промежуточном загрузочном экране | лого BlurStyle */
+            selector: '#root > div.LobbyLoaderComponentStyle-container > img',
+            origImage: '/play/static/images/logo.e64f36db.svg',
+            newImage: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYwIiBoZWlnaHQ9IjI1OSIgdmlld0JveD0iMCAwIDI2MCAyNTkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yNi4yNjY3IDI2LjZMMCA1Mi44NjY3TDAuMjY2NjY3IDEwNC43MzNMMC42NjY2NjcgMTU2LjZMMjUuMDY2NyAxNTYuNDY3QzM4LjQgMTU2LjQ2NyA0OS4zMzMzIDE1Ni44NjcgNDkuMzMzMyAxNTcuNEM0OS4zMzMzIDE1Ny45MzMgMzguMjY2NyAxNjkuNCAyNC42NjY3IDE4M0wwIDIwNy42NjdWMjMzLjI2N1YyNTlIMTAzLjczM0gyMDcuMzMzTDIzMy43MzMgMjMyLjczM0wyNjAgMjA2LjQ2N1YxNjQuNzMzVjEyM0gyMzcuNzMzSDIxNS4zMzNMMjM3LjczMyAxMDAuNkwyNjAgNzguMzMzM1YzOS4yNjY3VjAuMzMzMzJIMTU2LjRINTIuNjY2N0wyNi4yNjY3IDI2LjZaTTIwMi41MzMgNTMuMTMzM0MyMDQuOCA1My42NjY3IDIwNi42NjcgNTQuNzMzMyAyMDYuNjY3IDU1LjUzMzNDMjA2LjY2NyA1Ni4zMzMzIDE5Ni45MzMgNjYuNzMzMyAxODQuOTMzIDc4LjczMzNMMTYzLjMzMyAxMDAuMzMzSDE0Ni45MzNIMTMwLjY2N1Y4OVY3Ny42NjY3SDEwNS4zMzNIODBWOTEuOTMzM1YxMDYuMzMzTDkyLjI2NjcgMTE4LjZMMTA0LjY2NyAxMzFIMTU1LjZIMjA2LjY2N1YxNjlWMjA3SDEzMC40SDU0TDY3LjMzMzMgMTkzLjY2N0w4MC42NjY3IDE4MC4zMzNIMTI4LjkzM0gxNzcuMzMzVjE2Ny42NjdWMTU1SDEzMy4wNjdIODguNjY2N0w3MS4wNjY3IDEzNy40TDUzLjMzMzMgMTE5LjY2N1Y5N1Y3NC4zMzMzTDYzLjczMzMgNjQuMDY2N0M3Mi41MzMzIDU1LjI2NjcgNzQuOCA1My44IDc5LjMzMzMgNTMuMjY2N0M4OC41MzMzIDUyLjQ2NjcgMTk4LjEzMyA1Mi4zMzMzIDIwMi41MzMgNTMuMTMzM1oiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=',
+        },
+
+		{ 	/* лого в основном загрузочном экране | лого BlurStyle */
+			selector: '#root > div.ApplicationLoaderComponentStyle-container.Common-flexCenterAlignCenterColumn > img.ApplicationLoaderComponentStyle-logo',
+			origImage: '/play/static/images/logo.e64f36db.svg',
+			newImage: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYwIiBoZWlnaHQ9IjI1OSIgdmlld0JveD0iMCAwIDI2MCAyNTkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yNi4yNjY3IDI2LjZMMCA1Mi44NjY3TDAuMjY2NjY3IDEwNC43MzNMMC42NjY2NjcgMTU2LjZMMjUuMDY2NyAxNTYuNDY3QzM4LjQgMTU2LjQ2NyA0OS4zMzMzIDE1Ni44NjcgNDkuMzMzMyAxNTcuNEM0OS4zMzMzIDE1Ny45MzMgMzguMjY2NyAxNjkuNCAyNC42NjY3IDE4M0wwIDIwNy42NjdWMjMzLjI2N1YyNTlIMTAzLjczM0gyMDcuMzMzTDIzMy43MzMgMjMyLjczM0wyNjAgMjA2LjQ2N1YxNjQuNzMzVjEyM0gyMzcuNzMzSDIxNS4zMzNMMjM3LjczMyAxMDAuNkwyNjAgNzguMzMzM1YzOS4yNjY3VjAuMzMzMzJIMTU2LjRINTIuNjY2N0wyNi4yNjY3IDI2LjZaTTIwMi41MzMgNTMuMTMzM0MyMDQuOCA1My42NjY3IDIwNi42NjcgNTQuNzMzMyAyMDYuNjY3IDU1LjUzMzNDMjA2LjY2NyA1Ni4zMzMzIDE5Ni45MzMgNjYuNzMzMyAxODQuOTMzIDc4LjczMzNMMTYzLjMzMyAxMDAuMzMzSDE0Ni45MzNIMTMwLjY2N1Y4OVY3Ny42NjY3SDEwNS4zMzNIODBWOTEuOTMzM1YxMDYuMzMzTDkyLjI2NjcgMTE4LjZMMTA0LjY2NyAxMzFIMTU1LjZIMjA2LjY2N1YxNjlWMjA3SDEzMC40SDU0TDY3LjMzMzMgMTkzLjY2N0w4MC42NjY3IDE4MC4zMzNIMTI4LjkzM0gxNzcuMzMzVjE2Ny42NjdWMTU1SDEzMy4wNjdIODguNjY2N0w3MS4wNjY3IDEzNy40TDUzLjMzMzMgMTE5LjY2N1Y5N1Y3NC4zMzMzTDYzLjczMzMgNjQuMDY2N0M3Mi41MzMzIDU1LjI2NjcgNzQuOCA1My44IDc5LjMzMzMgNTMuMjY2N0M4OC41MzMzIDUyLjQ2NjcgMTk4LjEzMyA1Mi4zMzMzIDIwMi41MzMgNTMuMTMzM1oiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=',
+		},
+
+        { 	/* лого в первоначальном экране | лого BlurStyle */
+            selector: '#root > div > div > div > div.EntranceComponentStyle-ContainerForm.MainEntranceComponentStyle-mainContainer > form > div > img',
+            origImage: '/play/static/images/tanki_online_white.b4613c5f.svg',
+            newImage: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYwIiBoZWlnaHQ9IjI1OSIgdmlld0JveD0iMCAwIDI2MCAyNTkiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yNi4yNjY3IDI2LjZMMCA1Mi44NjY3TDAuMjY2NjY3IDEwNC43MzNMMC42NjY2NjcgMTU2LjZMMjUuMDY2NyAxNTYuNDY3QzM4LjQgMTU2LjQ2NyA0OS4zMzMzIDE1Ni44NjcgNDkuMzMzMyAxNTcuNEM0OS4zMzMzIDE1Ny45MzMgMzguMjY2NyAxNjkuNCAyNC42NjY3IDE4M0wwIDIwNy42NjdWMjMzLjI2N1YyNTlIMTAzLjczM0gyMDcuMzMzTDIzMy43MzMgMjMyLjczM0wyNjAgMjA2LjQ2N1YxNjQuNzMzVjEyM0gyMzcuNzMzSDIxNS4zMzNMMjM3LjczMyAxMDAuNkwyNjAgNzguMzMzM1YzOS4yNjY3VjAuMzMzMzJIMTU2LjRINTIuNjY2N0wyNi4yNjY3IDI2LjZaTTIwMi41MzMgNTMuMTMzM0MyMDQuOCA1My42NjY3IDIwNi42NjcgNTQuNzMzMyAyMDYuNjY3IDU1LjUzMzNDMjA2LjY2NyA1Ni4zMzMzIDE5Ni45MzMgNjYuNzMzMyAxODQuOTMzIDc4LjczMzNMMTYzLjMzMyAxMDAuMzMzSDE0Ni45MzNIMTMwLjY2N1Y4OVY3Ny42NjY3SDEwNS4zMzNIODBWOTEuOTMzM1YxMDYuMzMzTDkyLjI2NjcgMTE4LjZMMTA0LjY2NyAxMzFIMTU1LjZIMjA2LjY2N1YxNjlWMjA3SDEzMC40SDU0TDY3LjMzMzMgMTkzLjY2N0w4MC42NjY3IDE4MC4zMzNIMTI4LjkzM0gxNzcuMzMzVjE2Ny42NjdWMTU1SDEzMy4wNjdIODguNjY2N0w3MS4wNjY3IDEzNy40TDUzLjMzMzMgMTE5LjY2N1Y5N1Y3NC4zMzMzTDYzLjczMzMgNjQuMDY2N0M3Mi41MzMzIDU1LjI2NjcgNzQuOCA1My44IDc5LjMzMzMgNTMuMjY2N0M4OC41MzMzIDUyLjQ2NjcgMTk4LjEzMyA1Mi4zMzMzIDIwMi41MzMgNTMuMTMzM1oiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=',
+        }
+    ];
+
+    function replaceChecker() {
+    const observer = new MutationObserver((mutationsList) => {
+        mutationsList.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                replaceImages();
+            }
+        });
+    });
+
+    observer.observe(document, { attributes: true, attributeFilter: ['src'], subtree: true });
+    }
+
+    function replaceImages() {
+    replaceToUri.forEach((data) => {
+        const img = document.querySelector(data.selector);
+            if (img) {
+            replaceImage(img, data);
+            }
+        });
+    }
+
 	/* массив стилей */
 	function styles()
 	{
@@ -2031,7 +2079,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.2rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0)"
 				}
@@ -5334,7 +5382,7 @@
 			},
 
 			{ /* стилизация рег формы */
-			tag: ["QS", "BHV", "fade"],
+			tag: ["QSA", "BHV", "fade"],
 			selector: "#password",
 			styles:
 				{
@@ -5347,7 +5395,7 @@
 			},
 
 			{ /* стилизация рег формы */
-			tag: ["QS", "BHV", "fade"],
+			tag: ["QSA", "BHV", "fade"],
 			selector: "#password1",
 			styles:
 				{
@@ -6015,5 +6063,7 @@
 	restoreFilterSettings();
 	backgroundAnimation();
 	resistanceTab();
+	replaceChecker();
+    replaceImages();
 	initObserver();
 })();
