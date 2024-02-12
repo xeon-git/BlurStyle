@@ -5987,6 +5987,36 @@
 					width: "1.5rem",
 					height: "1.5rem"
 				}
+			},
+			
+			{ /* стилизация таймеров в миссиях */
+			tag: ["QSA"],
+			selector: ".TableMainQuestComponentStyle-timerTable",
+			styles:
+				{
+					background: "rgba(255, 255, 255, 1)",
+					borderRadius: "0.7rem"
+				}
+			},
+
+			{ /* стилизация таймеров в миссиях */
+			tag: ["QSA"],
+			selector: ".MainQuestComponentStyle-timer",
+			styles:
+				{
+					background: "rgba(255, 255, 255, 1)",
+					borderRadius: "0.7rem"
+				}
+			},
+
+			{ /* стилизация таймеров в миссиях */
+			tag: ["QSA"],
+			selector: ".Common-headerTimer",
+			styles:
+				{
+					background: "rgba(255, 255, 255, 1)",
+					borderRadius: "0.7rem"
+				}
 			}
 		];
 
