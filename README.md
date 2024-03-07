@@ -58,6 +58,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Перекрашен худ припасов в битве *(только для браузерной версии)*
 - Обновлена ховер анимация на всех элементах *(добавлен новый эффект впадания элемента при наведении курсора)*
 - Залита новая иконка для кнопки с логами чата в битве и помещена внутрь самого контейнера с чатом
+- Изменено содержимое билборда в битве на лого блюрстайл
 - Исправлен баг с пустым скроллом в настройках и перекрывание элементов скроллбаром в последних версиях хрома
 - Исправлен баг со стилями в различных разделах после очередной "полезной" обновы со стороны танков
 - Исправлен баг с кривыми отступами GearScore в ммной стате, так и не дождался фикса со стороны танков
@@ -275,6 +276,8 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Repainted the artwork of supplies in battle *(only for browser version)*
 - Updated hover animation on all items *(added a new effect of falling into an item when hovering the cursor)*
 - New icon for the button with chat logs in the battle and placed inside the container with the chat
+- Changed the content of the billboard in the battle to a bluerstyle logo
+- Fixed bug with empty scrollbar in settings and overlapping of items with scrollbar in recent versions of chrome
 - Fixed a bug with styles in different sections after another "useful" update from the tanks dev
 - Fixed a bug with crooked GearScore indents in MM stat, never waited for a fix from the tanks dev
 - Fixed a bug with blue background when entering/exiting a battle and moving between sections
