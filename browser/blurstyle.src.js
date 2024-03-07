@@ -952,6 +952,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+                    overflow: "hidden auto"
 				}
 			},
 
@@ -1183,6 +1184,14 @@
 			cssStyles: `
 				.InputComponentStyle-blurBackground {
 					display: none !important;
+				}
+			`
+			},
+
+            { /* стилизация раздела с битвами */
+			cssStyles: `
+				.UsersTableStyle-scrollCommandTable:hover {
+					scrollbar-width: thin !important;
 				}
 			`
 			},
