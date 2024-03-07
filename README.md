@@ -1,29 +1,29 @@
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439589624873020/miniLogo.svg?ex=65d4bcc7&is=65c247c7&hm=845484da7f3f823f95e7ab2bf4f557de778254ef42fc886e7effca0e8194b5c6&) О проекте
+## ![image](https://xeon.fun/logo/mini.svg) О проекте
 
 BlurStyle — проект, нацеленный на улучшение взаимодействия с игрой "Танки Онлайн", обеспечивающий регулярные обновления пользовательского интерфейса и функционала игры
 
 **Видеообзор**: [жмать сюда](https://youtu.be/eIjW4-D2_sw)
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439633925115924/team.svg?ex=65d4bcd2&is=65c247d2&hm=9e5d3553b54eca4f4cfb2ad7d4b7dbc29c8212298d58ddcaddaf5adaecdcbc82&) Участвовали в разработке
+## ![image](https://xeon.fun/logo/team.svg) Участвовали в разработке
 
 - Логистика, стилизация интерфейса: [xeon](https://vk.com/trallinator)
 - Дизайн, моделлинг: [xxnn](https://vk.com/wassupw)
 - Помощь в выгрузке необходимых скинов, тестирование проекта: [squirtatrise](https://vk.com/squirtatrise)
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439615700729899/download.svg?ex=65d4bccd&is=65c247cd&hm=52b8c018dc45cc441fefd2d6b8bfa68be959c923b00c64cbb69316d880e7b85c&) Установка для браузера
+## ![image](https://xeon.fun/logo/download.svg) Установка для браузера
 
 1. Установите/обновите расширение Tampermonkey: [жмать сюда](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://github.com/xeon-git/BlurStyle/raw/main/BlurStyle.user.js)
+2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://xeon.fun/blurstyle.user.js)
 3. Перезагрузите вкладку с игрой, если она открыта
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439615700729899/download.svg?ex=65d4bccd&is=65c247cd&hm=52b8c018dc45cc441fefd2d6b8bfa68be959c923b00c64cbb69316d880e7b85c&) Установка для клиента
+## ![image](https://xeon.fun/logo/download.svg) Установка для клиента
 
 1. Установите/обновите официальный клиент Танков Онлайн: [жмать сюда](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://github.com/xeon-git/BlurStyle/raw/main/app.asar)
+2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://xeon.fun/app.asar)
 3. После установки клиента и скачивания файла app.asar найдите ярлык с клиентом на рабочем столе, кликните правой кнопкой мыши, перейдите по расположению файла и по папке "resources"
 4. Перенесите с заменой файл app.asar и перезапустите клиент, если он открыт
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204442169587273758/hotkeys.svg?ex=65d4bf2e&is=65c24a2e&hm=3d2e2ebf0c1c259810321b92a99f66dd764f0aa56ded12faa1ce3ac59e1a6935&) Горячие клавиши
+## ![image](https://xeon.fun/logo/hotkeys.svg) Горячие клавиши
 
 - **\\** - Отключение/включение фильтра насыщенности и контрастности
 - **=** - Включение/отключение другой вариации таба с показом резистов
@@ -31,7 +31,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 *(Важное примечание: настройки горячих клавиш сохраняются после перезагрузки)*
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204441457696706641/plan.svg?ex=65d4be84&is=65c24984&hm=87bf0531369acdd999741e231c4f5f7e789c1d8529938c02947a5202903954ff&) В планах реализовать/в разработке
+## ![image](https://xeon.fun/logo/plan.svg) В планах реализовать/в разработке
 
 - Многофункциональное меню темы, содержащее различные пресеты настроек, крутилки, переключалки для большей модульности и лучшей интеракции с игровым интерфейсом
 - Скинчейнджер, включающий не только все существующие игровые скины, но и кастомные модели из ТХ
@@ -40,15 +40,29 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Функция с просчетом фейковых значений FPS
 - Функция для скрытия/редактирования припасов в гараже/битве
 - Реализовать тему в формате расширения для браузера
+- Разбить тему на модули, использовав webpack/rspack для упрощения дальнейшей разработки
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439625360347156/warning.svg?ex=65d4bcd0&is=65c247d0&hm=93d5a35d01ed28f6070d6af888c879df9d2e2225c27374cf0f5eb5779bf9d6f2&) Список багов, про которые уже известно
+## ![image](https://xeon.fun/logo/warning.svg) Список багов, про которые уже известно
 
 - Отсутствие ховер анимации на кнопке премиума в лобби
 - Рваная трансформация карточек при наведении курсора
 - Проблемы с залипанием ховера в списке битв
 - Баг с дублированием бордера после покупки слота под резист в гараже, если аккаунт новый
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439604590280766/changelog.svg?ex=65d4bccb&is=65c247cb&hm=f4e1cff0437553b96d5f242fdc509c03600526083fe0666ad8cae00d2999b5a6&) Список изменений
+## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
+
+**changelog version 4.0.6 === 4.1:**
+- Тема минифицирована и полностью перемещена на собственный хост, что в теории должно ускорить загрузку самой темы и обеспечить моментальную заливку актуальной версии
+- Добавлена новая LGBT анимация для GearScore *(в гараже, финальной стате и в битве)*
+- Добавлено новое космическое небо в режиме космос *(только для браузерной версии)*
+- Перекрашен худ припасов в битве *(только для браузерной версии)*
+- Обновлена ховер анимация на всех элементах *(добавлен новый эффект впадания элемента при наведении курсора)*
+- Залита новая иконка для кнопки с логами чата в битве и помещена внутрь самого контейнера с чатом
+- Исправлен баг со стилями в различных разделах после очередной "полезной" обновы со стороны танков
+- Исправлен баг с кривыми отступами GearScore в ммной стате, так и не дождался фикса со стороны танков
+- Исправлен баг с синим бэкграундом при заходе/выходе из битвы и перемещении между разделами
+- Исправлен баг с бэкграундом на странице ТСТО
+- Исправлен баг с впаданием кнопок в разделе битв из-за новой "полезной" обновы со стороны танков
 
 **changelog version 4.0.5 === 4.0.6:**
 - Добавлено лого BlurStyle на иконку вкладки
@@ -156,7 +170,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 **changelog version 3.3 === 3.4:**
 - Были внесены мелкие правки в диалоговые окна
 - Исправлено некорректное отображение некоторых элементов
-- Исправлены поломанные кнопки после очередной обновы танкив
+- Исправлены поломанные кнопки после очередной обновы танков
 - Улучшения производительности
 
 **changelog version 3.2 === 3.3:**
@@ -201,32 +215,32 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Полностью переработан список игроков
 - Абсолютно новые анимации для множества элементов с плавными переходами
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439589624873020/miniLogo.svg?ex=65d4bcc7&is=65c247c7&hm=845484da7f3f823f95e7ab2bf4f557de778254ef42fc886e7effca0e8194b5c6&) About project
+## ![image](https://xeon.fun/logo/mini.svg) About project
 
 BlurStyle — is a project aimed at improving interaction with the game "Tanki Online", providing regular updates to the user interface and functionality of the game
 
 **Videoreview**: [click here](https://youtu.be/eIjW4-D2_sw)
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439633925115924/team.svg?ex=65d4bcd2&is=65c247d2&hm=9e5d3553b54eca4f4cfb2ad7d4b7dbc29c8212298d58ddcaddaf5adaecdcbc82&) Participated in development
+## ![image](https://xeon.fun/logo/team.svg) Participated in development
 
 - Logistics, interface styling: [xeon](https://vk.com/trallinator)
 - Design, modeling: [xxnn](https://vk.com/wassupw)
 - Help in uploading necessary skins, testing the project: [squirtatrise](https://vk.com/squirtatrise)
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439615700729899/download.svg?ex=65d4bccd&is=65c247cd&hm=52b8c018dc45cc441fefd2d6b8bfa68be959c923b00c64cbb69316d880e7b85c&) Browser installation
+## ![image](https://xeon.fun/logo/download.svg) Browser installation
 
 1. Install/update Tampermonkey extension: [click here](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 2. Install/update the BlurStyle theme script: [click here](https://github.com/xeon-git/BlurStyle/raw/main/BlurStyle.user.js)
 3. Reload the game tab if it is open
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439615700729899/download.svg?ex=65d4bccd&is=65c247cd&hm=52b8c018dc45cc441fefd2d6b8bfa68be959c923b00c64cbb69316d880e7b85c&) Client Installation
+## ![image](https://xeon.fun/logo/download.svg) Client Installation
 
 1. Install/update the official Tanks Online client: [click here](https://tankionline.com/desktop/TankiOnlineSetup.exe)
 2. Download/update the theme file app.asar: [click here](https://github.com/xeon-git/BlurStyle/raw/main/app.asar)
 3. After installing the client and downloading the app.asar file, find the shortcut with the client on your desktop, right click, navigate to the file location and the "resources" folder
 4. Transfer the app.asar file with replacement and restart the client if it is open
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204442169587273758/hotkeys.svg?ex=65d4bf2e&is=65c24a2e&hm=3d2e2ebf0c1c259810321b92a99f66dd764f0aa56ded12faa1ce3ac59e1a6935&) Hotkeys
+## ![image](https://xeon.fun/logo/hotkeys.svg) Hotkeys
 
 - \ - Disable/enable saturation and contrast filter
 - = - Enable/disable another variation of the tab with resists shown
@@ -234,7 +248,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 *(Important note: hotkey settings are retained after reboot)*
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204441457696706641/plan.svg?ex=65d4be84&is=65c24984&hm=87bf0531369acdd999741e231c4f5f7e789c1d8529938c02947a5202903954ff&) Planned/in development
+## ![image](https://xeon.fun/logo/plan.svg) Planned/in development
 
 - Multifunctional theme menu, containing various settings presets, twiddles, toggles for more modularity and better interaction with the game interface
 - Skinchanger, including not only all existing game skins, but also custom models from TX
@@ -243,21 +257,35 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - False FPS calculation feature
 - Function for hiding/editing supplies in garage/battle
 - Implement theme in browser extension format
+- Break the theme into modules, using webpack/rspack to simplify further development
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439625360347156/warning.svg?ex=65d4bcd0&is=65c247d0&hm=93d5a35d01ed28f6070d6af888c879df9d2e2225c27374cf0f5eb5779bf9d6f2&) List of bugs that are already known about
+## ![image](https://xeon.fun/logo/warning.svg) List of bugs that are already known about
 
 - No hover animation on the premium button in the lobby
 - Ripped transformation of cards on mouseover
 - Problems with hover sticking in the battle list
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
-## ![image](https://cdn.discordapp.com/attachments/1204439508775342190/1204439604590280766/changelog.svg?ex=65d4bccb&is=65c247cb&hm=f4e1cff0437553b96d5f242fdc509c03600526083fe0666ad8cae00d2999b5a6&) List of changes
+## ![image](https://xeon.fun/logo/changelog.svg) List of changes
+
+- Theme is minified and completely moved to its own host, which in theory should speed up loading of the theme itself and provide an instant upload of the current version
+- Added new LGBT animation for GearScore *(in garage, final stat and battle)*
+- Added new space sky in space mode *(only for browser version)*
+- Repainted the artwork of supplies in battle *(only for browser version)*
+- Updated hover animation on all items *(added a new effect of falling into an item when hovering the cursor)*
+- New icon for the button with chat logs in the battle and placed inside the container with the chat
+- Fixed a bug with styles in different sections after another "useful" update from the tanks dev
+- Fixed a bug with crooked GearScore indents in MM stat, never waited for a fix from the tanks dev
+- Fixed a bug with blue background when entering/exiting a battle and moving between sections
+- Fixed a bug with the background on the page TSTO
+- Fixed a bug with buttons falling in the battles section due to a new "useful" update from the tanks dev
 
 **changelog version 4.0.5 === 4.0.6:**
 - Added BlurStyle logo to the tab icon
 - Unlocked devtools on client and cleaned up main.js junk in app.asar itself
 - Edit the logic of swapping images to the legal format
 - By numerous requests, the readme is now written for EN locale as well
+- Edits bg timers in missions
 
 **changelog version 4.0 release === 4.0.5:**
 - Added BlurStyle logo to all loading screens.
