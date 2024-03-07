@@ -62,17 +62,17 @@
 				el.style.transform = "scale(0.97)";
 				el.style.border = "0.150rem solid rgba(255, 255, 255, 1)";
 			});
-		
+
 			el.addEventListener("mouseout", () => {
 				el.style.transition = "border-color 1s, transform 0.7s";
 				el.style.transform = "scale(1)";
 				el.style.border = element.styles.border;
 			});
-		
+
 			el.addEventListener("mousemove", () => {
 				el.style.border = "0.150rem solid rgba(255, 255, 255, 1)";
 			});
-		}		
+		}
 		else if (element.tag.includes("RHV"))
 		{
 			el.addEventListener("mouseover", () =>
@@ -2771,7 +2771,7 @@
 					/* LGBT animation */
 					td.BattleTabStatisticComponentStyle-gsCell > span.GearScoreStyle-bestGS.bgClipText, div.TankParametersStyle-marginBlockGear > span.GearScoreStyle-bestGS, span.GearScoreStyle-bestGS.bgClipText {
 						color: rgba(255,255,255,0.1);
-						background: #ed8080;  
+						background: #ed8080;
 						background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ed8080), color-stop(16%,#2a77d6), color-stop(32%,#5eb524), color-stop(48%,#eacd25), color-stop(64%,#ed8080), color-stop(80%,#2a77d6), color-stop(100%,#5eb524));
 						background-size: 300% 300%;
 						-webkit-background-clip: text;
@@ -6276,7 +6276,7 @@
 				}
 			},
 
-			{ /* стилизация затенения в лобби */
+			{ /* стилизация кнопки-иконки логов в битве */
 				tag: ["QS", "slide"],
 				selector: "#root > div > div > div.BattleChatComponentStyle-rootDesktop > div > div > div.Common-flexCenterAlignCenter",
 				styles:
@@ -6284,6 +6284,38 @@
 					position: "absolute",
 					right: "1.2rem"
 				}
+			},
+
+            { /* стилизация чата в битве */
+                cssStyles: `
+                    .BattleChatComponentStyle-inputContainerAll.slideIn > input {
+                        flex-grow: 0.8 !important;
+                    }
+                `
+			},
+
+            { /* стилизация чата в битве */
+                cssStyles: `
+                    .BattleChatComponentStyle-inputContainerAllies > input {
+                        flex-grow: 0.1 !important;
+                    }
+                `
+            },
+
+            { /* стилизация чата в битве */
+                cssStyles: `
+                    .BattleChatComponentStyle-inputContainerAll > input {
+                        flex-grow: 0.4 !important;
+                    }
+                `
+            },
+
+            { /* стилизация раздела создания битвы */
+                cssStyles: `
+                    #root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle.fade > div:hover {
+                        scrollbar-width: thin !important;
+                    }
+                `
 			}
 		];
 

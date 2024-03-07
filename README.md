@@ -65,6 +65,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Исправлен баг с синим бэкграундом при заходе/выходе из битвы и перемещении между разделами
 - Исправлен баг с бэкграундом на странице ТСТО
 - Исправлен баг с впаданием кнопок в разделе битв из-за новой "полезной" обновы со стороны танков
+- Исправлен баг с заходом текста поверх иконки-кнопки логов в битве
 
 **changelog version 4.0.5 === 4.0.6:**
 - Добавлено лого BlurStyle на иконку вкладки
@@ -283,6 +284,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Fixed a bug with blue background when entering/exiting a battle and moving between sections
 - Fixed a bug with the background on the page TSTO
 - Fixed a bug with buttons falling in the battles section due to a new "useful" update from the tanks dev
+- Fixed a bug with text going on top of the log button icon in battle
 
 **changelog version 4.0.5 === 4.0.6:**
 - Added BlurStyle logo to the tab icon
