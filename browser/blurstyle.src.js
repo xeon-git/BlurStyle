@@ -6316,7 +6316,29 @@
                         scrollbar-width: thin !important;
                     }
                 `
-			}
+			},
+
+            { /* стилизация закупа припасов в гараже */
+                tag: ["QS", "fade"],
+                selector: ".SaleByKitStyle-commonBlockModal",
+                styles:
+                {
+                    background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+                    borderRight: "0.15rem solid rgba(255, 255, 255, 0.1)"
+                }
+            },
+
+            { /* стилизация закупа припасов в гараже */
+                tag: ["QSA", "scale", "BHV"],
+                selector: ".SaleByKitStyle-commonCard",
+                styles:
+                {
+                    background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+                    border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "2rem",
+                    boxShadow: "none"
+                }
+            },
 		];
 
 		elements.forEach((element) =>
