@@ -47,7 +47,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 - Отсутствие ховер анимации на кнопке премиума в лобби
 - Рваная трансформация карточек при наведении курсора
-- Проблемы с залипанием ховера в списке битв
+- Проблемы с залипанием ховера в списке битв (проблемы не с моей стороны)
 - Баг с дублированием бордера после покупки слота под резист в гараже, если аккаунт новый
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
@@ -240,13 +240,13 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 ## ![image](https://xeon.fun/logo/download.svg) Browser installation
 
 1. Install/update Tampermonkey extension: [click here](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Install/update the BlurStyle theme script: [click here](https://github.com/xeon-git/BlurStyle/raw/main/BlurStyle.user.js)
+2. Install/update the BlurStyle theme script: [click here](https://xeon.fun/blurstyle.user.js)
 3. Reload the game tab if it is open
 
 ## ![image](https://xeon.fun/logo/download.svg) Client Installation
 
 1. Install/update the official Tanks Online client: [click here](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Download/update the theme file app.asar: [click here](https://github.com/xeon-git/BlurStyle/raw/main/app.asar)
+2. Download/update the theme file app.asar: [click here](https://xeon.fun/app.asar)
 3. After installing the client and downloading the app.asar file, find the shortcut with the client on your desktop, right click, navigate to the file location and the "resources" folder
 4. Transfer the app.asar file with replacement and restart the client if it is open
 
