@@ -455,6 +455,22 @@
 		let acceleration = 1;
 		let canvas;
 		let starsToDraw;
+		let spaceAnim = true;
+
+		if (localStorage.getItem("spaceAnim") !== null) {
+			spaceAnim = localStorage.getItem("spaceAnim") === "true";
+		}
+
+		function toggleAnimation() {
+			spaceAnim = !spaceAnim;
+			if (spaceAnim) {
+				applyAnimationToBackground(document.querySelector(".ApplicationLoaderComponentStyle-container"));
+			} else {
+				removeAnimationFromBackground(document.querySelector(".ApplicationLoaderComponentStyle-container"));
+			}
+
+			localStorage.setItem("spaceAnim", spaceAnim);
+		}
 
 		function applyAnimationToBackground(loadBg) {
 			if (!loadBg) return;
@@ -476,17 +492,7 @@
 			starsToDraw = (canvas.width * canvas.height) / 5000;
 
 			function draw() {
-				if (!loadBg) {
-					clearInterval(animationInterval);
-					return;
-				}
-
-				if (!canvas) {
-					clearInterval(animationInterval);
-					return;
-				}
-
-				if (!canvas.getContext) {
+				if (!spaceAnim || !loadBg || !canvas || !canvas.getContext) {
 					clearInterval(animationInterval);
 					return;
 				}
@@ -569,6 +575,12 @@
 
 		document.querySelectorAll(".ApplicationLoaderComponentStyle-container").forEach(function(element) {
 			applyAnimationToBackground(element);
+		});
+
+		document.addEventListener("keydown", function(event) {
+			if (event.key === "Insert") {
+				toggleAnimation();
+			}
 		});
 	})();
 
@@ -2245,7 +2257,7 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.2rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0)"
 				}
@@ -2301,7 +2313,8 @@
 					backdropFilter: "blur(0.2rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1.5rem",
-					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+					boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+                    filter: "saturate(0)"
 				}
 			},
 
@@ -2558,7 +2571,7 @@
 
 			{ /* стилизация раздела с кланом */
 			tag: ["QS", "fade"],
-			selector: "#root > div > div > div.ksc-0.ClanCommonStyle-members > table > thead > tr",
+			selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr",
 			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
@@ -2571,7 +2584,7 @@
 
 			{ /* стилизация раздела с кланом */
 			tag: ["QSA"],
-			selector: "#root > div > div > div.ksc-0.ClanCommonStyle-members > table > thead > tr *",
+			selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr *",
 			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
@@ -2870,7 +2883,7 @@
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "2rem",
+					borderRadius: "1.4rem",
 					marginBottom: "-1%",
 					boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
 				}
@@ -3782,7 +3795,18 @@
 
 			{ /* стилизация раздела с миссиями */
 				tag: ["QS", "fade"],
-				selector: "div.QuestsComponentStyle-content > div.ksc-9 Common-flexCenterAlignCenter > div.QuestsComponentStyle-emptyList > h2",
+				selector: "div.QuestsComponentStyle-emptyList0 > h2",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
+					borderRadius: "1.1rem",
+					boxShadow: "inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QS", "fade"],
+				selector: ".TableMainQuestComponentStyle-commonBlockTimerButtonTable",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
@@ -4954,10 +4978,10 @@
 
 			{ /* стилизация загрузочного экрана */
 				tag: ["QS"],
-				selector: "div.ApplicationLoaderComponentStyle-container > div",
+				selector: "#root > div.ApplicationLoaderComponentStyle-container.Common-flexCenterAlignCenterColumn > div:nth-child(1)",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 0%)"
+					background: "none"
 				}
 			},
 
@@ -5122,6 +5146,15 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1.1rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела званок */
+				tag: ["QS"],
+				selector: ".UserProgressComponentStyle-progressLegendPlusImage",
+				styles:
+				{
+					borderRadius: "1rem"
 				}
 			},
 
@@ -5525,7 +5558,7 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-					width: "88%"
+					width: "95%"
 				}
 			},
 
@@ -6267,15 +6300,6 @@
 				}
 			},
 
-			{ /* стилизация затенения в лобби */
-				tag: ["QSA"],
-				selector: ".MainScreenComponentStyle-gradientBlock",
-				styles:
-				{
-					display: "none"
-				}
-			},
-
 			{ /* стилизация кнопки-иконки логов в битве */
 				tag: ["QS", "slide"],
 				selector: "#root > div > div > div.BattleChatComponentStyle-rootDesktop > div > div > div.Common-flexCenterAlignCenter",
@@ -6318,27 +6342,166 @@
                 `
 			},
 
-            { /* стилизация закупа припасов в гараже */
-                tag: ["QS", "fade"],
-                selector: ".SaleByKitStyle-commonBlockModal",
-                styles:
-                {
-                    background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-                    borderRight: "0.15rem solid rgba(255, 255, 255, 0.1)"
-                }
+			{ /* стилизация закупа припасов в гараже */
+				tag: ["QS", "fade"],
+				selector: ".SaleByKitStyle-commonBlockModal",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					borderRight: "0.15rem solid rgba(255, 255, 255, 0.1)"
+				}
+			},
+
+			{ /* стилизация закупа припасов в гараже */
+				tag: ["QSA", "scale", "BHV"],
+				selector: ".SaleByKitStyle-commonCard",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					borderRadius: "2rem",
+					boxShadow: "none"
+				}
+			},
+
+			{ /* стилизация раздела с заданками */
+				cssStyles: `
+					.MainQuestComponentStyle-progress, .TableMainQuestComponentStyle-progressTableMission {
+						filter: saturate(0) !important;
+					}
+				`
+			},
+
+            { /* стилизация чата в битве/стилизация списка никнеймов в друзьях/инвайтах/списка битв */
+                cssStyles: `
+                    .UserGroupTitleButtonComponentStyle-commonBlockGroup, .FriendListComponentStyle-nickName, .InvitationWindowsComponentStyle-usersScroll > div > div > div:nth-child(2), .ProBattleCommonStyleMobile-blockModesFilter > div.Common-flexCenterAlignCenter > div.Common-flexStartAlignCenter > p, .BattleModesComponentStyle-button > div.Common-flexStartAlignCenter.BattleModesComponentStyle-fund > div.Common-flexStartAlignCenter:nth-child(2) {
+                        filter: saturate(0) !important;
+                    }
+
+					.FriendListComponentStyle-greenTextOnline, .InvitationWindowsComponentStyle-onlineLabel, .ProBattlesComponentStyle-createBattleButton > p {
+						color: rgba(255, 204, 0, 1) !important;
+					}
+                `
             },
 
-            { /* стилизация закупа припасов в гараже */
-                tag: ["QSA", "scale", "BHV"],
-                selector: ".SaleByKitStyle-commonCard",
-                styles:
-                {
-                    background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-                    border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "2rem",
-                    boxShadow: "none"
-                }
-            },
+			{ /* стилизация раздела с битвами/раздела званий/карточек/гаража */
+				cssStyles: `
+					.ProBattleCommonStyleMobile-blockModesFilter .Common-maskImageContain, .ProBattlesComponentStyle-cellName span, .UserProgressComponentStyle-rankScore, .UserProgressComponentStyle-rankProgressBarContainerLegend, .BattlePickComponentStyle-blockForCrystalXP > div:nth-child(2), .Common-backgroundImageCover.modeLimitIcon > div.Common-flexSpaceBetweenAlignStretch > div > div > img, td.Common-flexSpaceBetweenAlignCenter.ProBattlesComponentStyle-cellName > div.Common-flexStartAlignCenter > img, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-flexSpaceBetweenAlignStretch {
+						filter: saturate(0) !important;
+					}
+				`
+			},
+
+			{ /* стилизация раздела с битвами/инвайт меню */
+				tag: ["QSA"],
+				selector: ".Common-displayFlex .BattleCardComponentStyle-containerTicker span, .InvitationWindowsComponentStyle-inviteButton span",
+				styles:
+				{
+					color: "rgb(255 206 142)"
+				}
+			},
+
+			{ /* стилизация раздела с битвами */
+				tag: ["QS"],
+				selector: "div.BattleCardComponentStyle-mapName > div.BattleCardComponentStyle-containerTicker.Common-displayFlex > span",
+				styles:
+				{
+					color: "white"
+				}
+			},
+
+			{ /* стилизация раздела с друзьями */
+				tag: ["QSA"],
+				selector: ".FriendListComponentStyle-opacityText, .InvitationWindowsComponentStyle-battleLabel",
+				styles:
+				{
+					marginTop: "0"
+				}
+			},
+
+			{ /* стилизация раздела с заданками/клана */
+				tag: ["QSA"],
+				selector: ".MainQuestComponentStyle-cardPlay > div > h4, .MainQuestComponentStyle-commonDescriptionProgress > div > h4, .MainQuestComponentStyle-commonCard > div > h4, .ClanCommonStyle-onlineNickName, .ClanInfoComponentStyle-buttonEditProfile > span, .ClanMembersListComponentStyle-buyClanPlaceButton > span, .ClanCommonStyle-buttonInvite > span",
+				styles:
+				{
+					color: "rgba(255, 204, 0, 1)"
+				}
+			},
+
+			{ /* стилизация раздела с настройками */
+				tag: ["QSA"],
+				selector: ".GameSettingsStyle-button > span, .SettingsComponentStyle-slider > p > span, .TwitchSettingsRendersStyle-button > span, .TwitchSettingsRendersStyle-nick, .ChatComponentStyle-chatRegularUser",
+				styles:
+				{
+					color: "rgba(255, 204, 0, 1)"
+				}
+			},
+
+			{ /* стилизация раздела с гаражом*/
+				tag: ["QSA"],
+				selector: ".GarageItemComponentStyle-descriptionDevice > div > .Common-whiteSpaceNoWrap.Font-bold.Common-whiteSpaceNoWrap",
+				styles:
+				{
+					color: "rgba(239, 239, 239, 1)"
+				}
+			},
+
+			{ /* стилизация раздела с гаражом */
+				tag: ["QSA"],
+				selector: ".GarageItemComponentStyle-descriptionDevice > h2, .GarageCommonStyle-animatedBlurredRightBlock > div > div > h2:nth-child(2)",
+				styles:
+				{
+					color: "rgba(255, 204, 0, 1)",
+					textShadow: "rgb(255, 204, 0) 0px 0px 0.375em",
+					zIndex: "9"
+				}
+			},
+
+			{ /* стилизация раздела с гаражом */
+				tag: ["QSA"],
+				selector: ".SquarePriceButtonComponentStyle-commonBlockButton > .Common-flexEndAlignEnd > span, .ItemDescriptionComponentStyle-textModal > a > u, .TutorialModalComponentStyle-navigationButton > span, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-displayFlexColumn > div > span.Font-bold.Common-flexEnd.Common-whiteSpaceNoWrap, .TanksPartComponentStyle-tankPartUpgrades.GarageCommonStyle-animatedBlurredRightBlock > div > div > span",
+				styles:
+				{
+					color: "rgba(255, 204, 0, 1)"
+				}
+			},
+
+			{ /* стилизация контекстного меню/чат */
+				cssStyles: `
+					.ContextMenuStyle-menuItem.ContextMenuStyle-menuItemRank > div > div > div > span, #root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div > span, .ChatComponentStyle-channelSelect {
+						color: rgba(255, 204, 0, 1) !important;
+					}
+				`
+			},
+
+			{ /* стилизация списка битв/всплывающего окна */
+				tag: ["QSA"],
+				selector: ".JoinToBattleComponentStyle-buttonJoin > span, .NotificationViewStyle-blockButtonAndTimer > div > div > span, .NotificationViewStyle-descriptionNotification > div > span:nth-child(2)",
+				styles:
+				{
+					color: "rgba(255, 204, 0, 1)"
+				}
+			},
+
+			{ /* стилизация списка битв */
+				cssStyles: `
+					#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn {
+						margin-bottom: 0.8rem !important;
+					}
+				`
+			},
+
+			{ /* стилизация карточек в режимах битв */
+				cssStyles: `
+					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(1) > h2, .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > span {
+						color: rgba(255, 204, 0, 1) !important;
+					}
+
+					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(2) {
+						filter: saturate(0);
+					}
+				`
+			}
 		];
 
 		elements.forEach((element) =>
