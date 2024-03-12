@@ -1128,7 +1128,7 @@
 
 			{ /* стилизация окна поиска битвы */
 			tag: ["QS"],
-			selector: "#root > div.MatchmakingWaitComponentStyle-container.slideIn > div.MatchmakingWaitComponentStyle-contentContainer.fade > div.MatchmakingWaitComponentStyle-currentTimeContainer > div > span",
+			selector: "#root > div.MatchmakingWaitComponentStyle-container.slideIn > div.MatchmakingWaitComponentStyle-contentContainer > div.MatchmakingWaitComponentStyle-currentTimeContainer > div > span",
 			styles:
 				{
 					fontSize: "1rem"
@@ -1740,9 +1740,9 @@
 				}
 			},
 
-			{ /* стилизация элементов в главном меню игры */
+			{ /* стилизация элементов в главном меню игры/заданках */
 			tag: ["QSA"],
-			selector: ".BattlePickComponentStyle-timerButton",
+			selector: ".BattlePickComponentStyle-timerButton, .MainQuestComponentStyle-commonBlockTimerButton",
 			styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
@@ -5956,7 +5956,7 @@
 
 			{ /* стилизация сайта с рейтингами */
 				tag: ["QS", "fade"],
-				selector: "#app-root > main > div.generic-box.panel.stats-panel.fade > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div",
+				selector: "#app-root > main > div.generic-box.panel.stats-panel > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
@@ -5981,7 +5981,7 @@
 
 			{ /* стилизация сайта с рейтингами */
 				tag: ["QS", "fade"],
-				selector: "#app-root > main > div.generic-box.panel.stats-panel.fade > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div > div.progress-bar__bar",
+				selector: "#app-root > main > div.generic-box.panel.stats-panel > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div > div.progress-bar__bar",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0%)",
@@ -6336,7 +6336,7 @@
 
             { /* стилизация раздела создания битвы */
                 cssStyles: `
-                    #root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle.fade > div:hover {
+                    #root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle > div:hover {
                         scrollbar-width: thin !important;
                     }
                 `
@@ -6364,21 +6364,17 @@
 				}
 			},
 
-			{ /* стилизация раздела с заданками */
-				cssStyles: `
-					.MainQuestComponentStyle-progress, .TableMainQuestComponentStyle-progressTableMission {
-						filter: saturate(0) !important;
-					}
-				`
-			},
-
             { /* стилизация чата в битве/стилизация списка никнеймов в друзьях/инвайтах/списка битв */
                 cssStyles: `
-                    .UserGroupTitleButtonComponentStyle-commonBlockGroup, .FriendListComponentStyle-nickName, .InvitationWindowsComponentStyle-usersScroll > div > div > div:nth-child(2), .ProBattleCommonStyleMobile-blockModesFilter > div.Common-flexCenterAlignCenter > div.Common-flexStartAlignCenter > p, .BattleModesComponentStyle-button > div.Common-flexStartAlignCenter.BattleModesComponentStyle-fund > div.Common-flexStartAlignCenter:nth-child(2) {
+                    .UserGroupTitleButtonComponentStyle-commonBlockGroup, .FriendListComponentStyle-nickName, .InvitationWindowsComponentStyle-usersScroll > div > div > div:nth-child(2), .ProBattleCommonStyleMobile-blockModesFilter > div.Common-flexCenterAlignCenter > div.Common-flexStartAlignCenter > p, .BattleModesComponentStyle-button > div.Common-flexStartAlignCenter.BattleModesComponentStyle-fund > div.Common-flexStartAlignCenter:nth-child(2), .BattleCreateComponentStyle-mainContainer.ProBattlesComponentStyle-mainContainer.Common-flexStartAlignStart > div.Common-flexStartAlignCenterColumn > div, .MapCardComponentStyle-message > span, .MapCardComponentStyle-imgSelectCard {
                         filter: saturate(0) !important;
                     }
 
-					.FriendListComponentStyle-greenTextOnline, .InvitationWindowsComponentStyle-onlineLabel, .ProBattlesComponentStyle-createBattleButton > p {
+					.FriendListComponentStyle-greenTextOnline, .InvitationWindowsComponentStyle-onlineLabel, .ProBattlesComponentStyle-createBattleButton > p, .FormatsSectionComponentStyle-selectedCard.cardImg > div.Common-flexCenterAlignCenterColumn > h2 {
+						color: rgba(255, 204, 0, 1) !important;
+					}
+
+					.FormatsSectionComponentStyle-unSelectedCard:hover > div:nth-child(4) > h2 {
 						color: rgba(255, 204, 0, 1) !important;
 					}
                 `
@@ -6386,7 +6382,7 @@
 
 			{ /* стилизация раздела с битвами/раздела званий/карточек/гаража */
 				cssStyles: `
-					.ProBattleCommonStyleMobile-blockModesFilter .Common-maskImageContain, .ProBattlesComponentStyle-cellName span, .UserProgressComponentStyle-rankScore, .UserProgressComponentStyle-rankProgressBarContainerLegend, .BattlePickComponentStyle-blockForCrystalXP > div:nth-child(2), .Common-backgroundImageCover.modeLimitIcon > div.Common-flexSpaceBetweenAlignStretch > div > div > img, td.Common-flexSpaceBetweenAlignCenter.ProBattlesComponentStyle-cellName > div.Common-flexStartAlignCenter > img, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-flexSpaceBetweenAlignStretch {
+					.ProBattleCommonStyleMobile-blockModesFilter .Common-maskImageContain, .ProBattlesComponentStyle-cellName span, .UserProgressComponentStyle-rankScore, .UserProgressComponentStyle-rankProgressBarContainerLegend, .BattlePickComponentStyle-blockForCrystalXP > div:nth-child(2), .Common-backgroundImageCover.modeLimitIcon > div.Common-flexSpaceBetweenAlignStretch > div > div > img, td.Common-flexSpaceBetweenAlignCenter.ProBattlesComponentStyle-cellName > div.Common-flexStartAlignCenter > img, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-flexSpaceBetweenAlignStretch, .Common-flexCenterAlignCenterColumn.blockCard {
 						filter: saturate(0) !important;
 					}
 				`
@@ -6419,18 +6415,46 @@
 				}
 			},
 
+			{ /* стилизация раздела с заданками */
+				cssStyles: `
+					.MainQuestComponentStyle-progress, .TableMainQuestComponentStyle-progressTableMission, .MainQuestComponentStyle-imageContainer, .MainQuestComponentStyle-iconMission {
+						filter: saturate(0) !important;
+					}
+
+					.MainQuestComponentStyle-scrollContainer {
+						scrollbar-width: thin !important;
+					}
+				`
+			},
+
+			{ /* стилизация ммной статы/магаза/кнопок навигации */
+				cssStyles: `
+					.BattleResultQuestProgressComponentStyle-progressContainer, .BlockResultTankComponentStyle-gsContainer > img, .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn, .BattleResultUserInfoComponentStyle-xp > img, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td > img, .BattleResultNavigationComponentStyle-button > img, .HeaderComponentStyle-backArrowBlock, .BreadcrumbsComponentStyle-rightButtonsContainer > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .BreadcrumbsComponentStyle-iconLogout, .IconStyle-iconBackArrow, .IconStyle-iconLogOff, .UserScoreComponentStyle-blockRightPanel > .Common-flexCenterAlignCenter > .Common-backgroundImageContain {
+						filter: saturate(0) !important;
+					}
+
+					.BattleResultQuestProgressComponentStyle-text:nth-child(2), .BattleResultUserInfoComponentStyle-rankNameContainer > span, .BattleResultUserInfoComponentStyle-xp > span, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td:nth-child(2) > span, .BasePaymentComponentStyle-buttonContainer > div > span, .PaymentInfoComponentStyle-currency {
+						color: rgba(255, 204, 0, 1) !important;
+					}
+					
+					.BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn::after {
+						box-shadow: rgb(255, 188, 9) 0px 0px 0.575em 0px;
+					}
+				`
+			},
+
 			{ /* стилизация раздела с заданками/клана */
 				tag: ["QSA"],
-				selector: ".MainQuestComponentStyle-cardPlay > div > h4, .MainQuestComponentStyle-commonDescriptionProgress > div > h4, .MainQuestComponentStyle-commonCard > div > h4, .ClanCommonStyle-onlineNickName, .ClanInfoComponentStyle-buttonEditProfile > span, .ClanMembersListComponentStyle-buyClanPlaceButton > span, .ClanCommonStyle-buttonInvite > span",
+				selector: ".MainQuestComponentStyle-cardPlay > div > h4, .MainQuestComponentStyle-commonDescriptionProgress > div > h4, .MainQuestComponentStyle-commonCard > div > h4, .ClanCommonStyle-onlineNickName, .ClanInfoComponentStyle-buttonEditProfile > span, .ClanMembersListComponentStyle-buyClanPlaceButton > span, .ClanCommonStyle-buttonInvite > span, .TutorialModalComponentStyle-mediaContainer.MainQuestComponentStyle-mediaContainer > div > h2, .MainQuestComponentStyle-buttonContainer > span",
 				styles:
 				{
 					color: "rgba(255, 204, 0, 1)"
 				}
 			},
-
-			{ /* стилизация раздела с настройками */
+			
+			{ /* стилизация раздела с настройками/заданками */
 				tag: ["QSA"],
-				selector: ".GameSettingsStyle-button > span, .SettingsComponentStyle-slider > p > span, .TwitchSettingsRendersStyle-button > span, .TwitchSettingsRendersStyle-nick, .ChatComponentStyle-chatRegularUser",
+				selector: ".GameSettingsStyle-button > span, .SettingsComponentStyle-slider > p > span, .TwitchSettingsRendersStyle-button > span, .TwitchSettingsRendersStyle-nick, .ChatComponentStyle-chatRegularUser, .MainQuestComponentStyle-cardRewardCompleted.iconsMission.MainQuestComponentStyle-animationImgHover> div.Common-flexCenterAlignCenterColumn > h4, .MainQuestComponentStyle-messageReward, .SuperMissionComponentStyle-buttonCollect > span",
 				styles:
 				{
 					color: "rgba(255, 204, 0, 1)"
@@ -6476,7 +6500,7 @@
 
 			{ /* стилизация списка битв/всплывающего окна */
 				tag: ["QSA"],
-				selector: ".JoinToBattleComponentStyle-buttonJoin > span, .NotificationViewStyle-blockButtonAndTimer > div > div > span, .NotificationViewStyle-descriptionNotification > div > span:nth-child(2)",
+				selector: ".JoinToBattleComponentStyle-buttonJoin > span, .NotificationViewStyle-blockButtonAndTimer > div > div > span, .NotificationViewStyle-descriptionNotification > div > span:nth-child(2), .BattleSelectDialogComponentStyle-container > span > a > u, .UserProgressComponentStyle-buttonOk > div > h2",
 				styles:
 				{
 					color: "rgba(255, 204, 0, 1)"
@@ -6491,13 +6515,13 @@
 				`
 			},
 
-			{ /* стилизация карточек в режимах битв */
+			{ /* стилизация карточек в режимах битв/рег меню */
 				cssStyles: `
-					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(1) > h2, .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > span {
+					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(1) > h2, .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > span, .HeaderComponentStyle-siteLink.menuItemClass:hover > .EntranceComponentStyle-fontStyleLabel, .HeaderComponentStyle-siteLink.menuItemClass:hover > .HeaderComponentStyle-textLink > span {
 						color: rgba(255, 204, 0, 1) !important;
 					}
 
-					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(2) {
+					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(2), .HeaderComponentStyle-siteLink.menuItemClass:hover > .Common-flexCenterAlignCenter {
 						filter: saturate(0);
 					}
 				`
