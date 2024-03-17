@@ -52,6 +52,12 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
 
+**changelog version 4.1.5 === 4.1.6**
+- Убраны всплывающие спецпредложения
+- Правки в анимацию логотипа
+- Различные фиксы стилей
+- Правки в акцентные цвета темы
+
 **changelog version 4.1 === 4.1.5:**
 - Различные фиксы и правки в стили
 - Наконец-то добрался до глобальной покраски цветов вместо блевотно-зеленого по умолчанию на оранжевый практически во всех разделах игры
@@ -278,6 +284,12 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
 ## ![image](https://xeon.fun/logo/changelog.svg) List of changes
+
+**changelog version 4.1.5 === 4.1.6**
+- Removed pop-up special offers
+- Edits to logo animation
+- Various style fixes
+- Edits to theme accent colors
 
 **changelog version 4.1 === 4.1.5:**
 - Various fixes and styling tweaks

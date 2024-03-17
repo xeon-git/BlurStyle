@@ -68,10 +68,6 @@
 				el.style.transform = "scale(1)";
 				el.style.border = element.styles.border;
 			});
-
-			el.addEventListener("mousemove", () => {
-				el.style.border = "0.150rem solid rgba(255, 255, 255, 1)";
-			});
 		}
 		else if (element.tag.includes("RHV"))
 		{
@@ -780,17 +776,16 @@
 				{ /* logo аним фрейм */
 				cssStyles: `
 					@keyframes logoAnim {
-						35% {
-							width: 0rem;
-						}
-
-						100% {
-							width: 6.25rem;
+						0%, 100% {
+							transform: scale(0.7);
+						} 
+						50% {
+							transform: scale(0.5);
 						}
 					}
 
 					.LobbyLoaderComponentStyle-logo {
-						animation: logoAnim 3s linear forwards infinite;
+						animation: logoAnim 2s infinite; 
 						position: relative;
 					}
 				`
@@ -1110,7 +1105,8 @@
 					left: "36vw",
 					top: "8vw",
 					width: "27.8vw",
-					height: "7.4vw"
+					height: "7.4vw",
+					zIndex: "5"
 				}
 			},
 
@@ -6371,11 +6367,11 @@
                     }
 
 					.FriendListComponentStyle-greenTextOnline, .InvitationWindowsComponentStyle-onlineLabel, .ProBattlesComponentStyle-createBattleButton > p, .FormatsSectionComponentStyle-selectedCard.cardImg > div.Common-flexCenterAlignCenterColumn > h2 {
-						color: rgba(255, 204, 0, 1) !important;
+						color: rgba(222, 184, 135, 1) !important;
 					}
 
 					.FormatsSectionComponentStyle-unSelectedCard:hover > div:nth-child(4) > h2 {
-						color: rgba(255, 204, 0, 1) !important;
+						color: rgba(222, 184, 135, 1) !important;
 					}
                 `
             },
@@ -6384,6 +6380,14 @@
 				cssStyles: `
 					.ProBattleCommonStyleMobile-blockModesFilter .Common-maskImageContain, .ProBattlesComponentStyle-cellName span, .UserProgressComponentStyle-rankScore, .UserProgressComponentStyle-rankProgressBarContainerLegend, .BattlePickComponentStyle-blockForCrystalXP > div:nth-child(2), .Common-backgroundImageCover.modeLimitIcon > div.Common-flexSpaceBetweenAlignStretch > div > div > img, td.Common-flexSpaceBetweenAlignCenter.ProBattlesComponentStyle-cellName > div.Common-flexStartAlignCenter > img, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-flexSpaceBetweenAlignStretch, .Common-flexCenterAlignCenterColumn.blockCard {
 						filter: saturate(0) !important;
+					}
+
+					.MainQuestComponentStyle-messageReward {
+						color: rgba(222, 184, 135, 1) !important;
+					}
+
+					.iconsMission:hover .MainQuestComponentStyle-messageReward {
+						color: transparent !important;
 					}
 				`
 			},
@@ -6417,7 +6421,7 @@
 
 			{ /* стилизация раздела с заданками */
 				cssStyles: `
-					.MainQuestComponentStyle-progress, .TableMainQuestComponentStyle-progressTableMission, .MainQuestComponentStyle-imageContainer, .MainQuestComponentStyle-iconMission {
+					.MainQuestComponentStyle-progress, .TableMainQuestComponentStyle-progressTableMission {
 						filter: saturate(0) !important;
 					}
 
@@ -6433,8 +6437,8 @@
 						filter: saturate(0) !important;
 					}
 
-					.BattleResultQuestProgressComponentStyle-text:nth-child(2), .BattleResultUserInfoComponentStyle-rankNameContainer > span, .BattleResultUserInfoComponentStyle-xp > span, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td:nth-child(2) > span, .BasePaymentComponentStyle-buttonContainer > div > span, .PaymentInfoComponentStyle-currency {
-						color: rgba(255, 204, 0, 1) !important;
+					.BattleResultQuestProgressComponentStyle-text:nth-child(2), .BattleResultUserInfoComponentStyle-rankNameContainer > span, .BattleResultUserInfoComponentStyle-xp > span, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td:nth-child(2) > span, .BasePaymentComponentStyle-buttonContainer > div > span, .PaymentInfoComponentStyle-currency, .SuccessfulPurchaseComponentStyle-container > .Common-flexCenterAlignCenter > span {
+						color: rgba(222, 184, 135, 1) !important;
 					}
 					
 					.BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn::after {
@@ -6445,19 +6449,19 @@
 
 			{ /* стилизация раздела с заданками/клана */
 				tag: ["QSA"],
-				selector: ".MainQuestComponentStyle-cardPlay > div > h4, .MainQuestComponentStyle-commonDescriptionProgress > div > h4, .MainQuestComponentStyle-commonCard > div > h4, .ClanCommonStyle-onlineNickName, .ClanInfoComponentStyle-buttonEditProfile > span, .ClanMembersListComponentStyle-buyClanPlaceButton > span, .ClanCommonStyle-buttonInvite > span, .TutorialModalComponentStyle-mediaContainer.MainQuestComponentStyle-mediaContainer > div > h2, .MainQuestComponentStyle-buttonContainer > span",
+				selector: ".MainQuestComponentStyle-cardPlay > div > h4, .MainQuestComponentStyle-commonDescriptionProgress > div > h4, .MainQuestComponentStyle-commonCard > div > h4, .ClanCommonStyle-onlineNickName, .ClanInfoComponentStyle-buttonEditProfile > span, .ClanMembersListComponentStyle-buyClanPlaceButton > span, .ClanCommonStyle-buttonInvite > span, .TutorialModalComponentStyle-mediaContainer.MainQuestComponentStyle-mediaContainer > div > h2, .MainQuestComponentStyle-buttonContainer > span, .ClanStatisticsComponentStyle-areCommonSpanOnline",
 				styles:
 				{
-					color: "rgba(255, 204, 0, 1)"
+					color: "rgba(222, 184, 135, 1)"
 				}
 			},
 			
 			{ /* стилизация раздела с настройками/заданками */
 				tag: ["QSA"],
-				selector: ".GameSettingsStyle-button > span, .SettingsComponentStyle-slider > p > span, .TwitchSettingsRendersStyle-button > span, .TwitchSettingsRendersStyle-nick, .ChatComponentStyle-chatRegularUser, .MainQuestComponentStyle-cardRewardCompleted.iconsMission.MainQuestComponentStyle-animationImgHover> div.Common-flexCenterAlignCenterColumn > h4, .MainQuestComponentStyle-messageReward, .SuperMissionComponentStyle-buttonCollect > span",
+				selector: ".GameSettingsStyle-button > span, .SettingsComponentStyle-slider > p > span, .TwitchSettingsRendersStyle-button > span, .TwitchSettingsRendersStyle-nick, .ChatComponentStyle-chatRegularUser, .MainQuestComponentStyle-cardRewardCompleted.iconsMission.MainQuestComponentStyle-animationImgHover> div.Common-flexCenterAlignCenterColumn > h4, .SuperMissionComponentStyle-buttonCollect > span",
 				styles:
 				{
-					color: "rgba(255, 204, 0, 1)"
+					color: "rgba(222, 184, 135, 1)"
 				}
 			},
 
@@ -6475,7 +6479,7 @@
 				selector: ".GarageItemComponentStyle-descriptionDevice > h2, .GarageCommonStyle-animatedBlurredRightBlock > div > div > h2:nth-child(2)",
 				styles:
 				{
-					color: "rgba(255, 204, 0, 1)",
+					color: "rgba(222, 184, 135, 1)",
 					textShadow: "rgb(255, 204, 0) 0px 0px 0.375em",
 					zIndex: "9"
 				}
@@ -6486,14 +6490,27 @@
 				selector: ".SquarePriceButtonComponentStyle-commonBlockButton > .Common-flexEndAlignEnd > span, .ItemDescriptionComponentStyle-textModal > a > u, .TutorialModalComponentStyle-navigationButton > span, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-displayFlexColumn > div > span.Font-bold.Common-flexEnd.Common-whiteSpaceNoWrap, .TanksPartComponentStyle-tankPartUpgrades.GarageCommonStyle-animatedBlurredRightBlock > div > div > span",
 				styles:
 				{
-					color: "rgba(255, 204, 0, 1)"
+					color: "rgba(222, 184, 135, 1)"
 				}
 			},
 
 			{ /* стилизация контекстного меню/чат */
 				cssStyles: `
 					.ContextMenuStyle-menuItem.ContextMenuStyle-menuItemRank > div > div > div > span, #root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div > span, .ChatComponentStyle-channelSelect {
-						color: rgba(255, 204, 0, 1) !important;
+						color: rgba(222, 184, 135, 1) !important;
+					}
+				`
+			},
+
+			{ /* стилизация раздела с контами */
+				cssStyles: `
+					.DeviceButtonComponentStyle-blockAlterations > div > span {
+						color: rgba(222, 184, 135, 1) !important;
+					}
+
+					.ContainersComponentStyle-countBlock > div {
+						box-shadow: rgba(222, 184, 135, 1) 0em 0em 1em 0em !important;
+						background: rgba(222, 184, 135, 1);
 					}
 				`
 			},
@@ -6503,7 +6520,7 @@
 				selector: ".JoinToBattleComponentStyle-buttonJoin > span, .NotificationViewStyle-blockButtonAndTimer > div > div > span, .NotificationViewStyle-descriptionNotification > div > span:nth-child(2), .BattleSelectDialogComponentStyle-container > span > a > u, .UserProgressComponentStyle-buttonOk > div > h2",
 				styles:
 				{
-					color: "rgba(255, 204, 0, 1)"
+					color: "rgba(222, 184, 135, 1)"
 				}
 			},
 
@@ -6518,13 +6535,22 @@
 			{ /* стилизация карточек в режимах битв/рег меню */
 				cssStyles: `
 					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(1) > h2, .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > span, .HeaderComponentStyle-siteLink.menuItemClass:hover > .EntranceComponentStyle-fontStyleLabel, .HeaderComponentStyle-siteLink.menuItemClass:hover > .HeaderComponentStyle-textLink > span {
-						color: rgba(255, 204, 0, 1) !important;
+						color: rgba(222, 184, 135, 1) !important;
 					}
 
 					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(2), .HeaderComponentStyle-siteLink.menuItemClass:hover > .Common-flexCenterAlignCenter {
 						filter: saturate(0);
 					}
 				`
+			},
+
+			{ /* нахуй рекламу */
+				tag: ["QS"],
+				selector: ".AnnouncementComponentStyle-mainContainer > .AnnouncementComponentStyle-extContent",
+				styles:
+					{
+						display: "none"
+					}
 			}
 		];
 
