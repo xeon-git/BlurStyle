@@ -25,10 +25,11 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://xeon.fun/logo/hotkeys.svg) Горячие клавиши
 
-- **\\** - Отключение/включение фильтра насыщенности и контрастности
-- **=** - Включение/отключение другой вариации таба с показом резистов
-- **]** - Отключение/включение анимированного фона в разделах игры
-- **insert** - Отключение/включение анимированного звездного фона в загрузочных экранах
+- <code>\\</code> - Отключение/включение фильтра насыщенности и контрастности
+- <code>=</code> - Включение/отключение другой вариации таба с показом резистов
+- <code>]</code> - Отключение/включение анимированного фона в разделах игры
+- <code>insert</code> - Отключение/включение анимированного звездного фона в загрузочных экранах
+- <code>F12</code> - Активация девтулс на клиенте
 
 *(Важное примечание: настройки горячих клавиш сохраняются после перезагрузки)*
 
@@ -47,12 +48,12 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 - Отсутствие ховер анимации на кнопке премиума в лобби
 - Рваная трансформация карточек при наведении курсора
-- Проблемы с залипанием ховера в списке битв (проблемы не с моей стороны)
+- Проблемы с залипанием ховера в списке битв *(проблемы не с моей стороны)*
 - Баг с дублированием бордера после покупки слота под резист в гараже, если аккаунт новый
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
 
-**changelog version 4.1.5 === 4.1.6**
+**changelog version 4.1.5 === 4.1.6:**
 - Убраны всплывающие спецпредложения
 - Правки в анимацию логотипа
 - Различные фиксы стилей
@@ -62,7 +63,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Различные фиксы и правки в стили
 - Наконец-то добрался до глобальной покраски цветов вместо блевотно-зеленого по умолчанию на оранжевый практически во всех разделах игры
 - Убраны экспериментальные правки с затенением в лобби
-- Добавлена новая горячая клавиша на отключение анимированного звездного фона в загрузочном экране на кнопку insert *(на слабых пк ускорит загрузку в битву)*
+- Добавлена новая горячая клавиша на отключение анимированного звездного фона в загрузочном экране на кнопку <code>insert</code> *(на слабых пк ускорит загрузку в битву)*
 
 **changelog version 4.0.6 === 4.1:**
 - Тема минифицирована и полностью перемещена на собственный хост, что в теории должно ускорить загрузку самой темы и обеспечить моментальную заливку актуальной версии
@@ -71,7 +72,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Перекрашен худ припасов в битве *(только для браузерной версии)*
 - Обновлена ховер анимация на всех элементах *(добавлен новый эффект впадания элемента при наведении курсора)*
 - Залита новая иконка для кнопки с логами чата в битве и помещена внутрь самого контейнера с чатом
-- Изменено содержимое билборда в битве на лого блюрстайл
+- Изменено содержимое билборда в битве на лого блюрстайл *(только для браузерной версии)*
 - Исправлен баг с пустым скроллом в настройках и перекрывание элементов скроллбаром в последних версиях хрома
 - Исправлен баг со стилями в различных разделах после очередной "полезной" обновы со стороны танков
 - Исправлен баг с кривыми отступами GearScore в ммной стате, так и не дождался фикса со стороны танков
@@ -258,10 +259,11 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 ## ![image](https://xeon.fun/logo/hotkeys.svg) Hotkeys
 
-- \ - Disable/enable saturation and contrast filter
-- = - Enable/disable another variation of the tab with resists shown
-- ] - Disable/enable animated backgrounds
-- **insert** - Disable/enable animated stars background in loading screens
+- <code>\\</code> - Disable/enable saturation and contrast filter
+- <code>=</code> - Enable/disable another variation of the tab with resists shown
+- <code>]</code> - Disable/enable animated backgrounds
+- <code>insert</code> - Disable/enable animated stars background in loading screens
+- <code>F12</code> - Activate devtools on the client
 
 *(Important note: hotkey settings are retained after reboot)*
 
@@ -280,12 +282,12 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 - No hover animation on the premium button in the lobby
 - Ripped transformation of cards on mouseover
-- Problems with hover sticking in the battle list
+- Problems with hover sticking in the battle list *(problems aren't on my side)*
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
 ## ![image](https://xeon.fun/logo/changelog.svg) List of changes
 
-**changelog version 4.1.5 === 4.1.6**
+**changelog version 4.1.5 === 4.1.6:**
 - Removed pop-up special offers
 - Edits to logo animation
 - Various style fixes
@@ -295,7 +297,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Various fixes and styling tweaks
 - Finally got to global coloring of colors instead of the default puke green to orange in almost all sections of the game
 - Removed experimental edits with shading in lobbies
-- Added a new hotkey to disable the animated stars background in the loading screen on the insert button *(on weak PCs will speed up loading into battle)*
+- Added a new hotkey to disable the animated stars background in the loading screen on the <code>insert</code> button *(on weak PCs will speed up loading into battle)*
 
 **changelog version 4.0.6 === 4.1:**
 - Theme is minified and completely moved to its own host, which in theory should speed up loading of the theme itself and provide an instant upload of the current version
@@ -304,7 +306,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Repainted the artwork of supplies in battle *(only for browser version)*
 - Updated hover animation on all items *(added a new effect of falling into an item when hovering the cursor)*
 - New icon for the button with chat logs in the battle and placed inside the container with the chat
-- Changed the content of the billboard in the battle to a bluerstyle logo
+- Changed the content of the billboard in the battle to a bluerstyle logo *(only for browser version)*
 - Fixed bug with empty scrollbar in settings and overlapping of items with scrollbar in recent versions of chrome
 - Fixed a bug with styles in different sections after another "useful" update from the tanks dev
 - Fixed a bug with crooked GearScore indents in MM stat, never waited for a fix from the tanks dev
