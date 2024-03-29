@@ -53,6 +53,12 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
 
+**changelog version 4.1.6 === 4.1.7:**
+- Была изменена вариация текущего меню паузы в битве под старый всеми привычный вариант
+- Пофикшен баг с отображением внутриигровых ивентов
+- Пофикшен баг с покраской сетевого статуса при скролле участников клана
+- Мелкие правки стилей
+
 **changelog version 4.1.5 === 4.1.6:**
 - Убраны всплывающие спецпредложения
 - Правки в анимацию логотипа
@@ -286,6 +292,12 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
 ## ![image](https://xeon.fun/logo/changelog.svg) List of changes
+
+**changelog version 4.1.6 === 4.1.7:**
+- Changed the variation of the current battle pause menu to the old familiar variant.
+- Fixed a bug with the display of in-game events
+- Fixed bug with network status coloring when scrolling clan members.
+- Minor style edits
 
 **changelog version 4.1.5 === 4.1.6:**
 - Removed pop-up special offers

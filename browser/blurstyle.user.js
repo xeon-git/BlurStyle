@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 		 BlurStyle
-// @version 	 4.1.6
+// @version 	 4.1.7
 // @description  better user experience
 // @author		 xeon | xxnn
 // @match        https://*.tankionline.com/*

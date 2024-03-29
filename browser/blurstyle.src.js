@@ -3267,25 +3267,16 @@
 				}
 			},
 
-			{ /* стилизация менюшки с паузой в битве */
-				tag: ["QS"],
-				selector: ".BattlePauseMenuComponentStyle-dialogFooter",
-				styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
-				}
-			},
-
 			{ /* стилизация кнопочек в менюшке паузы */
 				tag: ["QSA", "BHV", "fade"],
 				selector: ".BattlePauseMenuComponentStyle-menuButton.BattlePauseMenuComponentStyle-enabledButton",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.2rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+					height: "4rem"
 				}
 			},
 
@@ -3295,23 +3286,69 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					backdropFilter: "blur(0.1rem)",
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+					height: "4rem"
 				}
 			},
 
 			{ /* стилизация кнопочек в менюшке паузы */
-				tag: ["QS", "BHV", "fade"],
-				selector: ".BattlePauseMenuComponentStyle-selectedRedMenuButton",
+				tag: ["QS", "fade", "BHV"],
+				selector: ".BattlePauseMenuComponentStyle-redMenuButton",
 				styles:
 				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.2) 0%, rgba(255, 0, 0, 0.2) 0%)",
-					backdropFilter: "blur(0.1rem)",
-					border: "0.150rem solid rgba(255, 0, 0, 0.3)",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0) 0%, rgba(255, 0, 0, 0) 0%)",
+					border: "0.150rem solid rgba(255, 0, 0, 0.1)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+					height: "4rem"
+				}
+			},
+
+			{ /* стилизация меню паузы */
+				tag: ["QS", "fade"],
+				selector: ".BattlePauseMenuComponentStyle-blackGlobalWrapper",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					backdropFilter: "blur(0.3rem)"
+				}
+			},
+
+			{ /* стилизация меню паузы */
+				tag: ["QS", "scale"],
+				selector: ".BattlePauseMenuDialogComponentStyle-content",
+				styles:
+				{
+					display: "flex",
+					justifyContent: "center"
+				}
+			},
+
+			{ /* стилизация меню паузы */
+				tag: ["QS", "fade"],
+				selector: ".BattlePauseMenuComponentStyle-wrapperTimer",
+				styles:
+				{
+					position: "absolute",
+					top: "94.2%",
+					left: "50%",
+					transform: "translate(-50%, -50%)",
+					zIndex: "999"
+				}
+			},
+
+			{ /* стилизация меню паузы */
+				tag: ["QS", "fade"],
+				selector: ".BattlePauseMenuComponentStyle-container",
+				styles:
+				{
+					gap: "0.5rem",
+					border: "0.150rem solid rgba(255, 255, 255, 0.120)",
+					borderRadius: "1rem",
+					padding: "3.5rem",
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)"
 				}
 			},
 
@@ -5431,7 +5468,7 @@
 
 			{ /* стилизация раздела с битвами */
 				tag: ["QSA", "fade"],
-				selector: ".NewBattleCreateInputStyle-settings .Common-backgroundImageContain",
+				selector: ".NewBattleCreateInputStyle-settings .Common-backgroundImageContain, .TierItemComponentStyle-receivedItem > .PremiumTierItemComponentStyle-parametersTierCommon > h3, .TierItemComponentStyle-getItemNow > .PremiumTierItemComponentStyle-parametersTierCommon > h3",
 				styles:
 				{
 					zIndex: "1",
@@ -6431,9 +6468,9 @@
 				`
 			},
 
-			{ /* стилизация ммной статы/магаза/кнопок навигации */
+			{ /* стилизация ммной статы/магаза/кнопок навигации/челленджа */
 				cssStyles: `
-					.BattleResultQuestProgressComponentStyle-progressContainer, .BlockResultTankComponentStyle-gsContainer > img, .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn, .BattleResultUserInfoComponentStyle-xp > img, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td > img, .BattleResultNavigationComponentStyle-button > img, .HeaderComponentStyle-backArrowBlock, .BreadcrumbsComponentStyle-rightButtonsContainer > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .BreadcrumbsComponentStyle-iconLogout, .IconStyle-iconBackArrow, .IconStyle-iconLogOff, .UserScoreComponentStyle-blockRightPanel > .Common-flexCenterAlignCenter > .Common-backgroundImageContain {
+					.BattleResultQuestProgressComponentStyle-progressContainer, .BlockResultTankComponentStyle-gsContainer > img, .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn, .BattleResultUserInfoComponentStyle-xp > img, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td > img, .BattleResultNavigationComponentStyle-button > img, .HeaderComponentStyle-backArrowBlock, .BreadcrumbsComponentStyle-rightButtonsContainer > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .BreadcrumbsComponentStyle-iconLogout, .IconStyle-iconBackArrow, .IconStyle-iconLogOff, .UserScoreComponentStyle-blockRightPanel > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .TierItemComponentStyle-receivedItem > .TierIconComponentStyle-icons, .TierHeaderComponentStyle-descriptionTier {
 						filter: saturate(0) !important;
 					}
 
@@ -6494,10 +6531,14 @@
 				}
 			},
 
-			{ /* стилизация контекстного меню/чат */
+			{ /* стилизация контекстного меню/чата/клана */
 				cssStyles: `
 					.ContextMenuStyle-menuItem.ContextMenuStyle-menuItemRank > div > div > div > span, #root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div > span, .ChatComponentStyle-channelSelect {
 						color: rgba(222, 184, 135, 1) !important;
+					}
+					
+					.ClanCommonStyle-offlineNickName {
+						color: rgb(167, 167, 167) !important;
 					}
 				`
 			},
@@ -6542,15 +6583,6 @@
 						filter: saturate(0);
 					}
 				`
-			},
-
-			{ /* нахуй рекламу */
-				tag: ["QS"],
-				selector: ".AnnouncementComponentStyle-mainContainer > .AnnouncementComponentStyle-extContent",
-				styles:
-					{
-						display: "none"
-					}
 			}
 		];
 
