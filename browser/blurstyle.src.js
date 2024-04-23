@@ -194,6 +194,64 @@
 		}
 	});
 
+	/* логика просчета фейковых значений FPS */
+	const randomFPS = {
+		getRandom: function(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
+	};
+	
+	document.addEventListener("keydown", function(event) {
+		checkChatState();
+	
+		if (chatActive) {
+			return;
+		}
+	
+		if (event.key === "-") {
+			const minFPSInput = prompt("Введи минимальное количество фпс:", "143");
+			const maxFPSInput = prompt("Введи максимальное количество фпс:", "144");
+	
+			const minFPS = parseInt(minFPSInput) || 143;
+			const maxFPS = parseInt(maxFPSInput) || 144;
+	
+			var FPS = document.querySelector("#root > div > div > div.BattleHudComponentStyle-buttonsContainer > div > div > div:nth-child(1) > span.BattleHudFpsComponentStyle-value");
+			if (FPS) FPS.parentNode.removeChild(FPS);
+	
+			var fakeFPS = document.createElement("span");
+			fakeFPS.classList.add("BattleHudFpsComponentStyle-value");
+			document.querySelector("#root > div > div > div.BattleHudComponentStyle-buttonsContainer > div > div > div:nth-child(1)").appendChild(fakeFPS);
+	
+			var fake = {
+				FPS: null,
+				minFPS: minFPS,
+				maxFPS: maxFPS,
+			};
+	
+			fake.setFpsVal = function() {
+				fake.FPS = randomFPS.getRandom(fake.minFPS, fake.maxFPS);
+			};
+	
+			fake.setFPS = function() {
+				fakeFPS.innerText = fake.FPS;
+	
+				if (fake.FPS < 20) fakeFPS.style.color = "rgb(255, 82, 9)";
+				if (fake.FPS >= 20 && fake.FPS <= 40) fakeFPS.style.color = "rgb(255, 188, 9)";
+				if (fake.FPS > 40) fakeFPS.style.color = "rgb(116, 186, 61)";
+			};
+	
+			function updateFPS() {
+				fake.setFpsVal();
+				fake.setFPS();
+			}
+	
+			updateFPS();
+			setInterval(() => {
+				updateFPS();
+			}, 3000);
+		}
+	});
+
 	/* логика вариации таба с резистами */
 	function resistanceTab() {
 		let rTab = localStorage.getItem('rTab') === 'true';
@@ -773,14 +831,16 @@
 	function styles()
 	{
 		const elements = [
-				{ /* logo аним фрейм */
+			{ /* logo аним фрейм */
 				cssStyles: `
 					@keyframes logoAnim {
 						0%, 100% {
 							transform: scale(0.7);
+                            filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 165, 0, 1))
 						} 
 						50% {
 							transform: scale(0.5);
+                            filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 165, 0, 0))
 						}
 					}
 
@@ -894,42 +954,16 @@
 			},
 
 			{ /* стилизация раздела с челленджами */
-			cssStyles: `
-				div.QuestsChallengesComponentStyle-containerParametrsChallenge > div:nth-child(5) {
-					display: none !important;
-				}
-			`
+				cssStyles: `
+					div.QuestsChallengesComponentStyle-containerParametrsChallenge > div:nth-child(5) {
+						display: none !important;
+					}
+				`
 			},
 
 			{ /* стилизация раздела настроек */
-				tag: ["QS", "BHV", "fade"],
-				selector: "#root > div > div > div > div > div > div > div > div.AccountSettingsComponentStyle-containerFormOptions > div > div.AccountSettingsComponentStyle-blockInputEmail > input",
-				styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "1.2rem",
-					backdropFilter: "blur(0.2rem)",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-				}
-			},
-
-			{ /* стилизация раздела настроек */
-				tag: ["QS", "BHV", "fade"],
-				selector: "#root > div > div > div > div > div > div > div.AccountSettingsComponentStyle-containerFormOptions > div > div.AccountSettingsComponentStyle-blockInputEmail > input",
-				styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "1.2rem",
-					backdropFilter: "blur(0.2rem)",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-				}
-			},
-
-			{ /* стилизация раздела настроек */
-				tag: ["QS", "BHV", "fade"],
-				selector: "div.SecuritySettingsComponentStyle-codeInputBlock > div > div > input",
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".InputComponentStyle-input",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
@@ -1374,7 +1408,8 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 0%)",
-					borderRight: "0.150rem solid rgba(255, 255, 255, 0.2)"
+					borderRight: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					animation: "fadeIn 0.3s ease-in-out"
 				}
 			},
 
@@ -1445,7 +1480,8 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 0%)",
-					backdropFilter: "blur(1rem)"
+					backdropFilter: "blur(1rem)",
+					animation: "fadeIn 0.3s ease-in-out"
 				}
 			},
 
@@ -1877,19 +1913,7 @@
 
 			{ /* стилизация раздела с битвами */
 			tag: ["QS", "RHV"],
-			selector: ".BattleModesComponentStyle-button .Common-flexCenterAlignCenter",
-			styles: {}
-			},
-
-			{ /* стилизация раздела с битвами */
-			tag: ["QS", "RHV"],
-			selector: ".Common-flexStartAlignStartColumn .BattleModesComponentStyle-button",
-			styles: {}
-			},
-
-			{ /* стилизация раздела с битвами */
-			tag: ["QS", "RHV"],
-			selector: ".BattleModesComponentStyle-fund",
+			selector: ".BattleModesComponentStyle-button .Common-flexCenterAlignCenter, .Common-flexStartAlignStartColumn .BattleModesComponentStyle-button, .BattleModesComponentStyle-fund",
 			styles: {}
 			},
 
@@ -1960,7 +1984,8 @@
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-					borderLeft: "0.150rem solid rgba(255, 255, 255, 0.1)"
+					borderLeft: "0.150rem solid rgba(255, 255, 255, 0.1)",
+					animation: "none"
 				}
 			},
 
@@ -2205,13 +2230,12 @@
 			},
 
 			{ /* стилизация рекламного блока в мейн меню */
-				tag: ["QS"],
-				selector: ".AnnouncementHomeScreenComponentStyle-announceDescriptionContainer",
-				styles:
-				{
-					borderTopLeftRadius: "0.8rem",
-					borderTopRightRadius: "0.8rem",
-				}
+				cssStyles: `
+					.AnnouncementHomeScreenComponentStyle-announceDescriptionContainer {
+						border-top-left-radius: 0.85rem !important;
+    					border-top-right-radius: 0.85rem !important;
+					}
+				`
 			},
 
 			{ /* стилизация рекламного блока в мейн меню */
@@ -2328,13 +2352,13 @@
 			},
 
 			{ /* стилизация хоткеев */
-			tag: ["QSA", "fade"],
-			selector: ".MainQuestComponentStyle-timerData",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-					borderRadius: "1.1rem"
-				}
+				tag: ["QSA", "fade"],
+				selector: ".MainQuestComponentStyle-timerData",
+				styles:
+					{
+						background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
+						borderRadius: "1.1rem"
+					}
 			},
 
 			{ /* стилизация хоткеев */
@@ -2348,13 +2372,13 @@
 			},
 
 			{ /* стилизация хоткеев */
-			tag: ["QSA", "fade"],
-			selector: ".HotKey-inlineBlockForHotKey",
-			styles:
-				{
-					borderRadius: "1.1rem",
-					transform: "scale(0.94)"
-				}
+				tag: ["QSA", "fade"],
+				selector: ".HotKey-inlineBlockForHotKey",
+				styles:
+					{
+						borderRadius: "1.1rem",
+						transform: "scale(0.94)"
+					}
 			},
 
 			{ /* стилизация хоткеев */
@@ -2461,16 +2485,16 @@
 			},
 
 			{ /* стилизация раздела с кланом */
-			tag: ["QS", "scale"],
-			selector: ".ChangeOwnerDialogComponentStyle-container ",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					outline: "0.150rem solid rgba(255, 255, 255, 0.1)",
-					borderRadius: "1.2rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-				}
+				tag: ["QS", "scale"],
+				selector: ".ChangeOwnerDialogComponentStyle-container ",
+				styles:
+					{
+						background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+						backdropFilter: "blur(0.5rem)",
+						outline: "0.150rem solid rgba(255, 255, 255, 0.1)",
+						borderRadius: "1.2rem",
+						boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+					}
 			},
 
 			{ /* стилизация раздела с кланом */
@@ -2509,38 +2533,38 @@
 			},
 
 			{ /* стилизация раздела с кланом */
-			tag: ["QS"],
-			selector: ".ClanCommonStyle-content",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
-				}
+				tag: ["QS"],
+				selector: ".ClanCommonStyle-content",
+				styles:
+					{
+						background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+					}
 			},
 
 			{ /* стилизация раздела с кланом */
-			tag: ["QS", "BHV", "fade"],
-			selector: ".ClanInvitationsComponentStyle-buttonDeclineAll",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "1.1rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-				}
+				tag: ["QS", "BHV", "fade"],
+				selector: ".ClanInvitationsComponentStyle-buttonDeclineAll",
+				styles:
+					{
+						background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+						backdropFilter: "blur(0.5rem)",
+						border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+						borderRadius: "1.1rem",
+						boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+					}
 			},
 
 			{ /* стилизация раздела с кланом */
-			tag: ["QSA", "BHV", "fade"],
-			selector: ".ClanCommonStyle-buttonSendRequest",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "1.1rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-				}
+				tag: ["QSA", "BHV", "fade"],
+				selector: ".ClanCommonStyle-buttonSendRequest",
+				styles:
+					{
+						background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+						backdropFilter: "blur(0.5rem)",
+						border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+						borderRadius: "1.1rem",
+						boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+					}
 			},
 
 			{ /* стилизация раздела с кланом */
@@ -2566,25 +2590,25 @@
 			},
 
 			{ /* стилизация раздела с кланом */
-			tag: ["QS", "fade"],
-			selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-					backdropFilter: "blur(0.5rem)",
-					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-					borderRadius: "1.1rem",
-					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-				}
+				tag: ["QS", "fade"],
+				selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr",
+				styles:
+					{
+						background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+						backdropFilter: "blur(0.5rem)",
+						border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+						borderRadius: "1.1rem",
+						boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+					}
 			},
 
 			{ /* стилизация раздела с кланом */
-			tag: ["QSA"],
-			selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr *",
-			styles:
-				{
-					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
-				}
+				tag: ["QSA"],
+				selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr *",
+				styles:
+					{
+						background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+					}
 			},
 
 			{ /* стилизация раздела званок */
@@ -2757,7 +2781,7 @@
 
 					div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn::after {
 						background: rgba(222, 184, 135, 1) !important;
-						filter: saturate(5);
+						filter: saturate(1.5) drop-shadow(0rem 0rem 0.2rem rgba(255, 165, 0, 1));
 						box-shadow: rgba(222, 184, 135, 1) 0em 0em 0.275em 0em;
 					}
 
@@ -3016,7 +3040,7 @@
 
 			{ /* стилизация раздела настроек */
 				tag: ["QSA", "BHV", "fade"],
-				selector: "div.AccountSettingsComponentStyle-blockChangePassword > div > input",
+				selector: "div.AccountSettingsComponentStyle-blockChangePassword > div > input, .SecuritySettingsComponentStyle-codeInputBlock > div > div > input[type=text]",
 				styles:
 				{
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
@@ -3276,7 +3300,8 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
-					height: "4rem"
+					height: "4rem",
+					justifyContent: "center"
 				}
 			},
 
@@ -3289,7 +3314,8 @@
 					border: "0.150rem solid rgba(255, 255, 255, 0.1)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
-					height: "4rem"
+					height: "4rem",
+					justifyContent: "center"
 				}
 			},
 
@@ -3302,7 +3328,8 @@
 					border: "0.150rem solid rgba(255, 0, 0, 0.1)",
 					borderRadius: "1rem",
 					boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
-					height: "4rem"
+					height: "4rem",
+					justifyContent: "center"
 				}
 			},
 
@@ -3332,7 +3359,7 @@
 				styles:
 				{
 					position: "absolute",
-					top: "94.2%",
+					top: "94%",
 					left: "50%",
 					transform: "translate(-50%, -50%)",
 					zIndex: "999"
@@ -3346,7 +3373,7 @@
 				{
 					gap: "0.5rem",
 					border: "0.150rem solid rgba(255, 255, 255, 0.120)",
-					borderRadius: "1rem",
+					borderRadius: "1.2rem",
 					padding: "3.5rem",
 					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)"
 				}
@@ -5468,7 +5495,7 @@
 
 			{ /* стилизация раздела с битвами */
 				tag: ["QSA", "fade"],
-				selector: ".NewBattleCreateInputStyle-settings .Common-backgroundImageContain, .TierItemComponentStyle-receivedItem > .PremiumTierItemComponentStyle-parametersTierCommon > h3, .TierItemComponentStyle-getItemNow > .PremiumTierItemComponentStyle-parametersTierCommon > h3",
+				selector: ".TierItemComponentStyle-receivedItem > .PremiumTierItemComponentStyle-parametersTierCommon > h3, .TierItemComponentStyle-getItemNow > .PremiumTierItemComponentStyle-parametersTierCommon > h3",
 				styles:
 				{
 					zIndex: "1",
@@ -6399,7 +6426,7 @@
 
             { /* стилизация чата в битве/стилизация списка никнеймов в друзьях/инвайтах/списка битв */
                 cssStyles: `
-                    .UserGroupTitleButtonComponentStyle-commonBlockGroup, .FriendListComponentStyle-nickName, .InvitationWindowsComponentStyle-usersScroll > div > div > div:nth-child(2), .ProBattleCommonStyleMobile-blockModesFilter > div.Common-flexCenterAlignCenter > div.Common-flexStartAlignCenter > p, .BattleModesComponentStyle-button > div.Common-flexStartAlignCenter.BattleModesComponentStyle-fund > div.Common-flexStartAlignCenter:nth-child(2), .BattleCreateComponentStyle-mainContainer.ProBattlesComponentStyle-mainContainer.Common-flexStartAlignStart > div.Common-flexStartAlignCenterColumn > div, .MapCardComponentStyle-message > span, .MapCardComponentStyle-imgSelectCard {
+                    .UserGroupTitleButtonComponentStyle-commonBlockGroup, .FriendListComponentStyle-nickName, .InvitationWindowsComponentStyle-usersScroll > div > div > div:nth-child(2), .ProBattleCommonStyleMobile-blockModesFilter > div.Common-flexCenterAlignCenter > div.Common-flexStartAlignCenter > p, .BattleModesComponentStyle-button > div.Common-flexStartAlignCenter.BattleModesComponentStyle-fund > div.Common-flexStartAlignCenter:nth-child(2), .BattleModesComponentStyle-button > .Common-flexCenterAlignCenter, .BattleCreateComponentStyle-mainContainer.ProBattlesComponentStyle-mainContainer.Common-flexStartAlignStart > div.Common-flexStartAlignCenterColumn > div, .MapCardComponentStyle-message > span, .MapCardComponentStyle-imgSelectCard {
                         filter: saturate(0) !important;
                     }
 
@@ -6415,7 +6442,7 @@
 
 			{ /* стилизация раздела с битвами/раздела званий/карточек/гаража */
 				cssStyles: `
-					.ProBattleCommonStyleMobile-blockModesFilter .Common-maskImageContain, .ProBattlesComponentStyle-cellName span, .UserProgressComponentStyle-rankScore, .UserProgressComponentStyle-rankProgressBarContainerLegend, .BattlePickComponentStyle-blockForCrystalXP > div:nth-child(2), .Common-backgroundImageCover.modeLimitIcon > div.Common-flexSpaceBetweenAlignStretch > div > div > img, td.Common-flexSpaceBetweenAlignCenter.ProBattlesComponentStyle-cellName > div.Common-flexStartAlignCenter > img, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-flexSpaceBetweenAlignStretch, .Common-flexCenterAlignCenterColumn.blockCard, .ProBattlesComponentStyle-commonBlockHotkeyV > div > div, .ProBattlesComponentStyle-chatIcon {
+					.ProBattleCommonStyleMobile-blockModesFilter .Common-maskImageContain, .ProBattlesComponentStyle-cellName span, .UserProgressComponentStyle-rankScore, .UserProgressComponentStyle-rankProgressBarContainerLegend, .BattlePickComponentStyle-blockForCrystalXP > div:nth-child(2), .Common-backgroundImageCover.modeLimitIcon > div.Common-flexSpaceBetweenAlignStretch > div > div > img, td.Common-flexSpaceBetweenAlignCenter.ProBattlesComponentStyle-cellName > div.Common-flexStartAlignCenter > img, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-flexSpaceBetweenAlignStretch, .Common-flexCenterAlignCenterColumn.blockCard, .ProBattlesComponentStyle-commonBlockHotkeyV > div > div, .ProBattlesComponentStyle-chatIcon, .SkinCellStyle-nameDevices {
 						filter: saturate(0) !important;
 					}
 
@@ -6459,7 +6486,7 @@
 			{ /* стилизация раздела с заданками */
 				cssStyles: `
 					.MainQuestComponentStyle-progress, .TableMainQuestComponentStyle-progressTableMission {
-						filter: saturate(0) !important;
+						filter: saturate(0) drop-shadow(0rem 0rem 0.2rem rgba(255, 255, 255, 1));
 					}
 
 					.MainQuestComponentStyle-scrollContainer {
@@ -6470,7 +6497,7 @@
 
 			{ /* стилизация ммной статы/магаза/кнопок навигации/челленджа */
 				cssStyles: `
-					.BattleResultQuestProgressComponentStyle-progressContainer, .BlockResultTankComponentStyle-gsContainer > img, .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn, .BattleResultUserInfoComponentStyle-xp > img, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td > img, .BattleResultNavigationComponentStyle-button > img, .HeaderComponentStyle-backArrowBlock, .BreadcrumbsComponentStyle-rightButtonsContainer > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .BreadcrumbsComponentStyle-iconLogout, .IconStyle-iconBackArrow, .IconStyle-iconLogOff, .UserScoreComponentStyle-blockRightPanel > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .TierItemComponentStyle-receivedItem > .TierIconComponentStyle-icons, .TierHeaderComponentStyle-descriptionTier {
+					.BattleResultQuestProgressComponentStyle-progressContainer, .BlockResultTankComponentStyle-gsContainer > img, .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn, .BattleResultUserInfoComponentStyle-xp > img, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td > img, .BattleResultNavigationComponentStyle-button > img, .HeaderComponentStyle-backArrowBlock, .BreadcrumbsComponentStyle-rightButtonsContainer > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .BreadcrumbsComponentStyle-iconLogout, .IconStyle-iconBackArrow, .IconStyle-iconLogOff, .TierItemComponentStyle-receivedItem > .TierIconComponentStyle-icons, .TierHeaderComponentStyle-descriptionTier {
 						filter: saturate(0) !important;
 					}
 
@@ -6573,17 +6600,57 @@
 				`
 			},
 
-			{ /* стилизация карточек в режимах битв/рег меню */
+			{ /* стилизация карточек в режимах битв/рег меню/финальной статистики/контейнеров */
 				cssStyles: `
-					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(1) > h2, .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > span, .HeaderComponentStyle-siteLink.menuItemClass:hover > .EntranceComponentStyle-fontStyleLabel, .HeaderComponentStyle-siteLink.menuItemClass:hover > .HeaderComponentStyle-textLink > span {
+					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(1) > h2, .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > span, .HeaderComponentStyle-siteLink.menuItemClass:hover > .EntranceComponentStyle-fontStyleLabel, .HeaderComponentStyle-siteLink.menuItemClass:hover > .HeaderComponentStyle-textLink > span, .ButtonComponentStyle-disabled.BattleResultNavigationComponentStyle-disabledButtonWithTimer.BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter > span, .BattleResultNavigationComponentStyle-buttonNextWithTimer.BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter > span {
 						color: rgba(222, 184, 135, 1) !important;
 					}
 
-					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(2), .HeaderComponentStyle-siteLink.menuItemClass:hover > .Common-flexCenterAlignCenter {
+					.Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(2), .HeaderComponentStyle-siteLink.menuItemClass:hover > .Common-flexCenterAlignCenter, .BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter > img, .TableComponentStyle-thead, .ContainersComponentStyle-chatIcon {
 						filter: saturate(0);
 					}
 				`
-			}
+			},
+
+			{ /* стилизация бэкграунда карточек в гараже/ммной статы */
+				tag: ["QSA"],
+				selector: ".SkinCellComponentStyle-gradientCategoryDevices-LEGENDARY, .SkinCellComponentStyle-gradientCategoryDevices-EPIC, .SkinCellComponentStyle-gradientCategoryDevices-RARE, .SkinCellComponentStyle-gradientCategoryDevices-SPECIAL, .BattleResultHeaderComponentStyle-resultBg",
+				styles:
+				{
+					display: "none"
+				}
+			},
+
+			{ /* стилизация бэкграунда иконок в миссиях */
+				tag: ["QSA"],
+				selector: ".MainQuestComponentStyle-backgroundIcon",
+				styles:
+				{
+					backgroundImage: "none"
+				}
+			},
+
+			{ /* стилизация иконок в шапке/таблиц */
+				cssStyles: `
+					.BreadcrumbsComponentStyle-headerContainer > div.BreadcrumbsComponentStyle-rightButtonsContainer > div.Common-flexCenterAlignCenter > div, .UserScoreComponentStyle-blockRightPanel > .Common-flexCenterAlignCenter > .Common-maskImage.Common-maskImageContain, div.ProBattlesComponentStyle-mainContainer > div.Common-flexCenterAlignStart.Common-alignSelfStart.Common-flexStartAlignStart.Common-flexWrapNowrap.Common-scrollBarVisible > div > table > thead {
+						border-radius: 0rem !important;
+						filter: saturate(0) !important;
+					}
+				`
+			},
+
+			{ /* стилизация раздела с битвами */
+				cssStyles: `
+					.NewBattleCreateInputStyle-settings .Common-backgroundImageContain {
+						z-index: 1 !important;
+						filter: saturate(0) !important;
+					}
+
+					.ProBattlesComponentStyle-borderLineCell.ProBattlesComponentStyle-cellPlayers.ProBattlesComponentStyle-fontCellRegular, .BattleCardComponentStyle-battleInfo {
+						background: none !important;
+					}
+				`
+			},
 		];
 
 		elements.forEach((element) =>

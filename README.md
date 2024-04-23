@@ -29,6 +29,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - <code>=</code> - Включение/отключение другой вариации таба с показом резистов
 - <code>]</code> - Отключение/включение анимированного фона в разделах игры
 - <code>insert</code> - Отключение/включение анимированного звездного фона в загрузочных экранах
+- <code>-</code> - Активация фейковых значений FPS
 - <code>F12</code> - Активация девтулс на клиенте
 
 *(Важное примечание: настройки горячих клавиш сохраняются после перезагрузки)*
@@ -39,7 +40,6 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Скинчейнджер, включающий не только все существующие игровые скины, но и кастомные модели из ТХ
 - Конструктор лобби, чтобы каждый мог настроить лобби на свой вкус и цвет
 - Погодные циклы, эффекты, новое освещение и ретекстур карт/существующих скинов в игре
-- Функция с просчетом фейковых значений FPS
 - Функция для скрытия/редактирования припасов в гараже/битве
 - Реализовать тему в формате расширения для браузера
 - Разбить тему на модули, использовав webpack/rspack для упрощения дальнейшей разработки
@@ -52,6 +52,14 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Баг с дублированием бордера после покупки слота под резист в гараже, если аккаунт новый
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
+
+**changelog version 4.1.7 === 4.1.8**
+- Добавлена предварительная версия FakeFPS только для браузерной версии *(вызывать обязательно в самой битве)*
+- Фикс стилей практически во всех разделах игры после очередных ПОЛЕЗНЫХ обновлений со стороны танков
+- Фикс анимаций
+- Косметические правки в стилях
+- Обновлен визуала прогресс-баров
+- Обновлен визуал лого
 
 **changelog version 4.1.6 === 4.1.7:**
 - Была изменена вариация текущего меню паузы в битве под старый всеми привычный вариант
@@ -269,6 +277,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - <code>=</code> - Enable/disable another variation of the tab with resists shown
 - <code>]</code> - Disable/enable animated backgrounds
 - <code>insert</code> - Disable/enable animated stars background in loading screens
+- <code>-</code> - Activation of fake FPS values
 - <code>F12</code> - Activate devtools on the client
 
 *(Important note: hotkey settings are retained after reboot)*
@@ -279,7 +288,6 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Skinchanger, including not only all existing game skins, but also custom models from TX
 - Lobby builder so that everyone can customize the lobby to their own taste and color
 - Weather cycles, effects, new lighting and retexture of maps/existing skins in game
-- False FPS calculation feature
 - Function for hiding/editing supplies in garage/battle
 - Implement theme in browser extension format
 - Break the theme into modules, using webpack/rspack to simplify further development
@@ -293,10 +301,18 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 ## ![image](https://xeon.fun/logo/changelog.svg) List of changes
 
+**changelog version 4.1.7 === 4.1.8**
+- Added FakeFPS pre-release for browser version only *(use only in battle)*
+- Style fixes in almost all sections of the game after the next USELESS update on the tanks side
+- Animations fix
+- Cosmetic edits in styles
+- Updated progress bar visuals
+- Updated logo visual
+
 **changelog version 4.1.6 === 4.1.7:**
-- Changed the variation of the current battle pause menu to the old familiar variant.
+- Changed the variation of the current battle pause menu to the old familiar variant
 - Fixed a bug with the display of in-game events
-- Fixed bug with network status coloring when scrolling clan members.
+- Fixed bug with network status coloring when scrolling clan members
 - Minor style edits
 
 **changelog version 4.1.5 === 4.1.6:**
