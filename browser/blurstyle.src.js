@@ -194,64 +194,6 @@
 		}
 	});
 
-	/* логика просчета фейковых значений FPS */
-	const randomFPS = {
-		getRandom: function(min, max) {
-			return Math.floor(Math.random() * (max - min + 1) + min);
-		}
-	};
-	
-	document.addEventListener("keydown", function(event) {
-		checkChatState();
-	
-		if (chatActive) {
-			return;
-		}
-	
-		if (event.key === "-") {
-			const minFPSInput = prompt("Введи минимальное количество фпс:", "143");
-			const maxFPSInput = prompt("Введи максимальное количество фпс:", "144");
-	
-			const minFPS = parseInt(minFPSInput) || 143;
-			const maxFPS = parseInt(maxFPSInput) || 144;
-	
-			var FPS = document.querySelector("#root > div > div > div.BattleHudComponentStyle-buttonsContainer > div > div > div:nth-child(1) > span.BattleHudFpsComponentStyle-value");
-			if (FPS) FPS.parentNode.removeChild(FPS);
-	
-			var fakeFPS = document.createElement("span");
-			fakeFPS.classList.add("BattleHudFpsComponentStyle-value");
-			document.querySelector("#root > div > div > div.BattleHudComponentStyle-buttonsContainer > div > div > div:nth-child(1)").appendChild(fakeFPS);
-	
-			var fake = {
-				FPS: null,
-				minFPS: minFPS,
-				maxFPS: maxFPS,
-			};
-	
-			fake.setFpsVal = function() {
-				fake.FPS = randomFPS.getRandom(fake.minFPS, fake.maxFPS);
-			};
-	
-			fake.setFPS = function() {
-				fakeFPS.innerText = fake.FPS;
-	
-				if (fake.FPS < 20) fakeFPS.style.color = "rgb(255, 82, 9)";
-				if (fake.FPS >= 20 && fake.FPS <= 40) fakeFPS.style.color = "rgb(255, 188, 9)";
-				if (fake.FPS > 40) fakeFPS.style.color = "rgb(116, 186, 61)";
-			};
-	
-			function updateFPS() {
-				fake.setFpsVal();
-				fake.setFPS();
-			}
-	
-			updateFPS();
-			setInterval(() => {
-				updateFPS();
-			}, 3000);
-		}
-	});
-
 	/* логика вариации таба с резистами */
 	function resistanceTab() {
 		let rTab = localStorage.getItem('rTab') === 'true';
@@ -639,111 +581,58 @@
 	})();
 
 	/* логика перенаправления ресурсов */
-	function overrideGMFetch() {
+	function gmOverride() {
+		const overrides = [
+			{   // верх
+				from: 'https://s.eu.tankionline.com/0/16721/110/123/30545000606213/image.webp',
+				to: 'https://xeon.fun/battle/skybox/parkour/up.png'
+			},
 
-	const originalFetch = unsafeWindow.fetch;
+			{   // низ
+				from: 'https://s.eu.tankionline.com/0/16721/110/124/30545000606433/image.webp',
+				to: 'https://xeon.fun/battle/skybox/parkour/down.png'
+			},
 
-    unsafeWindow.fetch = async (input, init) => {
-			for (let index = override.length - 1; index >= 0; index--) {
-				if (input.includes(override[index].from)) {
-					input = override[index].to;
-					console.log(`[BlurStyle] успешная замена на: ${input}`);
-					if (override[index].external === true)
-						return GM_fetch(input, init);
+			{   // право
+				from: 'https://s.eu.tankionline.com/0/16721/110/121/30545000607406/image.webp',
+				to: 'https://xeon.fun/battle/skybox/parkour/back.png'
+			},
+
+			{   // лево
+				from: 'https://s.eu.tankionline.com/0/16721/110/120/30545000605752/image.webp',
+				to: 'https://xeon.fun/battle/skybox/parkour/right.png'
+			},
+
+			{   // перед
+				from: 'https://s.eu.tankionline.com/0/16721/107/207/30545000605173/image.webp',
+				to: 'https://xeon.fun/battle/skybox/parkour/f.png'
+			},
+
+			{   // зад
+				from: 'https://s.eu.tankionline.com/0/16721/110/122/30545000606256/image.webp',
+				to: 'https://xeon.fun/battle/skybox/parkour/left.png'
+			}
+		];
+
+		const originalFetch = unsafeWindow.fetch;
+		unsafeWindow.fetch = async (url, options) => {
+			for (const override of overrides) {
+				if (url === override.from) {
+					console.log(`[Blurstyle] успешная замена ресурса: \nкаво: ${override.from}\nкуда: ${override.to}`);
+					return new Promise((resolve, reject) => {
+						GM_xmlhttpRequest({
+							method: 'GET',
+							url: override.to,
+							responseType: 'blob',
+							onload: response => response.status === 200 && resolve(new Response(response.response, {status: 200, statusText: 'OK', headers: { 'Content-Type': response.response.type }})),
+							onerror: reject
+						});
+					});
 				}
 			}
-			return originalFetch(input, init);
+			return originalFetch(url, options);
 		};
 	}
-
-	/* массив ресурсов */
-	const override = [
-		/* худ и прочее в битве */
-		{	/* припасы в битве | прозрачные белые припасы */
-			from: `supplies_atlas`,
-			to: `https://xeon.fun/battle/hud/supplies.png`,
-			external: true
-		},
-
-		{	/* сток билборд в катке | блюрстайл лого */
-			from: `/0/16716/156/240/30545000607201/image.webp`,
-			to: `https://xeon.fun/battle/bilboard/bilboard.jpg`,
-			external: true
-		},
-
-		/* дефолт космос небо | кастом космос небо */
-		{   //верх
-			from: `/0/16721/110/123/30545000606213/image.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/up.png`,
-			external: true
-		},
-
-		{   //низ
-			from: `/0/16721/110/124/30545000606433/image.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/down.png`,
-			external: true
-		},
-
-		{   //право
-			from: `/0/16721/110/121/30545000607406/image.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/back.png`,
-			external: true
-		},
-
-		{   //лево
-			from: `/0/16721/110/120/30545000605752/image.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/right.png`,
-			external: true
-		},
-
-		{   //перед
-			from: `/0/16721/107/207/30545000605173/image.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/f.png`,
-			external: true
-		},
-
-		{   //зад
-			from: `/0/16721/110/122/30545000606256/image.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/left.png`,
-			external: true
-		},
-
-		{   //верх
-			from: `/0/16721/110/123/30545000606213/texture.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/up.png`,
-			external: true
-		},
-
-		{   //низ
-			from: `/0/16721/110/124/30545000606433/texture.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/down.png`,
-			external: true
-		},
-
-		{   //право
-			from: `/0/16721/110/121/30545000607406/texture.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/back.png`,
-			external: true
-		},
-
-		{   //лево
-			from: `/0/16721/110/120/30545000605752/texture.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/right.png`,
-			external: true
-		},
-
-		{   //перед
-			from: `/0/16721/107/207/30545000605173/texture.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/f.png`,
-			external: true
-		},
-
-		{   //зад
-			from: `/0/16721/110/122/30545000606256/texture.webp`,
-			to: `https://xeon.fun/battle/skybox/parkour/left.png`,
-			external: true
-		}
-	];
 
 	/* логика наложения кастомного тайтла */
 	function changeTitle(newTitle) {
@@ -837,7 +726,7 @@
 						0%, 100% {
 							transform: scale(0.7);
                             filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 165, 0, 1))
-						} 
+						}
 						50% {
 							transform: scale(0.5);
                             filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 165, 0, 0))
@@ -845,7 +734,7 @@
 					}
 
 					.LobbyLoaderComponentStyle-logo {
-						animation: logoAnim 2s infinite; 
+						animation: logoAnim 2s infinite;
 						position: relative;
 					}
 				`
@@ -4092,6 +3981,31 @@
 			},
 
 			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "fade"],
+				selector: "#root > div > div.QuestsComponentStyle-content > div > div.ContractCardComponentStyle-card > div:nth-child(5) > div, #root > div > div.QuestsComponentStyle-content > div > div.ContractCardComponentStyle-card > div:nth-child(4) > div",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.150)",
+					borderRadius: "1.2rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
+				tag: ["QSA", "BHV", "scale"],
+				selector: ".ContractCardComponentStyle-card",
+				styles:
+				{
+					background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
+					backdropFilter: "blur(0.5rem)",
+					border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+					borderRadius: "1.1rem",
+					boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+				}
+			},
+
+			{ /* стилизация раздела с миссиями */
 				tag: ["QSA", "BHV", "scale", "scale3d"],
 				selector: ".MainQuestComponentStyle-cardPlay",
 				styles:
@@ -6332,7 +6246,7 @@
 
 			{ /* стилизация таймеров в миссиях */
 				tag: ["QSA"],
-				selector: ".TableMainQuestComponentStyle-timerTable",
+				selector: ".TableMainQuestComponentStyle-timerTable, .ContractCardComponentStyle-timer",
 				styles:
 				{
 					background: "rgba(255, 255, 255, 1)",
@@ -6504,7 +6418,7 @@
 					.BattleResultQuestProgressComponentStyle-text:nth-child(2), .BattleResultUserInfoComponentStyle-rankNameContainer > span, .BattleResultUserInfoComponentStyle-xp > span, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td:nth-child(2) > span, .BasePaymentComponentStyle-buttonContainer > div > span, .PaymentInfoComponentStyle-currency, .SuccessfulPurchaseComponentStyle-container > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-content > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-reward > .Common-flexEndAlignStartColumn > span {
 						color: rgba(222, 184, 135, 1) !important;
 					}
-					
+
 					.BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn::after {
 						box-shadow: rgb(255, 188, 9) 0px 0px 0.575em 0px;
 					}
@@ -6519,7 +6433,7 @@
 					color: "rgba(222, 184, 135, 1)"
 				}
 			},
-			
+
 			{ /* стилизация раздела с настройками/заданками */
 				tag: ["QSA"],
 				selector: ".GameSettingsStyle-button > span, .SettingsComponentStyle-slider > p > span, .TwitchSettingsRendersStyle-button > span, .TwitchSettingsRendersStyle-nick, .ChatComponentStyle-chatRegularUser, .MainQuestComponentStyle-cardRewardCompleted.iconsMission.MainQuestComponentStyle-animationImgHover> div.Common-flexCenterAlignCenterColumn > h4, .SuperMissionComponentStyle-buttonCollect > span, .SecuritySettingsComponentStyle-button > span, .SecuritySettingsComponentStyle-activation2FaButton > span",
@@ -6563,7 +6477,7 @@
 					.ContextMenuStyle-menuItem.ContextMenuStyle-menuItemRank > div > div > div > span, #root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div > span, .ChatComponentStyle-channelSelect {
 						color: rgba(222, 184, 135, 1) !important;
 					}
-					
+
 					.ClanCommonStyle-offlineNickName {
 						color: rgb(167, 167, 167) !important;
 					}
@@ -6742,6 +6656,6 @@
 	resistanceTab();
 	replaceChecker();
     replaceImages();
-	overrideGMFetch();
 	initObserver();
+	gmOverride();
 })();

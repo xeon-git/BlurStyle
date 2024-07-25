@@ -5,7 +5,6 @@
 // @author		 xeon | xxnn
 // @match        https://*.tankionline.com/*
 // @icon         https://xeon.fun/logo/blurstyle.png
-// @require      https://xeon.fun/fetch.js
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 

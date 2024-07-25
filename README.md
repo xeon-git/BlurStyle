@@ -6,9 +6,9 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://xeon.fun/logo/team.svg) Участвовали в разработке
 
-- Логистика, стилизация интерфейса: [xeon](https://vk.com/trallinator)
-- Дизайн, моделлинг: [xxnn](https://vk.com/wassupw)
-- Помощь в выгрузке необходимых скинов, тестирование проекта: [squirtatrise](https://vk.com/squirtatrise)
+- Логистика, стилизация интерфейса: [VK](https://vk.com/trallinator) | DS - <code>.hierophant.</code>
+- Дизайн, моделлинг: [VK](https://vk.com/wassupw) | DS - <code>opium5834</code>
+- Помощь в выгрузке необходимых скинов, тестирование проекта: [VK](https://vk.com/squirtatrise) | DS - <code>squirtatrise</code>
 
 ## ![image](https://xeon.fun/logo/download.svg) Установка для браузера
 
@@ -53,12 +53,16 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
 
-**changelog version 4.1.7 === 4.1.8**
+**changelog version 4.1.8 === 4.1.9:**
+- Мелкие доработки стилей
+- Исправлена логика перенаправления ресурсов, отдельное спасибо <code>NeonTechFox</code> и за саму концепцию <code>San</code>
+
+**changelog version 4.1.7 === 4.1.8:**
 - Добавлена предварительная версия FakeFPS только для браузерной версии *(вызывать обязательно в самой битве)*
 - Фикс стилей практически во всех разделах игры после очередных ПОЛЕЗНЫХ обновлений со стороны танков
 - Фикс анимаций
 - Косметические правки в стилях
-- Обновлен визуала прогресс-баров
+- Обновлен визуал прогресс-баров
 - Обновлен визуал лого
 
 **changelog version 4.1.6 === 4.1.7:**
@@ -301,7 +305,11 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 ## ![image](https://xeon.fun/logo/changelog.svg) List of changes
 
-**changelog version 4.1.7 === 4.1.8**
+**changelog version 4.1.8 === 4.1.9:**
+- Minor styles tweaks
+- Fixed resource redirection logic, special thanks to <code>NeonTechFox</code> and for the very concept of <code>San</code>
+
+**changelog version 4.1.7 === 4.1.8:**
 - Added FakeFPS pre-release for browser version only *(use only in battle)*
 - Style fixes in almost all sections of the game after the next USELESS update on the tanks side
 - Animations fix
