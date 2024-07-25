@@ -583,48 +583,77 @@
 	/* логика перенаправления ресурсов */
 	function gmOverride() {
 		const overrides = [
+			/* худ и прочее в битве */
+			{	/* припасы в битве | прозрачные белые припасы */
+				from: `supplies_atlas`,
+				to: `https://xeon.fun/battle/hud/supplies.png`
+			},
+	
+			{	/* сток билборд в катке | блюрстайл лого */
+				from: `/0/16716/156/240/30545000607201/image.webp`,
+				to: `https://xeon.fun/battle/bilboard/bilboard.jpg`,
+				external: true
+			},
+	
+			/* дефолт космос небо | кастом космос небо */
 			{   // верх
-				from: 'https://s.eu.tankionline.com/0/16721/110/123/30545000606213/image.webp',
+				from: '/0/16721/110/123/30545000606213/image.webp',
 				to: 'https://xeon.fun/battle/skybox/parkour/up.png'
 			},
-
+	
 			{   // низ
-				from: 'https://s.eu.tankionline.com/0/16721/110/124/30545000606433/image.webp',
+				from: '/0/16721/110/124/30545000606433/image.webp',
 				to: 'https://xeon.fun/battle/skybox/parkour/down.png'
 			},
-
+	
 			{   // право
-				from: 'https://s.eu.tankionline.com/0/16721/110/121/30545000607406/image.webp',
+				from: '/0/16721/110/121/30545000607406/image.webp',
 				to: 'https://xeon.fun/battle/skybox/parkour/back.png'
 			},
-
+	
 			{   // лево
-				from: 'https://s.eu.tankionline.com/0/16721/110/120/30545000605752/image.webp',
+				from: '/0/16721/110/120/30545000605752/image.webp',
 				to: 'https://xeon.fun/battle/skybox/parkour/right.png'
 			},
-
+	
 			{   // перед
-				from: 'https://s.eu.tankionline.com/0/16721/107/207/30545000605173/image.webp',
+				from: '/0/16721/107/207/30545000605173/image.webp',
 				to: 'https://xeon.fun/battle/skybox/parkour/f.png'
 			},
-
+	
 			{   // зад
-				from: 'https://s.eu.tankionline.com/0/16721/110/122/30545000606256/image.webp',
+				from: '/0/16721/110/122/30545000606256/image.webp',
 				to: 'https://xeon.fun/battle/skybox/parkour/left.png'
 			}
 		];
-
+	
+		const createPattern = (url) => {
+			const escapedUrl = url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+			return new RegExp(escapedUrl);
+		};
+	
 		const originalFetch = unsafeWindow.fetch;
 		unsafeWindow.fetch = async (url, options) => {
 			for (const override of overrides) {
-				if (url === override.from) {
-					console.log(`[Blurstyle] успешная замена ресурса: \nкаво: ${override.from}\nкуда: ${override.to}`);
+				const pattern = createPattern(override.from);
+				if (pattern.test(url)) {
+					console.log(`[Blurstyle] успешная замена ресурса: \nкаво: ${url}\nкуда: ${override.to}`);
 					return new Promise((resolve, reject) => {
 						GM_xmlhttpRequest({
 							method: 'GET',
 							url: override.to,
 							responseType: 'blob',
-							onload: response => response.status === 200 && resolve(new Response(response.response, {status: 200, statusText: 'OK', headers: { 'Content-Type': response.response.type }})),
+							onload: response => {
+								if (response.status === 200) {
+									resolve(new Response(response.response, {
+										status: 200,
+										statusText: 'OK',
+										headers: { 'Content-Type': response.response.type }
+									}));
+								} else {
+									reject(new Error(`ошибочка вышла: ${response.status}`));
+								}
+							},
 							onerror: reject
 						});
 					});
