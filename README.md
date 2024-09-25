@@ -6,20 +6,20 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://xeon.fun/logo/team.svg) Участвовали в разработке
 
-- Логистика, стилизация интерфейса: [VK](https://vk.com/trallinator) | DS - <code>.hierophant.</code>
-- Дизайн, моделлинг: [VK](https://vk.com/wassupw) | DS - <code>opium5834</code>
-- Помощь в выгрузке необходимых скинов, тестирование проекта: [VK](https://vk.com/squirtatrise) | DS - <code>squirtatrise</code>
+- Логистика, стилизация интерфейса: [VK](https://vk.com/id468802366) | DS - <code>.hierophant.</code>
+- Дизайн, моделлинг: [VK](https://vk.com/id362783176) | DS - <code>opium5834</code>
+- Помощь в выгрузке необходимых скинов, тестирование проекта: [VK](https://vk.com/id259582649) | DS - <code>squirtatrise</code>
 
 ## ![image](https://xeon.fun/logo/download.svg) Установка для браузера
 
 1. Установите/обновите расширение Tampermonkey: [жмать сюда](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://xeon.fun/blurstyle.user.js)
+2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://xeon.fun/blurStyle/browser/blurstyle.user.js)
 3. Перезагрузите вкладку с игрой, если она открыта
 
 ## ![image](https://xeon.fun/logo/download.svg) Установка для клиента
 
 1. Установите/обновите официальный клиент Танков Онлайн: [жмать сюда](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://xeon.fun/app.asar)
+2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://xeon.fun/blurStyle/client/app.asar)
 3. После установки клиента и скачивания файла app.asar найдите ярлык с клиентом на рабочем столе, кликните правой кнопкой мыши, перейдите по расположению файла и по папке "resources"
 4. Перенесите с заменой файл app.asar и перезапустите клиент, если он открыт
 
@@ -39,10 +39,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Многофункциональное меню темы, содержащее различные пресеты настроек, крутилки, переключалки для большей модульности и лучшей интеракции с игровым интерфейсом
 - Скинчейнджер, включающий не только все существующие игровые скины, но и кастомные модели из ТХ
 - Конструктор лобби, чтобы каждый мог настроить лобби на свой вкус и цвет
-- Погодные циклы, эффекты, новое освещение и ретекстур карт/существующих скинов в игре
-- Функция для скрытия/редактирования припасов в гараже/битве
 - Реализовать тему в формате расширения для браузера
-- Разбить тему на модули, использовав webpack/rspack для упрощения дальнейшей разработки
 
 ## ![image](https://xeon.fun/logo/warning.svg) Список багов, про которые уже известно
 
@@ -52,6 +49,13 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Баг с дублированием бордера после покупки слота под резист в гараже, если аккаунт новый
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
+
+**changelog version 4.1.9 === 4.2.0:**
+- Масштабный рефакторинг и разбив на модули для лучшей масштабируемости и удобства в дальшейней разработке проекта
+- Оптимизация производительности
+- Автоапдейт темы теперь есть и на клиенте, не нужно больше вручную каждый раз обновлять <code>app.asar</code>
+- Исправлен баг с подгрузкой темы на клиенте в отдельное окно, например, при открытии рейтингов
+- Очередной фикс стилей
 
 **changelog version 4.1.8 === 4.1.9:**
 - Мелкие доработки стилей
@@ -258,20 +262,20 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 ## ![image](https://xeon.fun/logo/team.svg) Participated in development
 
-- Logistics, interface styling: [xeon](https://vk.com/trallinator)
-- Design, modeling: [xxnn](https://vk.com/wassupw)
-- Help in uploading necessary skins, testing the project: [squirtatrise](https://vk.com/squirtatrise)
+- Logistics, interface styling: [VK](https://vk.com/id468802366) | DS - <code>.hierophant.</code>
+- Design, modeling: [VK](https://vk.com/id362783176) | DS - <code>opium5834</code>
+- Help in uploading necessary skins, testing the project: [VK](https://vk.com/id259582649) | DS - <code>squirtatrise</code>
 
 ## ![image](https://xeon.fun/logo/download.svg) Browser installation
 
 1. Install/update Tampermonkey extension: [click here](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Install/update the BlurStyle theme script: [click here](https://xeon.fun/blurstyle.user.js)
+2. Install/update the BlurStyle theme script: [click here](blurStyle/browser/blurstyle.user.js)
 3. Reload the game tab if it is open
 
 ## ![image](https://xeon.fun/logo/download.svg) Client Installation
 
 1. Install/update the official Tanks Online client: [click here](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Download/update the theme file app.asar: [click here](https://xeon.fun/app.asar)
+2. Download/update the theme file app.asar: [click here](blurStyle/client/app.asar)
 3. After installing the client and downloading the app.asar file, find the shortcut with the client on your desktop, right click, navigate to the file location and the "resources" folder
 4. Transfer the app.asar file with replacement and restart the client if it is open
 
@@ -291,10 +295,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Multifunctional theme menu, containing various settings presets, twiddles, toggles for more modularity and better interaction with the game interface
 - Skinchanger, including not only all existing game skins, but also custom models from TX
 - Lobby builder so that everyone can customize the lobby to their own taste and color
-- Weather cycles, effects, new lighting and retexture of maps/existing skins in game
-- Function for hiding/editing supplies in garage/battle
 - Implement theme in browser extension format
-- Break the theme into modules, using webpack/rspack to simplify further development
 
 ## ![image](https://xeon.fun/logo/warning.svg) List of bugs that are already known about
 
@@ -304,6 +305,13 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
 ## ![image](https://xeon.fun/logo/changelog.svg) List of changes
+
+**changelog version 4.1.9 === 4.2.0:**
+- Large-scale refactoring and breaking into modules for better scalability and ease of further project development
+- Performance optimization
+- Theme auto-update is now available on the client as well, no more need to manually update every time <code>app.asar</code>
+- Fixed a bug with loading the theme on the client in a separate window, for example, when opening ratings
+- Another styles fix
 
 **changelog version 4.1.8 === 4.1.9:**
 - Minor styles tweaks

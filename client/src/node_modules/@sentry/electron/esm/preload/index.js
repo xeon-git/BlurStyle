@@ -1,0 +1,26 @@
+import { contextBridge, ipcRenderer } from 'electron';
+var PROTOCOL_SCHEME = 'sentry-ipc';
+var IPCChannel;
+(function (IPCChannel) {
+    IPCChannel["PING"] = "sentry-electron.ping";
+    IPCChannel["EVENT"] = "sentry-electron.event";
+    IPCChannel["SCOPE"] = "sentry-electron.scope";
+})(IPCChannel || (IPCChannel = {}));
+;
+if (window.__SENTRY_IPC__) {
+    console.log('Sentry Electron preload has already been run');
+}
+else {
+    var ipcObject = {
+        sendScope: function (scopeJson) { return ipcRenderer.send(IPCChannel.SCOPE, scopeJson); },
+        sendEvent: function (eventJson) { return ipcRenderer.send(IPCChannel.EVENT, eventJson); },
+    };
+    window.__SENTRY_IPC__ = ipcObject;
+    if (contextBridge) {
+        try {
+            contextBridge.exposeInMainWorld('__SENTRY_IPC__', ipcObject);
+        }
+        catch (e) {
+        }
+    }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/renderer/integrations/index.ts"],"names":[],"mappings":";;AAAA,iDAA8C;AAArC,4GAAA,WAAW,OAAA;AACpB,iDAA8C;AAArC,4GAAA,WAAW,OAAA","sourcesContent":["export { ScopeToMain } from './scope-to-main';\nexport { EventToMain } from './event-to-main';\n"]}

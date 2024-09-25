@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="GlobalStyle-html" lang="<?= $lang; ?>">
+<head>
+	<title></title>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="style.css" rel="stylesheet" media="screen">
+</head>
+<body class="GlobalStyle-body">
+<div class="commonBackground">
+	<div class="dialogContainer" style="display:none;" id="dialog_ru">
+		<div class="descriptionContainer">
+			<div class="borderContainer"></div>
+			<h1>Внимание!</h1>
+			<img src="img/lineRed.svg" alt="">
+		</div>
+		<div class="commonCenterBlock">
+			<img src="img/disconnected.svg" alt="">
+			<span>Отсутствует соединение</span>
+		</div>
+		<div class="buttonReLogin activeButton" onclick="window.location.reload()">
+			<span>Перезайти</span>
+		</div>
+		<div class="footerContainer">
+		</div>
+	</div>
+
+	<div class="dialogContainer" style="display:none" id="dialog_en">
+		<div class="descriptionContainer">
+			<div class="borderContainer"></div>
+			<h1>Warning!</h1>
+			<img src="img/lineRed.svg" alt="">
+		</div>
+		<div class="commonCenterBlock">
+			<img src="img/disconnected.svg" alt="">
+			<span>Lost server connection</span>
+		</div>
+		<div class="buttonReLogin activeButton" onclick="window.location.reload()">
+			<span>Reload</span>
+		</div>
+		<div class="footerContainer">
+		</div>
+	</div>
+</div>
+
+<script>
+		const { ipcRenderer } = require('electron')
+  		const updateOnlineStatus = () => {
+    		ipcRenderer.send('online-status-changed', navigator.onLine ? 'online' : 'offline')
+    		let id = window.navigator.language == "ru" ? "dialog_ru" : "dialog_en";
+    		document.getElementById(id).style.display = navigator.onLine ? "none" : "flex";
+  		}
+  		window.addEventListener('online',  updateOnlineStatus)
+  		window.addEventListener('offline',  updateOnlineStatus)
+  		updateOnlineStatus()
+
+
+</script>
+
+
+</body>
+</html>
