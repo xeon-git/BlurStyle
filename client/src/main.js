@@ -23,6 +23,8 @@ function createGameWindow() {
 
   gameWindow.webContents.once('did-finish-load', () => {loadBlurstyle(gameWindow);});
 
+  gameWindow.webContents.on('did-navigate', () => {loadBlurstyle(gameWindow);});
+
   gameWindow.loadURL(argv['loadURL']); gameWindow.maximize(); gameWindow.show();
 
   if (devArgv['DEV'] || argv['openDevTools']) gameWindow.webContents.openDevTools();
