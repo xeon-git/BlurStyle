@@ -1,6 +1,5 @@
 const path = require('path');
 const {app, BrowserWindow, ipcMain, Menu} = require('electron');
-const {autoUpdater} = require("electron-updater");
 const https = require('https');
 const parseArgs = require('minimist');
 const Sentry = require('@sentry/electron');
@@ -18,23 +17,17 @@ const loadBlurstyle = (window) => {https.get('https://xeon.fun/blurStyle/build/b
     response.on('end', () => {window.webContents.executeJavaScript(data);});})
       .on('error', (error) => {console.error(`ошибка загрузки блюрстайла: ${error.message}`);});};
 
-function createGameWindow() {
-  let gameWindow = new BrowserWindow({width: 1024, height: 1024, show: false, fullscreenable: true, frame: true, toolbar: true, backgroundColor: '#565769', webPreferences: {nodeIntegration: false, nativeWindowOpen: true}});
-
-  gameWindow.webContents.once('did-finish-load', () => {loadBlurstyle(gameWindow);});
-
-  gameWindow.webContents.on('did-navigate', () => {loadBlurstyle(gameWindow);});
-
-  gameWindow.loadURL(argv['loadURL']); gameWindow.maximize(); gameWindow.show();
-
-  if (devArgv['DEV'] || argv['openDevTools']) gameWindow.webContents.openDevTools();
-
-  gameWindow.on('enter-html-full-screen', () => gameWindow.setFullScreen(true)); gameWindow.on('leave-html-full-screen', () => gameWindow.setFullScreen(false)); gameWindow.on('closed', () => {gameWindow = null;});
-    return gameWindow;
-}
+const createGameWindow = () => {
+  let gameWindow = new BrowserWindow({width: 1024, height: 1024, show: false, fullscreenable: true, frame: true, toolbar: true, backgroundColor: '#565769', webPreferences: {nodeIntegration: true, contextIsolation: false, preload: path.join(__dirname, 'override.js'), nativeWindowOpen: true}});
+      
+  gameWindow.webContents.once('did-finish-load', () => loadBlurstyle(gameWindow)); gameWindow.loadURL(argv['loadURL']); gameWindow.maximize(); gameWindow.show();
+        
+  (devArgv['DEV'] || argv['openDevTools']) && gameWindow.webContents.openDevTools();
+        
+  gameWindow.on('enter-html-full-screen', () => gameWindow.setFullScreen(true)); gameWindow.on('leave-html-full-screen', () => gameWindow.setFullScreen(false)); gameWindow.on('closed', () => {gameWindow = null;}); 
+    return gameWindow;};      
 
 const startGame = () => {
-  if (config['checkForUpdates']) autoUpdater.checkForUpdatesAndNotify().catch((error) => {Sentry.captureException(error); log.error(error);});
     Menu.setApplicationMenu(null);
 
   onlineDetectorWindow = new BrowserWindow({width: 1024, height: 1024, show: true, fullscreenable: true, frame: true, toolbar: true, backgroundColor: '#565769', webPreferences: {nodeIntegration: true, contextIsolation: false, nativeWindowOpen: true}});
@@ -44,15 +37,15 @@ const startGame = () => {
     if (status === "offline") onlineDetectorWindow.show();
     if (status === "online") {createGameWindow(); onlineDetectorWindow.close();}});};
 
-Sentry.init({dsn: 'https://545f56153bef475fbca3adb9e198ae08@sentry.tankionline.com/32', release: config['sentryRelease'], environment: config['sentryEnvironment']});
+Sentry.init({dsn: 'https://545f56153bef475fbca3adb9e198ae08@sentry.tankionline.com/32', release: config['sentryRelease'], environment: config['sentryEnvironment']}); 
   log.transports.file.level = argv['logLevel']; log.info(`tankionline starting. version: ${config['sentryRelease']} environment: ${config['sentryEnvironment']}`);
-    autoUpdater.logger = log;
 
 app.commandLine.appendSwitch('ignore-gpu-blacklist');
   if (process.arch === 'ia32') app.commandLine.appendSwitch('js-flags', '--max-old-space-size=3072');
 
-app.on('browser-window-created', (event, window) => {window.webContents.once('did-finish-load', () => {loadBlurstyle(window);}); window.webContents.on('before-input-event', (event, input) => {
-  if (input.key === 'F12') window.webContents.openDevTools();});});
+app.on('browser-window-created', (event, window) => {
+  window.webContents.once('did-finish-load', () => {loadBlurstyle(window);}); window.webContents.on('did-navigate', () => {loadBlurstyle(window);}); window.webContents.on('before-input-event', (event, input) => {
+    if (input.key === 'F12') {window.webContents.openDevTools();}});});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();});

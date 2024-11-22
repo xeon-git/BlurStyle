@@ -4,8 +4,6 @@ import {resistanceTab} from './utils/resistanceTab';
 import {replaceChecker} from './utils/replaceChecker';
 import {cssBg} from './utils/cssBg';
 import {canvasBg} from './utils/canvasBg';
-import {fakeFPS} from './utils/fakeFPS';
-import {gmOverride} from './utils/gmOverride';
 import {initObserver} from './utils/initObserver';
 
 changeTitle('BlurStyle');
@@ -15,6 +13,4 @@ resistanceTab();
 replaceChecker();
 cssBg();
 canvasBg();
-fakeFPS();
-gmOverride();
 initObserver();

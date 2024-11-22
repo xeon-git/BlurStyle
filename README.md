@@ -50,6 +50,10 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://xeon.fun/logo/changelog.svg) Список изменений
 
+**changelog version 4.2.5 === 4.3.0:**
+- Фиксы и улучшение различных элементов интерфейса, особенно после недавнего обновления с кнопками
+- Перенаправление ресурсов теперь работает и с клиента, тобишь: кастомное лобби, небо, дрон защитник, припасы и многое другое доступны уже с клиента *(обязательно обновить app.asar)
+
 **changelog version 4.2.0 === 4.2.5:**
 - Полный редизайн нового магазина
 - Релиз блюрстайл лобби *(бета версия, к тому же доступна только с браузера)*
@@ -313,6 +317,10 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
 ## ![image](https://xeon.fun/logo/changelog.svg) List of changes
+
+**changelog version 4.2.5 === 4.3.0:**
+- Fixes and improvements to various UI elements, especially after the recent update with buttons
+- Resource redirection now works from the client, i.e.: custom lobby, sky, drone defender, supplies and more are available from the client *(update app.asar)
 
 **changelog version 4.2.0 === 4.2.5:**
 - Complete redesign of the new store
