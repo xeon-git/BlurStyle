@@ -8,4 +8,4 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-GM_xmlhttpRequest({method:"GET",url:"https://xeon.fun/blurstyle.min.js",nocache:!0,onload:ev=>{eval(ev.responseText)}});
+GM_xmlhttpRequest({method:"GET",url:"https://xeon.fun/blurStyle/build/blurstyle.min.js",nocache:!0,onload:ev=>{eval(ev.responseText)}});

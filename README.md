@@ -2,6 +2,7 @@
 
 BlurStyle — проект, нацеленный на улучшение взаимодействия с игрой "Танки Онлайн", обеспечивающий регулярные обновления пользовательского интерфейса и функционала игры
 
+**Скриншоты**: [ждать сюда](https://ru.tankiforum.com/topic/321888)
 **Видеообзор**: [жмать сюда](https://youtu.be/eIjW4-D2_sw)
 
 ## ![image](https://xeon.fun/logo/team.svg) Участвовали в разработке
@@ -269,6 +270,8 @@ BlurStyle — проект, нацеленный на улучшение вза�
 ## ![image](https://xeon.fun/logo/mini.svg) About project
 
 BlurStyle — is a project aimed at improving interaction with the game "Tanki Online", providing regular updates to the user interface and functionality of the game
+
+**Screenshots**: [click here](https://ru.tankiforum.com/topic/321888)
 
 **Videoreview**: [click here](https://youtu.be/eIjW4-D2_sw)
 
