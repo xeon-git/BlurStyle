@@ -15,13 +15,13 @@ BlurStyle — проект, нацеленный на улучшение вза�
 ## ![image](https://xeon.fun/logo/download.svg) Установка для браузера
 
 1. Установите/обновите расширение Tampermonkey: [жмать сюда](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://xeon.fun/blurStyle/browser/blurstyle.user.js)
+2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://xeon.fun/blurStyle/browser/blurstyle.user.js) | [зеркало](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/browser/blurstyle.min.js)
 3. Перезагрузите вкладку с игрой, если она открыта
 
 ## ![image](https://xeon.fun/logo/download.svg) Установка для клиента
 
 1. Установите/обновите официальный клиент Танков Онлайн: [жмать сюда](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://xeon.fun/blurStyle/client/app.asar)
+2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://xeon.fun/blurStyle/client/app.asar) | [зеркало](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/client/app.asar)
 3. После установки клиента и скачивания файла app.asar найдите ярлык с клиентом на рабочем столе, кликните правой кнопкой мыши, перейдите по расположению файла и по папке "resources"
 4. Перенесите с заменой файл app.asar и перезапустите клиент, если он открыт
 
@@ -54,7 +54,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 **changelog version 4.2.5 === 4.3.0:**
 - Фиксы и улучшение различных элементов интерфейса, особенно после недавнего обновления с кнопками
-- Перенаправление ресурсов теперь работает и с клиента, тобишь: кастомное лобби, небо, дрон защитник, припасы и многое другое доступны уже с клиента *(обязательно обновить app.asar)
+- Перенаправление ресурсов теперь работает и с клиента, тобишь: кастомное лобби, небо, дрон защитник, припасы и многое другое доступны уже с клиента *(обязательно обновить app.asar)*
 
 **changelog version 4.2.0 === 4.2.5:**
 - Полный редизайн нового магазина
@@ -285,13 +285,13 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 ## ![image](https://xeon.fun/logo/download.svg) Browser installation
 
 1. Install/update Tampermonkey extension: [click here](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Install/update the BlurStyle theme script: [click here](https://xeon.fun/blurStyle/browser/blurstyle.user.js)
+2. Install/update the BlurStyle theme script: [click here](https://xeon.fun/blurStyle/browser/blurstyle.user.js) | [mirror](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/browser/blurstyle.min.js)
 3. Reload the game tab if it is open
 
 ## ![image](https://xeon.fun/logo/download.svg) Client Installation
 
 1. Install/update the official Tanks Online client: [click here](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Download/update the theme file app.asar: [click here](https://xeon.fun/blurStyle/client/app.asar)
+2. Download/update the theme file app.asar: [click here](https://xeon.fun/blurStyle/client/app.asar) | [mirror](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/client/app.asar)
 3. After installing the client and downloading the app.asar file, find the shortcut with the client on your desktop, right click, navigate to the file location and the "resources" folder
 4. Transfer the app.asar file with replacement and restart the client if it is open
 
@@ -324,7 +324,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 **changelog version 4.2.5 === 4.3.0:**
 - Fixes and improvements to various UI elements, especially after the recent update with buttons
-- Resource redirection now works from the client, i.e.: custom lobby, sky, drone defender, supplies and more are available from the client *(update app.asar)
+- Resource redirection now works from the client, i.e.: custom lobby, sky, drone defender, supplies and more are available from the client *(update app.asar)*
 
 **changelog version 4.2.0 === 4.2.5:**
 - Complete redesign of the new store

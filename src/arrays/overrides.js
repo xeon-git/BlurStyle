@@ -19,7 +19,7 @@ export const overrides = [
 	},
 	{   /* зад */
 		from: '/0/16721/110/121/30545000607406/image.webp',
-		to: 'https://xeon.fun/battle/skybox/parkour/back.png'
+		to: 'https://xeon.fun/blurStyle/resources/battle/skybox/parkour/back.png'
 	},
 	{   /* право */
 		from: '/0/16721/110/120/30545000605752/image.webp',
