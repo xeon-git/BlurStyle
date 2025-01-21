@@ -15,13 +15,13 @@ const overrides = [
     {from: '/0/16721/107/207/30545000605173/image.webp', to: 'resources/battle/skybox/parkour/front.png'},
     {from: '/0/16721/110/122/30545000606256/image.webp', to: 'resources/battle/skybox/parkour/left.png'},
 /* дефолт лобби | кастом бс лобби */
-    {from: `/601/166176/165/206/30545000710421/object.3ds`, to: `resources/lobby/scifi_lobby.3ds`},
-    {from: `/601/166176/165/206/30545000710421/flr1.webp`, to: `resources/lobby/floor.png`},
-    {from: `/601/166176/165/206/30545000710421/gar1.webp`, to: `resources/lobby/room.png`},
-    {from: `/601/166176/165/206/30545000710421/sky1.webp`, to: `resources/lobby/sky0.png`},
-    {from: `/601/166176/165/206/30545000710421/pl1.webp`, to: `resources/lobby/tnk_plat.png`},
-    {from: `/601/166176/165/206/30545000710421/pl2.webp`, to: `resources/lobby/pl2.jpg`},
-    {from: `/601/166176/165/206/30545000710421/race1.webp`, to: `resources/lobby/race1.jpg`},
+    {from: `/601/166176/165/206/31167700267244/object.3ds`, to: `resources/lobby/scifi_lobby.3ds`},
+    {from: `/601/166176/165/206/31167700267244/flr1.webp`, to: `resources/lobby/floor.png`},
+    {from: `/601/166176/165/206/31167700267244/gar1.webp`, to: `resources/lobby/room.png`},
+    {from: `/601/166176/165/206/31167700267244/sky1.webp`, to: `resources/lobby/sky0.png`},
+    {from: `/601/166176/165/206/31167700267244/pl1.webp`, to: `resources/lobby/tnk_plat.png`},
+    {from: `/601/166176/165/206/31167700267244/pl2.webp`, to: `resources/lobby/pl2.jpg`},
+    {from: `/601/166176/165/206/31167700267244/race1.webp`, to: `resources/lobby/race1.jpg`},
 /* дефолт защитник | кастом бс защитник */
     {from: `/546/35001/351/175/30545000710544/lightmap.webp`, to: `resources/drones/defender/defender.png`},
     {from: `/546/35001/351/175/30545000710544/object.3ds`, to: `resources/drones/defender/defender.3ds`}

@@ -704,7 +704,7 @@ export const styles = () => {
 
     { /* стилизация кнопки играть в главном меню */
       cssStyles: `
-        .MainScreenComponentStyle-playButtonContainer > span {
+        .MainScreenComponentStyle-playButtonContainer > span, .MainScreenComponentStyle-playButtonContainer > h3 {
           color: rgba(255, 255, 255, 1) !important;
         }
       `
@@ -3681,16 +3681,16 @@ export const styles = () => {
       selector: ".ListItemsComponentStyle-itemsListContainer.CssCommonAnimations-appearFromBottom",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "transparent"
       }
     },
 
     { /* стилизация гаража */
       tag: ["QSA"],
-      selector: ".ListItemsComponentStyle-itemsWrapper .Common-flexCenterAlignCenter",
+      selector: ".ListItemsComponentStyle-itemsListContainer .Common-flexCenterAlignCenter",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "transparent"
       }
     },
 
@@ -5414,7 +5414,7 @@ export const styles = () => {
                       filter: saturate(0) !important;
                   }
 
-        .FriendListComponentStyle-greenTextOnline, .InvitationWindowsComponentStyle-onlineLabel, .ProBattlesComponentStyle-createBattleButton > p, .FormatsSectionComponentStyle-selectedCard.cardImg > div.Common-flexCenterAlignCenterColumn > h2, .ClosedContainerStyle-moreButton > span {
+        .FriendListComponentStyle-greenTextOnline, .InvitationWindowsComponentStyle-onlineLabel, .ProBattlesComponentStyle-createBattleButton > p, .FormatsSectionComponentStyle-selectedCard.cardImg > div.Common-flexCenterAlignCenterColumn > h2, .ClosedContainerStyle-moreButton > span, #root > div > div > div.BattleRewardsComponentStyle-commonBlockButtonRewards > div > div > div > div.Common-flexCenterAlignCenter > h2 {
           color: rgba(222, 184, 135, 1) !important;
         }
 
@@ -5479,13 +5479,13 @@ export const styles = () => {
       `
     },
 
-    { /* стилизация ммной статы/кнопок навигации/челленджа */
+    { /* стилизация ммной статы/кнопок навигации/челленджа/према */
       cssStyles: `
         .BattleResultQuestProgressComponentStyle-progressContainer, .BlockResultTankComponentStyle-gsContainer > img, .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn, .BattleResultUserInfoComponentStyle-xp > img, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td > img, .BattleResultNavigationComponentStyle-button > img, .HeaderComponentStyle-backArrowBlock, .BreadcrumbsComponentStyle-rightButtonsContainer > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .BreadcrumbsComponentStyle-iconLogout, .IconStyle-iconBackArrow, .IconStyle-iconLogOff, .TierItemComponentStyle-receivedItem > .TierIconComponentStyle-icons, .TierHeaderComponentStyle-descriptionTier {
           filter: saturate(0) !important;
         }
 
-        .BattleResultQuestProgressComponentStyle-text:nth-child(2), .BattleResultUserInfoComponentStyle-rankNameContainer > span, .BattleResultUserInfoComponentStyle-xp > span, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td:nth-child(2) > span, .BasePaymentComponentStyle-buttonContainer > div > span, .PaymentInfoComponentStyle-currency, .SuccessfulPurchaseComponentStyle-container > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-content > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-reward > .Common-flexEndAlignStartColumn > span {
+        .BattleResultQuestProgressComponentStyle-text:nth-child(2), .BattleResultUserInfoComponentStyle-rankNameContainer > span, .BattleResultUserInfoComponentStyle-xp > span, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td:nth-child(2) > span, .BasePaymentComponentStyle-buttonContainer > div > span, .PaymentInfoComponentStyle-currency, .SuccessfulPurchaseComponentStyle-container > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-content > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-reward > .Common-flexEndAlignStartColumn > span, .ChallengePurchaseComponentStyle-spanStyleWidthHotKey > span, .UserTitleComponentStyle-premiumButton > span {
           color: rgba(222, 184, 135, 1) !important;
         }
 
@@ -5720,7 +5720,7 @@ export const styles = () => {
 
     { /* стилизация раздела с магазом */
       tag: ["QSA"],
-      selector: ".SuccessfulPurchaseComponentStyle-containerHeadline > .Common-flexStartAlignStartColumn > .Common-flexCenterAlignCenter > span, .CoinSubscribeComponentStyle-commonBlock > .Common-flexCenterAlignCenter > span, .NewShopCommonComponentStyle-commonContainer > .CoinSubscribeComponentStyle-containerCoinSubscribe > div > .Common-flexCenterAlignCenter > .Common-flexCenterAlignCenter > span",
+      selector: ".SuccessfulPurchaseComponentStyle-containerHeadline > .Common-flexStartAlignStartColumn > .Common-flexCenterAlignCenter > span, .LargeSingleCardComponentStyle-commonBlock > .Common-flexCenterAlignCenter > span, .NewShopCommonComponentStyle-commonContainer > .CoinSubscribeComponentStyle-containerCoinSubscribe > div > .Common-flexCenterAlignCenter > .Common-flexCenterAlignCenter > span, .ShowcaseItemComponentStyle-priceText",
       styles:
         {
           color: "white"
@@ -5788,7 +5788,7 @@ export const styles = () => {
 
     { /* стилизация раздела с магазом*/
       cssStyles: `
-        .CoinSubscribeComponentStyle-commonBlock > .Common-flexCenterAlignCenterColumn.Common-backgroundImageCover {
+        .LargeSingleCardComponentStyle-commonBlock > .Common-flexCenterAlignCenterColumn.Common-backgroundImageCover {
           border-radius: 1.5rem !important;
           box-shadow: rgba(0, 0, 0, 0.5) 0rem 0rem 1rem 0.1rem, rgba(0, 0, 0, 0.3) 0rem 0rem 0.25rem 0.05rem inset !important;
         }
@@ -5797,7 +5797,7 @@ export const styles = () => {
 
     { /* стилизация раздела с магазом */
       tag: ["QSA", "fade", "BHV"],
-      selector: ".CoinSubscribeComponentStyle-commonBlock > .Common-flexCenterAlignCenter, .PromoCodesComponentStyle-sendButton, .BasePaymentComponentStyle-buttonContainer > .Common-flexCenterAlignCenter",
+      selector: ".LargeSingleCardComponentStyle-commonBlock > .Common-flexCenterAlignCenter, .PromoCodesComponentStyle-sendButton, .BasePaymentComponentStyle-buttonContainer > .Common-flexCenterAlignCenter",
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
@@ -5885,7 +5885,7 @@ export const styles = () => {
 
     { /* стилизация иконок в шапке/таблиц */
       cssStyles: `
-        .UserProgressComponentStyle-buyPremium > .Common-flexCenterAlignCenter > span, .ShopBuyButtonComponentStyle-container > .Common-flexStartAlignCenter > h4, .ConverterDialogComponentStyle-dialogButton:nth-child(2) > span, .DialogContainerComponentStyle-getRubyButton > span, .ClanInfoComponentStyle-clanForeignActions > div > .Common-flexCenterAlignCenter > span, .SettingsButtonsComponentStyle-buttonsWidthBackReset > span, .ContainersComponentStyle-moreButton > span, .UserTitleComponentStyle-premiumButton > span  {
+        .UserProgressComponentStyle-buyPremium > .Common-flexCenterAlignCenter > span, .ShopBuyButtonComponentStyle-container > .Common-flexStartAlignCenter > h4, .ConverterDialogComponentStyle-dialogButton:nth-child(2) > span, .DialogContainerComponentStyle-getRubyButton > span, .ClanInfoComponentStyle-clanForeignActions > div > .Common-flexCenterAlignCenter > span, .SettingsButtonsComponentStyle-buttonsWidthBackReset > span, .ContainersComponentStyle-moreButton > span {
           color: white !important;
         }
       `
@@ -5902,7 +5902,7 @@ export const styles = () => {
 
     { /* колхозная но как никак стилизация иконок в гараже */
       tag: ["QS"],
-      selector: ".GarageCommonStyle-bigActionButton:nth-child(2) > div.Common-flexCenterAlignCenter > div",
+      selector: ".GarageCommonStyle-bigActionButton:nth-child(2) > div.Common-flexCenterAlignCenter > div, .GarageTurretsAlterationsComponentStyle-mountStandardButton > div > .Common-flexCenterAlignCenter > div",
       styles:
         {
           backgroundImage: "url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCTxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIgoJCSAgZD0iTTMyIDIwLjYwN0wyOSAyMi4zMjEyVjM1Ljk5OTlMMjIgMzEuOTk5OVYzNy42Nzg3TDMyIDQzLjM5MjlMNDIgMzcuNjc4N1YzMS45OTk5TDM1IDM1Ljk5OTlWMjIuMzIxMkwzMiAyMC42MDdaTTQ2IDI1Ljc0MDlDNDYgMjQuNjY0MyA0NS40MjMxIDIzLjY3MDMgNDQuNDg4NCAyMy4xMzYyTDMzLjQ4ODQgMTYuODUwNUMzMi41NjYxIDE2LjMyMzQgMzEuNDMzOSAxNi4zMjM0IDMwLjUxMTYgMTYuODUwNUwxOS41MTE2IDIzLjEzNjJDMTguNTc2OSAyMy42NzAzIDE4IDI0LjY2NDMgMTggMjUuNzQwOVYzOC4yNTlDMTggMzkuMzM1NiAxOC41NzY5IDQwLjMyOTYgMTkuNTExNiA0MC44NjM3TDMwLjUxMTYgNDcuMTQ5NEMzMS40MzM5IDQ3LjY3NjUgMzIuNTY2MSA0Ny42NzY1IDMzLjQ4ODQgNDcuMTQ5NEw0NC40ODg0IDQwLjg2MzdDNDUuNDIzMSA0MC4zMjk2IDQ2IDM5LjMzNTYgNDYgMzguMjU5VjI1Ljc0MDlaIgoJCSAgZmlsbD0iI2RlYjg4NyIvPgo8L3N2Zz4K)"
