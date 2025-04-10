@@ -13,7 +13,7 @@ export const toggleMenuVisibility = () => {
         else {
           const allSliders = menuContainer.querySelectorAll('input[type="range"]');
             allSliders.forEach(slider => {
-              if (slider.dataset.key) {
+              if (slider.dataset.key && slider.dataset.modified === 'true') {
                 const value = parseFloat(slider.value);
                   if (!isNaN(value)) {saveToLocalStorage(`style_${slider.dataset.key}`, value);}}});
                     menuContainer.classList.add('bs-menu-hidden'); document.body.classList.remove('bs-menu-open');
@@ -105,12 +105,13 @@ export const showNotification = (message, type = 'success') => {
           
           slider.addEventListener('input', (e) => {
             const newValue = parseFloat(e.target.value); valueDisplay.textContent = newValue;
-              onChange(newValue, key); clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                  if (labelText?.trim()) {
-                    const simplifiedLabel = labelText.replace(':', '');
-                      showNotification(`${simplifiedLabel}: ${newValue}`, 'info');}}, 500);}); controlContainer.append(slider, valueDisplay); container.append(label, controlContainer);
-                        return container;};
+              slider.dataset.modified = 'true';
+                onChange(newValue, key); clearTimeout(timeout);
+                  timeout = setTimeout(() => {
+                    if (labelText?.trim()) {
+                      const simplifiedLabel = labelText.replace(':', '');
+                        showNotification(`${simplifiedLabel}: ${newValue}`, 'info');}}, 500);}); controlContainer.append(slider, valueDisplay); container.append(label, controlContainer);
+                          return container;};
 
 export const createInputField = (labelText, value, onChange, key) => {
   const container = document.createElement('div'); container.className = 'bs-option';

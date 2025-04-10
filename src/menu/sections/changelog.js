@@ -332,8 +332,6 @@ export const createChangelogSection = (container) => {
     }
   ];
 
-  const changelogTitle = document.createElement('h3'); changelogTitle.textContent = 'История изменений'; changelogTitle.style.marginBottom = '20px'; changelogTitle.style.textAlign = 'center'; changelogTitle.style.color = 'rgba(222, 184, 135, 0.9)'; container.appendChild(changelogTitle);
-
   changelogData.forEach(log => {
     const changelogItem = document.createElement('div'); changelogItem.className = 'bs-changelog-item';
     const versionTitle = document.createElement('div'); versionTitle.className = 'bs-changelog-version'; versionTitle.textContent = `Версия ${log.version}`; changelogItem.appendChild(versionTitle);
