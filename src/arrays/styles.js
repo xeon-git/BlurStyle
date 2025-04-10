@@ -6,11 +6,140 @@ let cssStyles;
 let elementsProcessed = new WeakSet();
 
 export const styles = () => {
+  const cssVariables = `
+    :root {
+      /* основные цвета */
+      --color-primary: rgba(222, 184, 135, 1);
+      --color-white: rgba(255, 255, 255, 1);
+      --color-black: rgba(0, 0, 0, 1);
+      --color-red: rgba(255, 0, 0, 1);
+      --color-green: rgba(60, 179, 113, 1);
+      --color-gold: rgba(255, 204, 0, 1);
+      
+      /* прозрачные бгшки */
+      --bg-transparent: rgba(0, 0, 0, 0);
+      --bg-transparent-light: rgba(0, 0, 0, 0.1);
+      --bg-transparent-medium: rgba(0, 0, 0, 0.15);
+      --bg-transparent-dark: rgba(0, 0, 0, 0.2);
+      --bg-transparent-darker: rgba(0, 0, 0, 0.3);
+      --bg-white-opaque: rgba(255, 255, 255, 1);
+      --bg-white-light: rgba(255, 255, 255, 0.1);
+      --bg-white-medium: rgba(255, 255, 255, 0.2);
+      --bg-white-dark: rgba(255, 255, 255, 0.3);
+      --bg-red-light: rgba(255, 0, 0, 0.1);
+      --bg-red-medium: rgba(255, 0, 0, 0.15);
+      --bg-green-light: rgba(60, 179, 113, 0.1);
+      --bg-green-medium: rgba(60, 179, 113, 0.2);
+      --bg-gold-light: rgba(255, 204, 0, 0.1);
+      --bg-gold-medium: rgba(255, 204, 0, 0.2);
+      --bg-gray-light: rgba(128, 128, 128, 0.2);
+      --bg-gray-medium: rgba(176, 176, 176, 0.7);
+      
+      /* бордеры */
+      --border-width: 0.15rem;
+      --border-radius-xs: 0.6rem;
+      --border-radius-sm: 0.7rem;
+      --border-radius-md: 1rem;
+      --border-radius-lg: 1.1rem;
+      --border-radius-xl: 1.2rem;
+      --border-radius-xxl: 1.5rem;
+      --border-radius-round: 2rem;
+      
+      /* цвета бордеров */
+      --border-color-none: rgba(0, 0, 0, 1);
+      --border-color-light: rgba(255, 255, 255, 0.05);
+      --border-color-medium: rgba(255, 255, 255, 0.1);
+      --border-color-dark: rgba(255, 255, 255, 0.2);
+      --border-color-darker: rgba(255, 255, 255, 0.3);
+      --border-color-red-light: rgba(255, 0, 0, 0.1);
+      --border-color-red-medium: rgba(255, 0, 0, 0.2);
+      --border-color-gold-light: rgba(255, 204, 0, 0.1);
+      --border-color-gold-medium: rgba(255, 204, 0, 0.2);
+      
+      /* тени */
+      --shadow-none: 0rem 0rem 0rem 0rem rgba(0, 0, 0, 0);
+      --shadow-light: 0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4);
+      --shadow-medium: 0rem 0rem 0.5rem 0.05rem rgba(0, 0, 0, 0.55);
+      --shadow-dark: 0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75);
+      --shadow-darker: 0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75);
+      --shadow-darkest: 0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.6);
+      
+      /* внутренние тени */
+      --shadow-inset-light: inset 0rem 0rem 0.25rem 0.05rem rgba(0, 0, 0, 0.2);
+      --shadow-inset-medium: inset 0rem 0rem 0.25rem 0.05rem rgba(0, 0, 0, 0.3);
+      --shadow-inset-dark: inset 0rem 0rem 0.5rem 0.15rem rgba(0, 0, 0, 0.3);
+      --shadow-inset-darker: inset 0rem 0rem 0.5rem 0.15rem rgba(0, 0, 0, 0.5);
+      
+      /* комбинированные тени */
+      --shadow-combined-light: var(--shadow-light), var(--shadow-inset-light);
+      --shadow-combined-medium: var(--shadow-medium), var(--shadow-inset-medium);
+      --shadow-combined-dark: var(--shadow-dark), var(--shadow-inset-dark);
+      --shadow-combined-darker: var(--shadow-darker), var(--shadow-inset-darker);
+      --shadow-combined-darkest: var(--shadow-darkest), var(--shadow-inset-dark);
+      
+      /* мыло */
+      --blur-xs: blur(0.1rem);
+      --blur-sm: blur(0.2rem);
+      --blur-md: blur(0.3rem);
+      --blur-lg: blur(0.5rem);
+      --blur-xl: blur(0.8rem);
+      --blur-xxl: blur(1rem);
+      --blur-xxxl: blur(2rem);
+      
+      /* основа с градиентами */
+      --gradient-black: radial-gradient(50% 100% at 50% 100%, var(--color-black) 0%, var(--color-black) 0%);
+      --gradient-transparent: radial-gradient(50% 100% at 50% 100%, var(--bg-transparent) 0%, var(--bg-transparent) 0%);
+      --gradient-transparent-light: radial-gradient(50% 100% at 50% 100%, var(--bg-transparent-light) 0%, var(--bg-transparent-light) 0%);
+      --gradient-transparent-medium: radial-gradient(50% 100% at 50% 100%, var(--bg-transparent-medium) 0%, var(--bg-transparent-medium) 0%);
+      --gradient-transparent-dark: radial-gradient(50% 100% at 50% 100%, var(--bg-transparent-dark) 0%, var(--bg-transparent-dark) 0%);
+      --gradient-transparent-darker: radial-gradient(50% 100% at 50% 100%, var(--bg-transparent-darker) 0%, var(--bg-transparent-darker) 0%);
+      --gradient-white: radial-gradient(50% 100% at 50% 100%, var(--color-white) 0%, var(--color-white) 0%);
+      --gradient-white-light: radial-gradient(50% 100% at 50% 100%, var(--bg-white-light) 0%, var(--bg-white-light) 0%);
+      --gradient-white-medium: radial-gradient(50% 100% at 50% 100%, var(--bg-white-medium) 0%, var(--bg-white-medium) 0%);
+      --gradient-white-dark: radial-gradient(50% 100% at 50% 100%, var(--bg-white-dark) 0%, var(--bg-white-dark) 0%);
+      --gradient-red-light: radial-gradient(50% 100% at 50% 100%, var(--bg-red-light) 0%, var(--bg-red-light) 0%);
+      --gradient-green-light: radial-gradient(50% 100% at 50% 100%, var(--bg-green-light) 0%, var(--bg-green-light) 0%);
+      --gradient-gray-light: radial-gradient(50% 100% at 50% 100%, var(--bg-gray-light) 0%, var(--bg-gray-light) 0%);
+      --gradient-gray-medium: radial-gradient(50% 100% at 50% 100%, var(--bg-gray-medium) 0%, var(--bg-gray-medium) 0%);
+      
+      /* основа с мыльными комбинациями */
+      --glassmorphism-none: var(--gradient-transparent) var(--blur-lg);
+      --glassmorphism-light: var(--gradient-transparent-light) var(--blur-lg);
+      --glassmorphism-medium: var(--gradient-transparent-medium) var(--blur-lg);
+      --glassmorphism-dark: var(--gradient-transparent-dark) var(--blur-lg);
+      --glassmorphism-darker: var(--gradient-transparent-darker) var(--blur-lg);
+      
+      /* тень для шрифта */
+      --text-shadow-gold: rgb(222, 184, 135) 1px 0px, rgb(222, 184, 135) 0px -1px 15px, rgb(222, 184, 135) -1px 0px, rgb(222, 184, 135) 0px 1px;
+      
+      /* шорткаты бордеров */
+      --card-border-light: var(--border-width) solid var(--border-color-medium);
+      --card-border-medium: var(--border-width) solid var(--border-color-dark);
+      --card-border-dark: var(--border-width) solid var(--border-color-darker);
+      
+      /* фильтры */
+      --filter-saturate-none: saturate(0);
+      --filter-saturate-light: saturate(1);
+      --filter-saturate-medium: saturate(1.5);
+      --filter-drop-shadow-gold: drop-shadow(0rem 0rem 0.5rem rgba(255, 165, 0, 1));
+    }
+  `;
+
+  const bsGlass = (opacity = "light", borderOpacity = "medium", radius = "md", blurStrength = "lg", shadowIntensity = "dark") => {
+    return {
+      background: `var(--gradient-transparent-${opacity})`,
+      backdropFilter: `var(--blur-${blurStrength})`,
+      border: `var(--border-width) solid var(--border-color-${borderOpacity})`,
+      borderRadius: `var(--border-radius-${radius})`,
+      boxShadow: `var(--shadow-none), var(--shadow-inset-${shadowIntensity})`
+    };
+  };
+
   const elements = [
     { /* logo аним фрейм */
       cssStyles: `
         @keyframes logoAnim {
-          0%, 100% {transform: scale(0.7); filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 165, 0, 1))}
+          0%, 100% {transform: scale(0.7); filter: var(--filter-drop-shadow-gold)}
           50% {transform: scale(0.5); filter: drop-shadow(0rem 0rem 0.5rem rgba(255, 165, 0, 0))}}
 
         .LobbyLoaderComponentStyle-logo {animation: logoAnim 2s infinite; position: relative;}
@@ -51,7 +180,7 @@ export const styles = () => {
       selector: "body",
       styles:
         {
-          background: "black"
+          background: "var(--color-black)"
         }
     },
 
@@ -69,7 +198,7 @@ export const styles = () => {
       selector: "body > div.content-wrapper > main",
       styles:
         {
-          background: "black"
+          background: "var(--color-black)"
         }
     },
 
@@ -78,7 +207,7 @@ export const styles = () => {
       selector: ".Common-container",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgb(0, 0, 0, 1) 0%, rgb(0, 0, 0, 1) 0%)"
+          background: "var(--gradient-black)"
         }
     },
 
@@ -87,7 +216,7 @@ export const styles = () => {
       selector: ".Common-entranceGradient",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgb(0, 0, 0, 1) 0%, rgb(0, 0, 0, 1) 0%)"
+          background: "var(--gradient-black)"
         }
     },
 
@@ -111,29 +240,13 @@ export const styles = () => {
     { /* стилизация раздела настроек */
       tag: ["QSA", "BHV", "fade"],
       selector: ".InputComponentStyle-input",
-      styles:
-        {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.2rem",
-          backdropFilter: "blur(0.2rem)",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-          marginBottom: "0.350rem"
-        }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
-      keyCode: 100,
       selector: ".SecuritySettingsComponentStyle-activation2FaButton",
-      styles:
-        {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.2rem",
-          backdropFilter: "blur(0.2rem)",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-        }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
@@ -141,7 +254,7 @@ export const styles = () => {
       selector: ".SettingsComponentStyle-scrollingMenu",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+          background: "var(--gradient-transparent)",
           overflow: "hidden auto"
         }
     },
@@ -151,11 +264,11 @@ export const styles = () => {
       selector: ".BattleChatComponentStyle-inputContainerAllies",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "1.2rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xl)",
+          boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)"
         }
     },
 
@@ -164,11 +277,11 @@ export const styles = () => {
       selector: ".BattleChatComponentStyle-inputContainerAll",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "1.2rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xl)",
+          boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)"
         }
     },
 
@@ -177,8 +290,8 @@ export const styles = () => {
       selector: ".BattleChatComponentStyle-btnToggleTeamAllies",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-          borderRadius: "1rem"
+          background: "var(--gradient-transparent)",
+          borderRadius: "var(--border-radius-md)"
         }
     },
 
@@ -187,8 +300,8 @@ export const styles = () => {
       selector: ".BattleChatComponentStyle-btnToggleTeamAll",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-          borderRadius: "1rem"
+          background: "var(--gradient-transparent)",
+          borderRadius: "var(--border-radius-md)"
         }
     },
 
@@ -197,11 +310,11 @@ export const styles = () => {
       selector: ".BattleTabStatisticComponentStyle-containerInsideTeams",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "1.5rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xxl)",
+          boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)"
         }
     },
 
@@ -210,11 +323,11 @@ export const styles = () => {
       selector: ".BattleTabStatisticComponentStyle-containerInsideResults",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "1.5rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xxl)",
+          boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)"
         }
     },
 
@@ -232,11 +345,11 @@ export const styles = () => {
       selector: ".BattleTabStatisticComponentStyle-rowBackGround",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(2rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.1rem",
-          boxShadow: "inset 0rem 0rem 0.5rem 0.05rem rgba(0,0,0,0.170)",
+          background: "var(--gradient-transparent-medium)",
+          backdropFilter: "var(--blur-xxxl)",
+          border: "var(--border-width) solid var(--border-color-dark)",
+          borderRadius: "var(--border-radius-lg)",
+          boxShadow: "var(--shadow-inset-light)",
           marginBottom: "0.50%",
           top: "0.5rem"
         }
@@ -265,11 +378,11 @@ export const styles = () => {
       selector: ".BattleTabStatisticComponentStyle-selectedRowBackGround",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.075) 0%)",
-          backdropFilter: "blur(2rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.1rem",
-          boxShadow: "inset 0rem 0rem 0.5rem 0.05rem rgba(0,0,0,0.170)",
+          background: "var(--gradient-white-light)",
+          backdropFilter: "var(--blur-xxxl)",
+          border: "var(--border-width) solid var(--border-color-dark)",
+          borderRadius: "var(--border-radius-lg)",
+          boxShadow: "var(--shadow-inset-light)",
           marginBottom: "0.50%",
           top: "0.5rem"
         }
@@ -280,11 +393,11 @@ export const styles = () => {
       selector: ".MatchmakingWaitComponentStyle-container",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "1.5rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-medium)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xxl)",
+          boxShadow: "var(--shadow-darkest), var(--shadow-inset-dark)",
           left: "36vw",
           top: "8vw",
           width: "27.8vw",
@@ -328,11 +441,11 @@ export const styles = () => {
       selector: ".MatchmakingWaitComponentStyle-cancelButton",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.1rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-dark)",
+          borderRadius: "var(--border-radius-lg)",
+          boxShadow: "var(--shadow-darkest), var(--shadow-inset-dark)",
           position: "absolute",
           right: "2%",
           top: "4rem",
@@ -357,7 +470,7 @@ export const styles = () => {
       {
         position: "absolute",
         top: "1.5rem",
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -367,7 +480,7 @@ export const styles = () => {
       styles:
         {
           top: "calc(50% - 0.5em + 2.438em)",
-          color: "rgba(255, 255, 255, 1)"
+          color: "var(--color-white)"
         }
     },
 
@@ -392,9 +505,9 @@ export const styles = () => {
       selector: ".Common-backgroundImageCover.modeLimitIcon",
       styles:
         {
-          border: "0.150rem solid rgba(0, 0, 0, 1)",
-          borderRadius: "1.2rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+          border: "var(--border-width) solid var(--border-color-none)",
+          borderRadius: "var(--border-radius-xl)",
+          boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
         }
     },
 
@@ -403,9 +516,9 @@ export const styles = () => {
     selector: ".BattleCreateComponentStyle-blockCard .Common-flexStartAlignStretchColumn .Common-backgroundImageCover",
     styles:
       {
-        border: "0.150rem solid rgba(0, 0, 0, 1)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        border: "var(--border-width) solid var(--border-color-none)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -414,11 +527,11 @@ export const styles = () => {
     selector: ".BattleCreateComponentStyle-scrollBattlePick .Common-flexStartAlignStretchColumn .blockCard",
     styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -435,7 +548,7 @@ export const styles = () => {
       selector: ".MainScreenComponentStyle-new.FooterComponentStyle-marginEllips",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -444,7 +557,7 @@ export const styles = () => {
       selector: "li.SettingsMenuComponentStyle-menuItemOptions > div.ItemNotificationMarkerStyle-base",
       styles:
         {
-          filter: "saturate(0)",
+          filter: "var(--filter-saturate-none)",
           top: "15%"
         }
     },
@@ -454,7 +567,7 @@ export const styles = () => {
       selector: ".ItemNotificationMarkerStyle-base",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -463,7 +576,7 @@ export const styles = () => {
       selector: ".ScrollingCardsComponentStyle-cardCount",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
+          background: "var(--gradient-white)",
         }
     },
 
@@ -472,7 +585,7 @@ export const styles = () => {
       selector: ".FormatsSectionComponentStyle-numberBattles",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
+          background: "var(--gradient-white)",
         }
     },
 
@@ -481,7 +594,7 @@ export const styles = () => {
       selector: "div.MenuComponentStyle-battleTitleCommunity > div > span",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -490,7 +603,7 @@ export const styles = () => {
       selector: ".Common-discount",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -499,7 +612,7 @@ export const styles = () => {
       selector: ".SquarePriceButtonComponentStyle-discountLabel",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -508,7 +621,7 @@ export const styles = () => {
       selector: ".SuppliesComponentStyle-discountLabel",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -517,7 +630,7 @@ export const styles = () => {
       selector: "div.GarageCommonStyle-animatedBlurredLeftBlock > div > img",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -535,20 +648,14 @@ export const styles = () => {
       selector: ".GarageCommonStyle-discountLabel",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
     { /* стилизация кнопки забрать все в контах */
       tag: ["QS", "BHV", "fade"],
       selector: ".SuperMissionComponentStyle-buttonCollect",
-      styles:
-        {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.1rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-        }
+      styles: bsGlass("light", "dark", "lg", "lg", "light")
     },
 
     { /* стилизация шапки новостного меню */
@@ -556,7 +663,7 @@ export const styles = () => {
       selector: ".NewsComponentStyle-header",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+          background: "var(--gradient-transparent)"
         }
     },
 
@@ -574,8 +681,8 @@ export const styles = () => {
       selector: ".NewsComponentStyle-newsWindow",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 0%)",
-          borderRight: "0.150rem solid rgba(255, 255, 255, 0.2)",
+          background: "var(--gradient-transparent-darker)",
+          borderRight: "var(--border-width) solid var(--border-color-dark)",
           animation: "fadeIn 0.3s ease-in-out"
         }
     },
@@ -585,7 +692,7 @@ export const styles = () => {
       selector: ".NewsComponentStyle-newsItemContainer",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+          background: "var(--gradient-transparent)"
         }
     },
 
@@ -594,7 +701,7 @@ export const styles = () => {
       selector: "div.NewsComponentStyle-newsItemDate > img",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -603,8 +710,8 @@ export const styles = () => {
       selector: ".NewsComponentStyle-closeArea",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)"
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)"
         }
     },
 
@@ -613,8 +720,8 @@ export const styles = () => {
       selector: ".ChatComponentStyle-upMenu",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-          backdropFilter: "blur(0.5rem)"
+          background: "var(--gradient-transparent-dark)",
+          backdropFilter: "var(--blur-lg)"
         }
     },
 
@@ -623,8 +730,8 @@ export const styles = () => {
       selector: ".ChatComponentStyle-chatResize",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0%)",
-          backdropFilter: "blur(0.5rem)"
+          background: "var(--gradient-white-dark)",
+          backdropFilter: "var(--blur-lg)"
         }
     },
 
@@ -633,11 +740,11 @@ export const styles = () => {
       selector: ".ChatComponentStyle-channelSelect",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.8rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "0.6rem",
-          boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-xl)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xs)",
+          boxShadow: "var(--shadow-inset-dark)",
         }
     },
 
@@ -646,8 +753,8 @@ export const styles = () => {
       selector: ".ChatComponentStyle-chatWindow",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 0%)",
-          backdropFilter: "blur(1rem)",
+          background: "var(--gradient-transparent-darker)",
+          backdropFilter: "var(--blur-xxl)",
           animation: "fadeIn 0.3s ease-in-out"
         }
     },
@@ -657,11 +764,11 @@ export const styles = () => {
       selector: ".ChatComponentStyle-messageRow",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.8rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-xl)",
+          border: "var(--border-width) solid var(--border-color-medium)",
           borderRadius: "12px",
-          boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          boxShadow: "var(--shadow-inset-dark)",
         }
     },
 
@@ -670,8 +777,8 @@ export const styles = () => {
       selector: ".ChatComponentStyle-closeArea",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)"
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)"
         }
     },
 
@@ -689,11 +796,11 @@ export const styles = () => {
       selector: ".MainScreenComponentStyle-playButtonContainer",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "2rem 2rem 2rem 2rem",
-          boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-medium)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-round) var(--border-radius-round) var(--border-radius-round) var(--border-radius-round)",
+          boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
           position: "fixed",
           height: "5.4vw",
           width: "28vw",
@@ -705,7 +812,7 @@ export const styles = () => {
     { /* стилизация кнопки играть в главном меню */
       cssStyles: `
         .MainScreenComponentStyle-playButtonContainer > span, .MainScreenComponentStyle-playButtonContainer > h3 {
-          color: rgba(255, 255, 255, 1) !important;
+          color: var(--color-white) !important;
         }
       `
     },
@@ -715,11 +822,11 @@ export const styles = () => {
       selector: ".PrimaryMenuItemComponentStyle-itemCommonLi.PrimaryMenuItemComponentStyle-menuItemContainer",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "2rem",
-          boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-dark)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-round)",
+          boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
           marginBottom: "1vw",
           height: "5vw",
           width: "20vw",
@@ -733,7 +840,7 @@ export const styles = () => {
       selector: "#root > div > div.Common-blockCenter.MainScreenComponentStyle-containerForMenuGradient > div.MainScreenComponentStyle-blockMainMenu > ul > li > div",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -742,7 +849,7 @@ export const styles = () => {
       selector: ".PrimaryMenuItemComponentStyle-notificationIconNewNews",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -751,7 +858,7 @@ export const styles = () => {
       selector: ".Common-maskImageContain.BattleTabStatisticComponentStyle-colorIconBattleOptions",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -769,11 +876,11 @@ export const styles = () => {
       selector: "#root > div > div.Common-blockCenter.MainScreenComponentStyle-containerForMenuGradient > footer > ul",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "2rem",
-          boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-round)",
+          boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-end",
@@ -789,17 +896,17 @@ export const styles = () => {
       selector: ".FooterComponentStyle-containerMenu",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.050)",
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-light)",
           borderRadius: "4.5rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
           marginRight: "0.6rem",
           width: "4.5rem",
           height: "4.5rem",
           bottom: "0.150rem",
           left: "0.250vw",
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -808,8 +915,8 @@ export const styles = () => {
       selector: ".LobbyLoaderComponentStyle-container",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 0%)",
-        backdropFilter: "blur(0.5rem)"
+        background: "var(--gradient-transparent-darker)",
+        backdropFilter: "var(--blur-lg)"
       }
     },
 
@@ -818,11 +925,11 @@ export const styles = () => {
       selector: ".DialogContainerComponentStyle-container",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        outline: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        outline: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -831,11 +938,11 @@ export const styles = () => {
       selector: ".DialogContainerComponentStyle-keyButton, #modal-root > div > div > .Common-flexStartAlignStartColumn > .Common-flexEndAlignCenter > :nth-child(1)",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-red-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -844,11 +951,11 @@ export const styles = () => {
       selector: ".DialogContainerComponentStyle-enterButton, #modal-root > div > div > .Common-flexStartAlignStartColumn > .Common-flexEndAlignCenter > :nth-child(3)",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 128, 0, 0.150) 0%, rgba(0, 128, 0, 0.150) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-green-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -859,12 +966,12 @@ export const styles = () => {
       {
         background: "none",
         border: "none"
-          /* backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderBottomLeftRadius: "2rem",
-          borderBottomRightRadius: "2rem",
+          /* backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderBottomLeftRadius: "var(--border-radius-round)",
+          borderBottomRightRadius: "var(--border-radius-round)",
           width: "99.7%",
-          boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)" */
+          boxShadow: "var(--shadow-inset-dark)" */
       }
     },
 
@@ -873,11 +980,11 @@ export const styles = () => {
       selector: ".MainScreenComponentStyle-containerPanel .UserInfoContainerStyle-blockLeftPanel",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "2rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-round)",
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
         position: "fixed",
         left: "2vw",
         width: "33rem",
@@ -891,11 +998,11 @@ export const styles = () => {
       selector: ".MainScreenComponentStyle-containerPanel .UserScoreComponentStyle-blockRightPanel",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "2rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-round)",
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
         position: "fixed",
         right: "2vw",
         width: "33rem",
@@ -918,9 +1025,9 @@ export const styles = () => {
       selector: ".ChallengeTimerComponentStyle-textTime",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
+        background: "var(--gradient-white)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
         height: "1.3rem",
         transform: "scale(0.94)"
       }
@@ -931,9 +1038,9 @@ export const styles = () => {
     selector: ".BattlePickComponentStyle-timerButton, .MainQuestComponentStyle-commonBlockTimerButton",
     styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem"
+        background: "var(--gradient-white)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)"
       }
     },
 
@@ -942,8 +1049,8 @@ export const styles = () => {
       selector: ".PrimaryMenuItemComponentStyle-discountNotification",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-        borderRadius: "1rem",
+        background: "var(--gradient-white)",
+        borderRadius: "var(--border-radius-md)",
         height: "1.7rem",
         transform: "scale(0.94)",
         right: "2rem"
@@ -955,7 +1062,7 @@ export const styles = () => {
     selector: ".IconStyle-iconAddBattle",
     styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)"
+        background: "var(--gradient-white)"
       }
     },
 
@@ -964,7 +1071,7 @@ export const styles = () => {
     selector: ".ProBattlesComponentStyle-createBattleButton > h3",
     styles:
       {
-        borderRadius: "1rem"
+        borderRadius: "var(--border-radius-md)"
       }
     },
 
@@ -973,11 +1080,11 @@ export const styles = () => {
     selector: "#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn",
     styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
         border: "none",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none)",
         marginBottom: "0.8rem"
       }
     },
@@ -1019,9 +1126,9 @@ export const styles = () => {
       selector: ".AnnouncementHomeScreenComponentStyle-headerTimer",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
+        background: "var(--gradient-white)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
         height: "1.3rem",
         transform: "scale(0.94)"
       }
@@ -1099,8 +1206,8 @@ export const styles = () => {
       selector: ".BreadcrumbsComponentStyle-headerContainer",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0px solid rgba(255, 255, 255, 0.150)",
+        background: "var(--gradient-transparent)",
+        border: "0px solid var(--border-color-medium)",
       }
     },
 
@@ -1109,8 +1216,8 @@ export const styles = () => {
       selector: ".TutorialModalComponentStyle-contentWrapper",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        borderLeft: "0.150rem solid rgba(255, 255, 255, 0.1)",
+        background: "var(--gradient-transparent)",
+        borderLeft: "var(--border-width) solid var(--border-color-medium)",
         animation: "none"
       }
     },
@@ -1118,14 +1225,7 @@ export const styles = () => {
     { /* стилизация туториал всплывашек */
       tag: ["QSA", "BHV", "fade"],
       selector: ".TutorialModalComponentStyle-navigationButton",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("dark", "medium", "lg")
     },
 
     { /* стилизация лобби-меню в главном меню */
@@ -1133,14 +1233,14 @@ export const styles = () => {
       selector: ".InvitationWindowsComponentStyle-commonItem",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.5rem",
+        background: "var(--gradient-transparent-dark)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xxl)",
         top: "8vw",
         left: "2vw",
         width: "33rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)"
       }
     },
 
@@ -1176,11 +1276,11 @@ export const styles = () => {
       selector: ".ClanCreateComponentStyle-blockCreatureClan",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
         width: "60%"
       }
     },
@@ -1215,13 +1315,13 @@ export const styles = () => {
     { /* стилизация чекбоксов */
       cssStyles: `
         .CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span) {
-          background: radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%);
-          border: 0.150rem solid rgba(255, 255, 255, 0.2);
-          border-radius: 1.2rem;
+          background: var(--gradient-transparent-light);
+          border: var(--border-width) solid var(--border-color-dark);
+          border-radius: var(--border-radius-xl);
         }
 
         .CheckBoxStyle-checkbox > label > span:not(#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span)::before {
-          background: radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 0%);
+          background: var(--gradient-white);
           margin-top: 0.2rem;
           border-radius: 5rem;
           height: 1.1rem;
@@ -1235,11 +1335,11 @@ export const styles = () => {
       selector: ".BattlePassLobbyComponentStyle-menuBattlePass",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-medium)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
         position: "absolute",
         margin: "0",
         top: "16.9rem",
@@ -1252,7 +1352,7 @@ export const styles = () => {
       selector: ".BattlePassLobbyComponentStyle-blockBattlePass",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+        background: "var(--gradient-transparent)",
         border: "none",
         right: "0.1rem"
       }
@@ -1272,8 +1372,8 @@ export const styles = () => {
       selector: ".ItemDescriptionComponentStyle-commonBlockModal",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        borderLeft: "0.150rem solid rgba(255, 255, 255, 0.1)"
+        background: "var(--gradient-transparent)",
+        borderLeft: "var(--border-width) solid var(--border-color-medium)"
       }
     },
 
@@ -1282,11 +1382,11 @@ export const styles = () => {
       selector: ".EventBattlePassLobbyComponentStyle-buttonEventBattlePass",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-medium)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
         position: "absolute",
         top: "33rem",
         width: "21.5rem",
@@ -1299,11 +1399,11 @@ export const styles = () => {
       selector: ".EventBattlePassLobbyComponentStyle-commonBlockProgressBar",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "none"
       }
     },
 
-    { /* фикс ивентового блока */
+    { /* стилизация ивентового блока */
     tag: ["QS"],
     selector: ".AnnouncementComponentStyle-extContent",
     styles:
@@ -1317,16 +1417,16 @@ export const styles = () => {
       selector: ".AnnouncementHomeScreenComponentStyle-mainContainer",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.150) 0%, rgba(0, 0, 0, 0.150) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-medium)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)",
         bottom: "2.79rem"
       }
     },
 
-    { /* фикс стилизации анонс блока в главном меню */
+    { /* стилизация анонс блока в главном меню */
       cssStyles: `
         .AnnouncementHomeScreenComponentStyle-announceContainer {
           background: linear-gradient(rgba(0, 25, 38, 0) 0%, rgb(0, 25, 38) 100%) !important;
@@ -1341,7 +1441,7 @@ export const styles = () => {
       cssStyles: `
         .AnnouncementHomeScreenComponentStyle-announceDescriptionContainer {
           border-top-left-radius: 0.85rem !important;
-            border-top-right-radius: 0.85rem !important;
+          border-top-right-radius: 0.85rem !important;
         }
       `
     },
@@ -1351,9 +1451,9 @@ export const styles = () => {
       selector: "#root > div > div.AnnouncementHomeScreenComponentStyle-mainContainer > div.Common-flexCenterAlignCenterColumn",
       styles:
       {
-        borderBottomLeftRadius: "1rem",
-        borderBottomRightRadius: "1rem",
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)"
+        borderBottomLeftRadius: "var(--border-radius-md)",
+        borderBottomRightRadius: "var(--border-radius-md)",
+        background: "var(--gradient-transparent-light)"
       }
     },
 
@@ -1371,11 +1471,11 @@ export const styles = () => {
       selector: ".ModalStyle-rootHover .Common-displayFlex:first-child",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(1rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.050)",
-        borderRadius: "1.5rem",
-        boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-xxl)",
+        border: "var(--border-width) solid var(--border-color-light)",
+        borderRadius: "var(--border-radius-xxl)",
+        boxShadow: "var(--shadow-dark), var(--shadow-inset-dark)"
       }
     },
 
@@ -1384,10 +1484,10 @@ export const styles = () => {
       selector: ".UserTitleComponentStyle-premiumButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.150)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0)"
+        background: "var(--gradient-transparent-dark)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none)"
       }
     },
 
@@ -1417,11 +1517,11 @@ export const styles = () => {
       selector: ".ContextMenuStyle-menu",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.3rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.050)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-md)",
+        border: "var(--border-width) solid var(--border-color-light)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-darker), var(--shadow-inset-dark)"
       }
     },
 
@@ -1437,12 +1537,12 @@ export const styles = () => {
       selector: ".TooltipStyle-tooltip",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.5rem",
-        boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-                  filter: "saturate(0)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xxl)",
+        boxShadow: "var(--shadow-dark), var(--shadow-inset-dark)",
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -1451,11 +1551,11 @@ export const styles = () => {
       selector: ".Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.3)",
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-darker)",
         borderRadius: "20px",
-        backdropFilter: "blur(1rem)",
-        boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)",
+        backdropFilter: "var(--blur-xxl)",
+        boxShadow: "var(--shadow-dark), var(--shadow-inset-darker)",
       }
     },
 
@@ -1464,8 +1564,8 @@ export const styles = () => {
       selector: ".MainQuestComponentStyle-timerData",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-          borderRadius: "1.1rem"
+          background: "var(--gradient-white)",
+          borderRadius: "var(--border-radius-lg)"
         }
     },
 
@@ -1474,7 +1574,7 @@ export const styles = () => {
       selector: ".HotKey-commonBlockForHotKey",
       styles:
       {
-        borderRadius: "1.1rem",
+        borderRadius: "var(--border-radius-lg)",
         transform: "scale(0.94)"
       }
     },
@@ -1484,7 +1584,7 @@ export const styles = () => {
       selector: ".HotKey-inlineBlockForHotKey",
       styles:
         {
-          borderRadius: "1.1rem",
+          borderRadius: "var(--border-radius-lg)",
           transform: "scale(0.94)"
         }
     },
@@ -1494,7 +1594,7 @@ export const styles = () => {
       selector: ".ApplicationLoaderComponentStyle-helpChangeKey",
       styles:
       {
-        borderRadius: "1rem",
+        borderRadius: "var(--border-radius-md)",
       }
     },
 
@@ -1503,7 +1603,7 @@ export const styles = () => {
       selector: ".Common-buttonQE",
       styles:
       {
-        borderRadius: "1.1rem",
+        borderRadius: "var(--border-radius-lg)",
         transform: "scale(0.94)"
       }
     },
@@ -1513,7 +1613,7 @@ export const styles = () => {
       selector: "div.BreadcrumbsComponentStyle-backButton > h3",
       styles:
       {
-        borderRadius: "1.1rem",
+        borderRadius: "var(--border-radius-lg)",
         transform: "scale(0.94)"
       }
     },
@@ -1561,8 +1661,8 @@ export const styles = () => {
       selector: ".ModalStyle-rootHover",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
       }
     },
 
@@ -1571,25 +1671,18 @@ export const styles = () => {
       selector: ".ChangeOwnerDialogComponentStyle-container ",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          outline: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "1.2rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          outline: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xl)",
+          boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
         }
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QSA", "BHV", "fade"],
       selector: ".ClanInvitationsItemComponentStyle-buttonReject",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с кланом */
@@ -1597,7 +1690,7 @@ export const styles = () => {
       selector: ".ClanInvitationsComponentStyle-invitationsLine",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
@@ -1606,11 +1699,11 @@ export const styles = () => {
       selector: ".ClanInvitationsComponentStyle-invitationContent",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.5rem",
-        boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0.75), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xxl)",
+        boxShadow: "var(--shadow-dark), var(--shadow-inset-dark)"
       }
     },
 
@@ -1619,47 +1712,26 @@ export const styles = () => {
       selector: ".ClanCommonStyle-content",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+          background: "var(--gradient-transparent)"
         }
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClanInvitationsComponentStyle-buttonDeclineAll",
-      styles:
-        {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.1rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-        }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QSA", "BHV", "fade"],
       selector: ".ClanCommonStyle-buttonSendRequest",
-      styles:
-        {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.1rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-        }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "fade"],
       selector: "#modal-root > div > div > div.ClanCommonStyle-members.ClanInvitationsListComponentStyle-members > table > thead > tr",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с кланом */
@@ -1667,21 +1739,14 @@ export const styles = () => {
       selector: "#modal-root > div > div > div.ClanCommonStyle-members.ClanInvitationsListComponentStyle-members > table > thead > tr *",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "fade"],
       selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr",
-      styles:
-        {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.1rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-        }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с кланом */
@@ -1689,7 +1754,7 @@ export const styles = () => {
       selector: "#root > div > div > div.ClanCommonStyle-members > table > thead > tr *",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+          background: "var(--gradient-transparent)"
         }
     },
 
@@ -1698,11 +1763,11 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-modalWrapper",
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-          backdropFilter: "blur(0.5rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-          borderRadius: "1.5rem",
-          boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-light)",
+          backdropFilter: "var(--blur-lg)",
+          border: "var(--border-width) solid var(--border-color-medium)",
+          borderRadius: "var(--border-radius-xxl)",
+          boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
           width: "72%"
         }
     },
@@ -1712,7 +1777,7 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-progressLegendPlusGradient > .Common-flexCenterAlignCenter",
       styles:
         {
-          textShadow: "rgb(222, 184, 135) 1px 0px, rgb(222, 184, 135) 0px -1px 15px, rgb(222, 184, 135) -1px 0px, rgb(222, 184, 135) 0px 1px",
+          textShadow: "var(--text-shadow-gold)",
           color: "rgba(0, 0, 0, 0.9)"
         }
     },
@@ -1734,11 +1799,11 @@ export const styles = () => {
       selector: "#modal-root > div > div, #modal-root > div:nth-child(2) > .Common-flexSpaceBetweenAlignStartColumn", /* старый костыль #modal-root > div > .Common-flexSpaceBetweenAlignCenterColumn, #modal-root > div > .Need2FaDialogComponentStyle-container, #modal-root > div > .Common-flexCenterAlignCenter */
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-          backdropFilter: "blur(0.3rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.5rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-dark)",
+          backdropFilter: "var(--blur-md)",
+          border: "var(--border-width) solid var(--border-color-dark)",
+          borderRadius: "var(--border-radius-xxl)",
+          boxShadow: "var(--shadow-darkest), var(--shadow-inset-dark)",
           opacity: "1",
           outline: "none"
         }
@@ -1749,11 +1814,11 @@ export const styles = () => {
       selector: "#modal-root > div:nth-child(2) > .Common-flexSpaceBetweenAlignStartColumn", 
       styles:
         {
-          background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-          backdropFilter: "blur(0.3rem)",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.5rem",
-          boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          background: "var(--gradient-transparent-dark)",
+          backdropFilter: "var(--blur-md)",
+          border: "var(--border-width) solid var(--border-color-dark)",
+          borderRadius: "var(--border-radius-xxl)",
+          boxShadow: "var(--shadow-darkest), var(--shadow-inset-dark)",
           opacity: "1",
           outline: "none"
         }
@@ -1764,10 +1829,10 @@ export const styles = () => {
       selector: ".BattlePickComponentStyle-commonStyleBlock.cardImgEvents",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.75)"
+        background: "var(--gradient-transparent-dark)",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-darker)"
       }
     },
 
@@ -1776,11 +1841,11 @@ export const styles = () => {
       selector: ".FriendRequestComponentStyle-cellName",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "-1%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1789,11 +1854,11 @@ export const styles = () => {
       selector: ".FriendRequestComponentStyle-cellActions",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "-1%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1802,11 +1867,11 @@ export const styles = () => {
       selector: ".TableComponentStyle-row",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "0.50%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1816,11 +1881,11 @@ export const styles = () => {
       selector: ".FriendRequestComponentStyle-buttonDecline",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.2) 0%, rgba(255, 0, 0, 0.150) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
+        background: "var(--gradient-red-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "0.50%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1829,11 +1894,11 @@ export const styles = () => {
       selector: ".FriendRequestComponentStyle-buttonAccept",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(60, 179, 113, 0.2) 0%, rgba(60, 179, 113, 0.2) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
+        background: "var(--gradient-green-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "0.50%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1851,11 +1916,11 @@ export const styles = () => {
       selector: ".FriendRequestComponentStyle-buttonDeclineAll",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.150) 0%, rgba(255, 0, 0, 0.150) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
+        background: "var(--gradient-red-medium)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "0.50%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1864,11 +1929,11 @@ export const styles = () => {
       selector: ".FriendRequestComponentStyle-buttonDeclineAllInvisible",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "0.50%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1877,11 +1942,11 @@ export const styles = () => {
       selector: ".FriendListComponentStyle-blockList.nickNameClass",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.4rem",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "-1%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
       }
     },
 
@@ -1898,25 +1963,25 @@ export const styles = () => {
       cssStyles: `
         div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn {
           background: rgba(222, 184, 135, 0.3) !important;
-          backdrop-filter: blur(0.1rem);
+          backdrop-filter: var(--blur-xs);
         }
 
         div.UserInfoContainerStyle-containerProgressMainScreen > div.Common-flexStartAlignStartColumn::after {
-          background: rgba(222, 184, 135, 1) !important;
-          filter: saturate(1.5) drop-shadow(0rem 0rem 0.2rem rgba(255, 165, 0, 1));
-          box-shadow: rgba(222, 184, 135, 1) 0em 0em 0.275em 0em;
+          background: var(--color-primary) !important;
+          filter: var(--filter-saturate-medium) var(--filter-drop-shadow-gold);
+          box-shadow: var(--color-primary) 0em 0em 0.275em 0em;
         }
 
         .UserInfoContainerStyle-xpIcon {
-          filter: saturate(0);
+          filter: var(--filter-saturate-none);
         }
 
         div.UserInfoContainerStyle-progressValue {
-          color: rgba(255, 255, 255, 1) !important;
+          color: var(--color-white) !important;
         }
 
         div.UserInfoContainerStyle-progressValue > span {
-          color: rgba(255, 255, 255, 1) !important;
+          color: var(--color-white) !important;
         }
       `
     },
@@ -1952,35 +2017,21 @@ export const styles = () => {
       selector: ".FriendListComponentStyle-substrateRhombus",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)",
+        background: "var(--gradient-transparent)",
+        boxShadow: "var(--shadow-none)",
       }
     },
 
     { /* стилизация кнопочек в разделе друзей */
       tag: ["QS", "fade", "BHV"],
       selector: ".FriendListComponentStyle-buttonCloseAddFriends",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
-      }
+      styles: bsGlass("light", "dark", "xl", "lg", "darker")
     },
 
     { /* стилизация кнопочек в разделе друзей */
       tag: ["QS", "fade", "BHV"],
       selector: ".FriendListComponentStyle-buttonAddFriends",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
-      }
+      styles: bsGlass("light", "dark", "xl", "lg", "darker")
     },
 
     { /* стилизация кнопочек в разделе друзей */
@@ -1988,21 +2039,14 @@ export const styles = () => {
       selector: "div.FriendListComponentStyle-containerButtonFriends > div > img",
       styles:
       {
-        filter: "brightness(10) saturate(0)"
+        filter: "brightness(10) var(--filter-saturate-none)"
       }
     },
 
     { /* стилизация кнопочек в разделе друзей */
       tag: ["QS", "fade"],
       selector: ".FriendListComponentStyle-buttonDisableAdd",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.05rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
-      }
+      styles: bsGlass("light", "dark", "xl", "lg", "darker")
     },
 
     { /* стилизация списка друзей в инвайт меню */
@@ -2010,11 +2054,11 @@ export const styles = () => {
       selector: ".Common-flexStartAlignCenter.Common-whiteSpaceNoWrap.nickNameClass",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.4rem",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "-1%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -2023,11 +2067,11 @@ export const styles = () => {
       selector: ".Common-flexStartAlignCenter.Common-whiteSpaceNoWrap",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.4rem",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
         marginBottom: "-1%",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -2036,8 +2080,8 @@ export const styles = () => {
       selector: ".InvitationWindowsComponentStyle-substrateRank",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0)"
+        background: "var(--gradient-transparent)",
+        boxShadow: "var(--shadow-none)"
       }
     },
 
@@ -2046,10 +2090,10 @@ export const styles = () => {
       selector: ".InvitationWindowsComponentStyle-backButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -2058,24 +2102,17 @@ export const styles = () => {
       selector: ".InvitationWindowsComponentStyle-inviteButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0px 0px 0px rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
     { /* стилизация полосы поиска */
       tag: ["QSA", "fade", "BHV"],
       selector: ".SearchInputComponentStyle-searchInput .Font-normal",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.5)"
-      }
+      styles: bsGlass("light", "dark", "xl", "sm", "darker")
     },
 
     { /* стилизация раздела настроек */
@@ -2083,11 +2120,11 @@ export const styles = () => {
       selector: ".SettingsMenuComponentStyle-menuItemOptions",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0.5rem 0.05rem rgba(0, 0, 0, 0.55), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        backdropFilter: "var(--blur-sm)",
+        boxShadow: "var(--shadow-medium), var(--shadow-inset-dark)",
         width: "17rem",
         height: "3rem",
         marginBottom: "0.7rem",
@@ -2098,144 +2135,67 @@ export const styles = () => {
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: ".GameSettingsStyle-button",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: ".KeyboardSettingsComponentStyle-buttonResetAllKeys",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QSA", "BHV", "fade"],
       selector: ".KeyboardSettingsComponentStyle-keyInput",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QSA", "BHV", "fade"],
       selector: ".AccountSettingsComponentStyle-buttonChangesOptions",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: ".AccountSettingsComponentStyle-buttonConnectOptions",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QSA", "BHV", "fade"],
       selector: "div.AccountSettingsComponentStyle-blockChangePassword > div > input, .SecuritySettingsComponentStyle-codeInputBlock > div > div > input[type=text]",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: ".AccountSettingsComponentStyle-buttonCaptchaOptions",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: ".TwitchSettingsRendersStyle-button",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: "div.AccountSettingsComponentStyle-containerFormOptions > div > div.AccountSettingsComponentStyle-blockInputEmail > input",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "fade"],
       selector: "div.AccountSettingsComponentStyle-containerFormOptions:nth-child(1) > form > div",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QSA", "BHV", "fade"],
       selector: ".KeyMappingWithIconComponentStyle-commonBlockSupplies",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация ползунков в разделе настроек */
@@ -2243,18 +2203,18 @@ export const styles = () => {
       selector: ".InputRangeComponentStyle-range",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        backdropFilter: "blur(0.2rem)"
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        backdropFilter: "var(--blur-sm)"
       }
     },
 
     { /* стилизация активного раздела */
       cssStyles: `
         .InputRangeComponentStyle-range::-webkit-slider-thumb {
-          background: radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%) !important;
-          border-radius: 1rem !important;
+          background: var(--gradient-white) !important;
+          border-radius: var(--border-radius-md) !important;
         }
       `
     },
@@ -2262,27 +2222,13 @@ export const styles = () => {
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: ".SecuritySettingsComponentStyle-button",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела настроек */
       tag: ["QS", "BHV", "fade"],
       selector: ".KeyMappingWithIconComponentStyle-overdrives",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела настроек */
@@ -2290,11 +2236,11 @@ export const styles = () => {
       selector: ".SettingsButtonsComponentStyle-buttonsWidthBackReset",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 0, 0, 0.2)",
-        borderRadius: "1.2rem",
-        backdropFilter: "blur(0.2rem)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-red-light)",
+        border: "var(--border-width) solid var(--border-color-red-medium)",
+        borderRadius: "var(--border-radius-xl)",
+        backdropFilter: "var(--blur-sm)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -2310,14 +2256,7 @@ export const styles = () => {
     { /* стилизация выпадающего списка */
       tag: ["QSA", "fade", "BHV"],
       selector: ".DropDownStyle-dropdownControl",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация выпадающего списка */
@@ -2325,11 +2264,11 @@ export const styles = () => {
       selector: ".VerticalScrollStyle-outerContainerStyle .Common-flexStartAlignCenter",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         marginBottom: "0.4rem"
       }
     },
@@ -2337,18 +2276,18 @@ export const styles = () => {
     { /* стилизация активного раздела */
       cssStyles: `
         .Common-activeMenu {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
           animation: fadeIn 0.3s ease-in-out;
         }
 
         .MenuComponentStyle-mainMenuItem:hover {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
 
         .Common-menuItemActive {
-          background: rgba(222, 184, 135, 1) !important;
-          box-shadow: rgba(222, 184, 135, 1) 0rem 0rem 0.375rem !important;
-          filter: drop-shadow(rgba(222, 184, 135, 1) 0rem 0rem 0.5rem) !important;
+          background: var(--color-primary) !important;
+          box-shadow: var(--color-primary) 0rem 0rem 0.375rem !important;
+          filter: drop-shadow(var(--color-primary) 0rem 0rem 0.5rem) !important;
           animation: scaleIn 0.7s ease-in-out;
         }
 
@@ -2372,7 +2311,7 @@ export const styles = () => {
     { /* стилизация заголовка раздела */
       cssStyles: `
         div.BreadcrumbsComponentStyle-breadcrumbs > div > span {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
       `
     },
@@ -2382,11 +2321,11 @@ export const styles = () => {
       selector: ".BattleHudComponentStyle-hudButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-light), var(--shadow-inset-light)",
       }
     },
 
@@ -2405,11 +2344,11 @@ export const styles = () => {
       selector: ".BattleMessagesComponentStyle-message",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.1rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-sm)",
+        border: "0.1rem solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-light), var(--shadow-inset-light)"
       }
     },
 
@@ -2418,10 +2357,10 @@ export const styles = () => {
       selector: ".BattlePauseMenuComponentStyle-menuButton.BattlePauseMenuComponentStyle-enabledButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-light), var(--shadow-inset-light)",
         height: "4rem",
         justifyContent: "center"
       }
@@ -2432,10 +2371,10 @@ export const styles = () => {
       selector: ".BattlePauseMenuComponentStyle-menuButton.BattlePauseMenuComponentStyle-disabledButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-light), var(--shadow-inset-light)",
         height: "4rem",
         justifyContent: "center"
       }
@@ -2446,10 +2385,10 @@ export const styles = () => {
       selector: ".BattlePauseMenuComponentStyle-redMenuButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0) 0%, rgba(255, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 0, 0, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.4), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.2)",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-red-light)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-light), var(--shadow-inset-light)",
         height: "4rem",
         justifyContent: "center"
       }
@@ -2460,8 +2399,8 @@ export const styles = () => {
       selector: ".BattlePauseMenuComponentStyle-blackGlobalWrapper",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        backdropFilter: "blur(0.3rem)"
+        background: "var(--gradient-transparent-dark)",
+        backdropFilter: "var(--blur-md)"
       }
     },
 
@@ -2493,12 +2432,12 @@ export const styles = () => {
       selector: ".BattlePauseMenuComponentStyle-container",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
+        background: "var(--gradient-transparent-dark)",
         gap: "0.5rem",
-        border: "0.150rem solid rgba(255, 255, 255, 0.120)",
-        borderRadius: "1.2rem",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xl)",
         padding: "3.5rem",
-        boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0.6), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-darkest), var(--shadow-inset-dark)"
       }
     },
 
@@ -2507,11 +2446,11 @@ export const styles = () => {
       selector: ".RankupComponentStyle-wrapper",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.8rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-xl)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-light), var(--shadow-inset-light)",
         width: "60%"
       }
     },
@@ -2529,53 +2468,25 @@ export const styles = () => {
     { /* стилизация заданок в ммной стате */
       tag: ["QSA", "BHV", "fade"],
       selector: ".BattleResultQuestProgressComponentStyle-container",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl", "lg", "light")
     },
 
     { /* стилизация заданок в ммной стате */
       tag: ["QSA", "BHV", "fade"],
       selector: ".BattleResultQuestProgressComponentStyle-container-true",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl", "lg", "light")
     },
 
     { /* стилизация заданок в ммной стате */
       tag: ["QSA", "BHV", "fade"],
       selector: ".BattleResultQuestProgressComponentStyle-container-false",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl", "lg", "light")
     },
 
     { /* стилизация ммной статы */
       tag: ["QS", "fade"],
       selector: ".BattleResultUserInfoComponentStyle-progressVictoryContainer",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0.2rem 0.05rem rgba(0, 0, 0, 0.5), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl", "lg", "light")
     },
 
     { /* стилизация ммной статы */
@@ -2646,11 +2557,11 @@ export const styles = () => {
       selector: "#selfUserBg",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(128, 128, 128, 0.2) 0%, rgba(128, 128, 128, 0.2) 0%)",
-        backdropFilter: "blur(0.3rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-gray-light)",
+        backdropFilter: "var(--blur-md)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -2659,11 +2570,11 @@ export const styles = () => {
       selector: "#blueCommand",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.3rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-md)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -2672,11 +2583,11 @@ export const styles = () => {
       selector: "#enemyCommand",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0.05) 0%)",
-        backdropFilter: "blur(0.3rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-red-light)",
+        backdropFilter: "var(--blur-md)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -2685,11 +2596,11 @@ export const styles = () => {
       selector: "#root > div > div > div.BattleRewardsComponentStyle-commonBlockButtonRewards > div > div > div",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)",
         width: "30%"
       }
     },
@@ -2699,11 +2610,11 @@ export const styles = () => {
       selector: ".BattleResultNavigationComponentStyle-button",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -2712,11 +2623,11 @@ export const styles = () => {
       selector: "div.Common-flexCenterAlignCenter.BattleResultNavigationComponentStyle-buttonNextWithTimer.BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -2725,11 +2636,11 @@ export const styles = () => {
       selector: ".BattleResultNavigationComponentStyle-disabledButtonWithTimer",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -2745,27 +2656,13 @@ export const styles = () => {
     { /* стилизация раздела с контейнерами */
       tag: ["QS", "BHV", "fade"],
       selector: ".ItemDescriptionComponentStyle-captionDevice",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с контейнерами */
       tag: ["QS", "fade"],
       selector: ".ContainersComponentStyle-possibleRewardsBlock",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     {  /* стилизация раздела с контейнерами */
@@ -2789,41 +2686,19 @@ export const styles = () => {
     { /* стилизация раздела с контейнерами */
       tag: ["QSA", "BHV"],
       selector: "div.ContainersComponentStyle-rewards > div",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
-        margin: "0.2rem"
-      }
+      styles: bsGlass("light", "dark", "md", "lg", "light")
     },
 
     { /* стилизация раздела с контейнерами и гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".DeviceButtonComponentStyle-blockAlterations .Common-flexCenterAlignCenter",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с контейнерами */
       tag: ["QS", "BHV", "fade"],
       selector: ".ContainersComponentStyle-moreButton",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с контейнерами */
@@ -2882,66 +2757,31 @@ export const styles = () => {
     { /* стилизация раздела с контейнерами */
       tag: ["QSA", "BHV", "fade"],
       selector: ".ContainerInfoComponentStyle-possibleRewardsContainer .Common-flexCenterAlignCenterColumn",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация дропа с контейнеров */
       tag: ["QSA", "BHV", "fade"],
       selector: ".RewardCardComponentStyle-smoothAppearance",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация дропа с контейнеров */
       tag: ["QSA", "BHV", "fade"],
       selector: ".RewardCardComponentStyle-fastAppearance",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация дропа с контейнеров */
       tag: ["QSA", "BHV", "scale"],
       selector: "#root > div > div > div.AnimationOpenContainerComponentStyle-rewardWrapper > div.AnimationOpenContainerComponentStyle-rewardContainer > div.Common-flexCenterAlignCenterColumn",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация дропа с контейнеров */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClosedContainerStyle-moreButton",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация дропа с контейнеров */
@@ -2949,7 +2789,7 @@ export const styles = () => {
       selector: ".AnimationOpenContainerComponentStyle-receivedReward",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
@@ -2958,10 +2798,10 @@ export const styles = () => {
       selector: ".ScrollingCardsComponentStyle-scrollCard.cardImg",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -2978,7 +2818,7 @@ export const styles = () => {
       styles:
       {
         border: "none",
-        borderRadius: "1.1rem",
+        borderRadius: "var(--border-radius-lg)",
         transform: "scale(0.94)"
       }
     },
@@ -2988,9 +2828,9 @@ export const styles = () => {
       selector: "div.QuestsComponentStyle-emptyList0 > h2",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-        borderRadius: "1.1rem",
-        boxShadow: "inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-white)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-inset-light)"
       }
     },
 
@@ -2999,9 +2839,9 @@ export const styles = () => {
       selector: ".TableMainQuestComponentStyle-commonBlockTimerButtonTable",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-        borderRadius: "1.1rem",
-        boxShadow: "inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-white)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-inset-light)"
       }
     },
 
@@ -3010,9 +2850,9 @@ export const styles = () => {
       selector: "div.ContainerInfoComponentStyle-lootBoxContainer > div > div > h2",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%)",
-        borderRadius: "1.1rem",
-        boxShadow: "inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-white)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-inset-light)"
       }
     },
 
@@ -3049,89 +2889,47 @@ export const styles = () => {
       selector: ".SuperMissionComponentStyle-buttonDisable",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "fade"],
       selector: ".SuperMissionComponentStyle-rewardsContainer .Common-flexCenterAlignCenterColumn",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg", "lg", "light")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "fade"],
       selector: ".MainQuestComponentStyle-rewardsContainer .Common-flexCenterAlignCenterColumn",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg", "lg", "light")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "fade"],
       selector: ".TableMainQuestComponentStyle-rewardsContainerTable .Common-flexCenterAlignCenterColumn",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg", "lg", "light")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "fade"],
       selector: ".MainQuestComponentStyle-rewardsInDescriptionModal .Common-flexCenterAlignCenterColumn",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg", "lg", "light")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QS", "BHV", "fade"],
       selector: ".MainQuestComponentStyle-buttonContainer",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QS", "BHV", "fade"],
       selector: ".MainQuestComponentStyle-containerButtonStore",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
@@ -3139,11 +2937,11 @@ export const styles = () => {
       selector: ".MainQuestComponentStyle-cardRewardGiven",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -3152,11 +2950,11 @@ export const styles = () => {
       selector: ".TableMainQuestComponentStyle-cardRewardGivenTable",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -3165,51 +2963,30 @@ export const styles = () => {
       selector: ".MainQuestComponentStyle-needRank",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "BHV", "scale", "scale3d"],
       selector: ".MainQuestComponentStyle-colorCardPlay",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "BHV", "scale", "scale3d"],
       selector: ".MainQuestComponentStyle-commonCard",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "BHV", "fade"],
       selector: ".TableMainQuestComponentStyle-cardLockedTable",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
@@ -3227,10 +3004,10 @@ export const styles = () => {
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -3240,10 +3017,10 @@ export const styles = () => {
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -3259,27 +3036,13 @@ export const styles = () => {
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "BHV", "scale", "scale3d"],
       selector: ".MainQuestComponentStyle-cardPlay",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "BHV", "fade"],
       selector: ".MainQuestComponentStyle-cardPlayCommon",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
@@ -3287,11 +3050,11 @@ export const styles = () => {
       selector: ".MainQuestComponentStyle-cardRewardCompleted",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.6rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.6)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -3300,25 +3063,18 @@ export const styles = () => {
       selector: ".TableMainQuestComponentStyle-cardRewardCompletedTable",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.6rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.6)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
     { /* стилизация раздела с миссиями */
       tag: ["QSA", "BHV", "fade"],
       selector: ".MainQuestComponentStyle-cardCommonLocked",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела с миссиями */
@@ -3333,27 +3089,13 @@ export const styles = () => {
     { /* стилизация всплывающего инфо-окна */
       tag: ["QS", "slide"],
       selector: ".NotificationViewStyle-commonBlockNotification",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.5rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xxl", "lg", "light")
     },
 
     { /* стилизация всплывающего инфо-окна */
       tag: ["QSA", "BHV", "fade"],
       selector: "div.NotificationViewStyle-commonBlockButtonYesNo > div",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация всплывающего инфо-окна */
@@ -3386,14 +3128,7 @@ export const styles = () => {
     { /* стилизация гаража */
       tag: ["QS", "fade"],
       selector: ".TankParametersStyle-leftParamsContainer",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
@@ -3401,7 +3136,7 @@ export const styles = () => {
       selector: ".TankParametersStyle-parametersBlockGear .Common-flexStartAlignCenter",
       styles:
         {
-          filter: "saturate(0)"
+          filter: "var(--filter-saturate-none)"
         }
     },
 
@@ -3447,10 +3182,10 @@ export const styles = () => {
       styles:
       {
         backgroundSize: "initial",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+        border: "var(--border-width) solid var(--border-color-dark)",
         borderRadius: "0.9rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
-        filter: "saturate(0)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)",
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3460,10 +3195,10 @@ export const styles = () => {
       styles:
       {
         backgroundSize: "initial",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+        border: "var(--border-width) solid var(--border-color-dark)",
         borderRadius: "0.9rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
-        filter: "saturate(0)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)",
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3472,11 +3207,11 @@ export const styles = () => {
       selector: ".MountedItemsStyle-commonBlockDrone",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)",
         width: "47%"
       }
     },
@@ -3484,14 +3219,7 @@ export const styles = () => {
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "scale", "scale3d"],
       selector: ".SkinCellStyle-widthHeight",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация гаража */
@@ -3499,7 +3227,7 @@ export const styles = () => {
       selector: ".GarageCommonStyle-positionContentAlteration .Common-flexSpaceBetweenAlignStartColumn",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+        background: "var(--gradient-transparent)",
         borderRight: "none"
       }
     },
@@ -3509,11 +3237,11 @@ export const styles = () => {
       selector: ".MountedItemsStyle-commonBlockGrenades",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)",
         width: "47%"
       }
     },
@@ -3521,159 +3249,79 @@ export const styles = () => {
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".MountedItemsComponentStyleMobile-commonBlockForTurretsHulls",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".MountedItemsComponentStyleMobile-commonBlockForTurretsHulls",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".MountedItemsStyle-commonForCellResistenceName",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".GarageProtectionsComponentStyle-equipmentResistance",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".Common-flexCenterAlignCenter.Common-borderRadius4px",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".SuppliesComponentStyle-cellAdd",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QS", "fade"],
       selector: "#root > div > div.GarageCommonStyle-garageContainer > div.GarageCommonStyle-positionContent > div.GarageMainScreenStyle-blockParameters > div.TanksPartBaseComponentStyle-tankPartContainer > div > div.TanksPartComponentStyle-tankPartUpgrades.GarageCommonStyle-animatedBlurredRightBlock",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QS", "fade"],
       selector: "#root > div > div > div.GarageCommonStyle-garageContainer > div.GarageCommonStyle-positionContent > div.GarageMainScreenStyle-blockParameters > div.TanksPartBaseComponentStyle-tankPartContainer > div > div.TanksPartComponentStyle-tankPartUpgrades.GarageCommonStyle-animatedBlurredRightBlock",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QS", "BHV", "fade"],
       selector: "div.GarageSuppliesComponentStyle-containerButtons > div > input",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QS", "fade"],
       selector: "div.TanksPartComponentStyle-descriptionContainer > div.GarageCommonStyle-animatedBlurredLeftBlock > div:nth-child(2)",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QS", "fade"],
       selector: ".TanksPartComponentStyle-blockForImageResistanceModule",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".SquarePriceButtonComponentStyle-commonBlockButton",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация гаража */
       tag: ["QSA", "BHV", "fade"],
       selector: ".Common-itemStyle.garage-item",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация гаража */
@@ -3699,7 +3347,7 @@ export const styles = () => {
       selector: ".GarageProtectionsComponentStyle-iconEquipResist",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3708,7 +3356,7 @@ export const styles = () => {
       selector: ".MountedItemsStyle-improvementArrow",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3717,7 +3365,7 @@ export const styles = () => {
       selector: ".SkinCellStyle-mountIcon",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3726,7 +3374,7 @@ export const styles = () => {
       selector: ".MountedItemsStyle-improvementArrow",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3735,7 +3383,7 @@ export const styles = () => {
       selector: ".MountedItemsStyle-improvementArrow",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3744,7 +3392,7 @@ export const styles = () => {
       selector: ".GarageItemComponentStyle-improvementArrow",
       styles:
       {
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -3753,27 +3401,13 @@ export const styles = () => {
     { /* стилизация раздела с кланом */
       tag: ["QS", "fade"],
       selector: ".ClanHeaderComponentStyle-blockInform",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg", "lg", "dark")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QSA", "BHV", "fade"],
       selector: "#root > div > div > div.ClanCommonStyle-center.ClanCommonStyle-marginContent > div > div.ClanInfoComponentStyle-clanForeignActions > div.Common-flexCenterAlignCenter",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg", "lg", "dark")
     },
 
     { /* стилизация раздела с кланом */
@@ -3788,53 +3422,25 @@ export const styles = () => {
     { /* стилизация раздела с кланом */
       tag: ["QS", "fade"],
       selector: ".ClanInfoComponentStyle-messageClan",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg", "lg", "dark")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClanInvitationsComponentStyle-sendButton",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClanProfileEditComponentStyle-clanDescriptionEdit",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QSA", "BHV", "fade"],
       selector: ".ClanProfileEditComponentStyle-buttonCancel",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела с кланом */
@@ -3842,47 +3448,26 @@ export const styles = () => {
       selector: ".ClanProfileEditComponentStyle-containerParametersClanBlockInform",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClanInfoComponentStyle-buttonEditProfile",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClanInfoComponentStyle-clanForeignActions > div > .Common-flexCenterAlignCenter",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "fade"],
       selector: "#root > div > div > div.FriendListComponentStyle-containerMembers > table > thead > tr",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md", "lg", "dark")
     },
 
     { /* стилизация раздела с кланом */
@@ -3890,7 +3475,7 @@ export const styles = () => {
       selector: "#root > div > div > div.FriendListComponentStyle-containerMembers > table > thead > tr *",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
@@ -3899,11 +3484,11 @@ export const styles = () => {
       selector: ".ClanCommonStyle-row",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         marginBottom: "0.4rem"
       }
     },
@@ -3913,7 +3498,7 @@ export const styles = () => {
       selector: ".ClanCommonStyle-rowEmpty",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
@@ -3929,40 +3514,19 @@ export const styles = () => {
     { /* стилизация раздела с кланом */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClanMembersListComponentStyle-buyClanPlaceButton",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QS", "BHV", "fade"],
       selector: ".ClanCommonStyle-buttonInvite",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация раздела с кланом */
       tag: ["QSA", "BHV", "fade"],
       selector: ".PopupMessageComponentStyle-buttonsContainer .Common-flexCenterAlignCenter",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с кланом */
@@ -3970,11 +3534,11 @@ export const styles = () => {
       selector: ".ClanStatisticsComponentStyle-areCommon",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-inset-dark)"
       }
     },
 
@@ -4001,7 +3565,7 @@ export const styles = () => {
       selector: ".ApplicationLoaderComponentStyle-container",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 0%)"
+        background: "var(--gradient-black)"
       }
     },
 
@@ -4055,11 +3619,11 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-progressItemCompleted",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4068,11 +3632,11 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-progressItemUncompleted",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-dark)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4099,25 +3663,18 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-itemContainer",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-dark)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
     { /* стилизация раздела званок */
       tag: ["QS", "BHV", "fade"],
       selector: ".UserProgressComponentStyle-buyPremium .Common-flexCenterAlignCenter",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "lg")
     },
 
     { /* стилизация раздела званок */
@@ -4157,7 +3714,7 @@ export const styles = () => {
       selector: ".ScrollBarStyle-leftScrollArrow",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+        background: "var(--gradient-transparent)",
         /* width: "0rem",
         boxShadow: "-0.3rem 0rem 0.5rem 0.08rem rgba(0, 0, 0, 1)",
         left: "-0.2rem" */
@@ -4169,7 +3726,7 @@ export const styles = () => {
       selector: ".ScrollBarStyle-rightScrollArrow",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+        background: "var(--gradient-transparent)",
         /* width: "0rem",
         boxShadow: "-0.3rem 0rem 0.5rem 0.08rem rgba(0, 0, 0, 1)",
         right: "-0.2rem" */
@@ -4181,10 +3738,10 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-progressLegendPlus",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4193,7 +3750,7 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-progressLegendPlusImage",
       styles:
       {
-        borderRadius: "1rem"
+        borderRadius: "var(--border-radius-md)"
       }
     },
 
@@ -4202,7 +3759,7 @@ export const styles = () => {
       selector: ".UserProgressComponentStyle-progressLegendPlusGradient",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
@@ -4211,10 +3768,10 @@ export const styles = () => {
       selector: ".Common-flexStartAlignCenter.Common-flexWrapNowrap.modeLimitIcon",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         width: "99%",
         marginBottom: "0.50%"
       }
@@ -4275,11 +3832,11 @@ export const styles = () => {
       selector: ".BattleModesComponentStyle-blockModesFilter .Common-flexCenterAlignCenter",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
         border: "none",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4288,11 +3845,11 @@ export const styles = () => {
       selector: ".BattleCreateComponentStyle-mainContainer .Common-flexStartAlignCenterColumn .Common-flexStartAlignStartColumn .Common-flexCenterAlignCenter",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
         border: "none",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4310,10 +3867,10 @@ export const styles = () => {
       selector: ".InformationComponentStyle-blockCard",
       styles:
       {
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(0, 0, 0, 1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-none)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4322,7 +3879,7 @@ export const styles = () => {
       selector: ".MainSectionComponentStyle-linearGradientImgCard",
       styles:
       {
-        borderRadius: "1rem",
+        borderRadius: "var(--border-radius-md)",
         bottom: "-0.1rem",
         width: "100.2%"
       }
@@ -4344,7 +3901,7 @@ export const styles = () => {
       selector: ".ProBattlesComponentStyle-createBattleButton",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+        background: "var(--gradient-transparent)",
         borderTop: "none",
       }
     },
@@ -4354,7 +3911,7 @@ export const styles = () => {
       selector: ".ProBattlesComponentStyle-mainContainer .Common-flexStartAlignCenterColumn",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+        background: "var(--gradient-transparent)",
         borderRight: "none",
         marginBottom: "1rem"
       }
@@ -4429,11 +3986,11 @@ export const styles = () => {
       selector: ".FormatsSectionComponentStyle-card",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-        borderRadius: "1.1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-lg)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4449,27 +4006,13 @@ export const styles = () => {
     { /* стилизация раздела с битвами */
       tag: ["QS", "BHV", "fade"],
       selector: "div.BattleCreateComponentStyle-commonInputButtons.ProBattleCommonStyleMobile-commonInputButtons > form > div > input",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с битвами */
       tag: ["QSA", "BHV", "fade"],
       selector: "div.MainSectionComponentStyle-parameters > div > input",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с битвами */
@@ -4478,7 +4021,7 @@ export const styles = () => {
       styles:
       {
         zIndex: "1",
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
@@ -4488,21 +4031,14 @@ export const styles = () => {
       styles:
       {
         zIndex: "1",
-        filter: "saturate(0)"
+        filter: "var(--filter-saturate-none)"
       }
     },
 
     { /* стилизация раздела с битвами */
       tag: ["QSA", "fade"],
       selector: ".MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация раздела с битвами */
@@ -4510,7 +4046,7 @@ export const styles = () => {
       selector: ".SettingsComponentStyle-scrollCreateBattle.Common-scrollBarHoverVisible",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
+        background: "var(--gradient-transparent)",
         border: "none",
       }
     },
@@ -4518,14 +4054,7 @@ export const styles = () => {
     { /* стилизация раздела с битвами */
       tag: ["QSA", "BHV", "fade"],
       selector: "#root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.Common-flexStartAlignStretchColumn > div > div.Common-flexCenterAlignCenter.Common-alignSelfFlexEnd",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация кнопок в разделе с битвами */
@@ -4542,11 +4071,11 @@ export const styles = () => {
       selector: "#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div.Common-flexCenterAlignCenterColumn > div",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         width: "96%"
       }
     },
@@ -4556,11 +4085,11 @@ export const styles = () => {
       selector: "#root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         height: "95.5%"
       }
     },
@@ -4592,11 +4121,11 @@ export const styles = () => {
       selector: "#root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.Common-flexCenterAlignCenter.JoinToBattleComponentStyle-buttonJoin.ProBattleCommonStyleMobile-buttonContainer",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         width: "95%"
       }
     },
@@ -4606,22 +4135,17 @@ export const styles = () => {
       selector: "#root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.Common-flexCenterAlignCenter.JoinToBattleComponentStyle-buttonJoin.ProBattleCommonStyleMobile-buttonContainer > span",
       styles:
       {
-        color: "rgba(255, 255, 255, 1)"
+        color: "var(--color-white)"
       }
     },
 
     { /* стилизация списка игроков в разделе битв */
       tag: ["QSA", "BHV", "fade"],
       selector: ".UsersTableStyle-centerCell.UsersTableStyle-fontCell.UsersTableStyle-rowBattle",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-        marginBottom: "0.3rem"
-      }
+      styles: { 
+        ...bsGlass("light", "dark", "md", "lg", "dark"), 
+        'margin-bottom': '0.3rem'
+      },
     },
 
     { /* стилизация списка игроков в разделе битв */
@@ -4629,11 +4153,11 @@ export const styles = () => {
       selector: ".UsersTableStyle-cellName.UsersTableStyle-rowBattleEmpty.UsersTableStyle-centerCell.UsersTableStyle-fontCell",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         marginBottom: "0.3rem"
       }
     },
@@ -4641,15 +4165,10 @@ export const styles = () => {
     { /* стилизация списка игроков в разделе битв */
       tag: ["QSA", "BHV", "fade"],
       selector: ".UsersTableStyle-row.UsersTableStyle-rowBattle.UsersTableStyle-rowWidth",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-        marginBottom: "0.3rem"
-      }
+      styles: { 
+        ...bsGlass("light", "dark", "md", "lg", "dark"), 
+        'margin-bottom': '0.3rem'
+      },
     },
 
     { /* стилизация списка игроков в разделе битв */
@@ -4657,11 +4176,11 @@ export const styles = () => {
       selector: ".UsersTableStyle-row.UsersTableStyle-rowBattleEmpty.UsersTableStyle-rowWidth",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         marginBottom: "0.3rem"
       }
     },
@@ -4671,34 +4190,20 @@ export const styles = () => {
       selector: ".Common-entranceGradient .Common-container",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 0%)"
+        background: "var(--gradient-black)"
       }
     },
 
     { /* стилизация рег формы */
       tag: ["QSA", "BHV", "scale", "scale3d"],
       selector: ".HeaderComponentStyle-siteLink.menuItemClass",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl")
     },
 
     { /* стилизация рег формы */
       tag: ["QS", "BHV", "fade"],
       selector: "#email",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl", "sm")
     },
 
     { /* стилизация рег формы */
@@ -4706,11 +4211,11 @@ export const styles = () => {
       selector: "#username",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         bottom: "0.3rem"
       }
     },
@@ -4718,14 +4223,7 @@ export const styles = () => {
     { /* стилизация рег формы */
       tag: ["QSA", "BHV", "fade"],
       selector: "#password",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
-      }
+      styles: bsGlass("light", "dark", "xl", "sm")
     },
 
     { /* стилизация рег формы */
@@ -4733,11 +4231,11 @@ export const styles = () => {
       selector: "#password1",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         top: "0.3rem"
       }
     },
@@ -4745,40 +4243,19 @@ export const styles = () => {
     { /* стилизация рег формы */
       tag: ["QSA", "BHV", "fade"],
       selector: ".EntranceComponentStyle-styleButtons",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl", "sm")
     },
 
     { /* стилизация рег формы */
       tag: ["QS", "BHV", "fade"],
       selector: "div.RegistrationComponentStyle-containerItem > input",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "xl", "sm")
     },
 
     { /* стилизация рег формы */
       tag: ["QS", "BHV", "fade"],
       selector: ".HeaderComponentStyle-blockForIconToggleSound",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md", "sm")
     },
 
     { /* стилизация рег формы */
@@ -4786,7 +4263,7 @@ export const styles = () => {
       selector: ".EntranceComponentStyle-styleButtons > span",
       styles:
       {
-        color: "rgba(255, 255, 255, 1)"
+        color: "var(--color-white)"
       }
     },
 
@@ -4795,7 +4272,7 @@ export const styles = () => {
       selector: "#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm.Common-flexCenterAlignCenter.Common-displayFlex.Common-alignCenter > form > div.RegistrationComponentStyle-containerItem > div.DropDownStyle-dropdownRoot.UidInputComponentStyle-dropDownRoot > div > div > div > div > span",
       styles:
       {
-        color: "rgba(255, 255, 255, 1)"
+        color: "var(--color-white)"
       }
     },
 
@@ -4831,17 +4308,17 @@ export const styles = () => {
       selector: "#root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
       }
     },
 
     { /* стилизация рег формы */
       cssStyles: `
         #root > div > div.Common-entranceGradient > div.Common-contentSpaceBetween > div.EntranceComponentStyle-ContainerForm > form > div.EntranceComponentStyle-blockCheckedLink.Common-flexStartAlignStartColumn > div.EntranceComponentStyle-checkbox > div > label > span::before {
-          filter: saturate(0);
+          filter: var(--filter-saturate-none);
         }
       `
     },
@@ -4860,74 +4337,39 @@ export const styles = () => {
       selector: ".navbar",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0)"
+        background: "var(--gradient-transparent)",
+        boxShadow: "var(--shadow-none)"
       }
     },
 
     { /* стилизация сайта с рейтингами */
       tag: ["QSA", "fade"],
       selector: ".generic-box.panel",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация сайта с рейтингами */
       tag: ["QS", "fade"],
       selector: ".generic-box.error-box",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация сайта с рейтингами */
       tag: ["QSA", "BHV", "fade"],
       selector: ".generic-box.profile-entity-card",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация сайта с рейтингами */
       tag: ["QS", "fade"],
       selector: ".generic-box.user-achievements",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация сайта с рейтингами */
       tag: ["QSA", "fade"],
       selector: ".generic-box.leaderboard",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация сайта с рейтингами */
@@ -4935,11 +4377,11 @@ export const styles = () => {
       selector: ".search-panel__input-wrapper > input",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
         borderRadius: "0.7rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4948,11 +4390,11 @@ export const styles = () => {
       selector: ".generic-selector__itself",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
         borderRadius: "0.7rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4961,11 +4403,11 @@ export const styles = () => {
       selector: ".search-panel__button-search",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
         borderRadius: "0.7rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4974,11 +4416,11 @@ export const styles = () => {
       selector: ".my-favorites__list",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
         borderRadius: "0.7rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -4987,9 +4429,9 @@ export const styles = () => {
       selector: ".progress-bar",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem"
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)"
       }
     },
 
@@ -4998,9 +4440,9 @@ export const styles = () => {
       selector: "#app-root > main > div.generic-box.panel.stats-panel > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem"
+        background: "var(--gradient-transparent-light)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)"
       }
     },
 
@@ -5009,9 +4451,9 @@ export const styles = () => {
       selector: ".progress-bar__bar",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
+        background: "var(--gradient-white-dark)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
         position: "absolute",
         height: "1.5rem",
         left: "0.1rem"
@@ -5023,9 +4465,9 @@ export const styles = () => {
       selector: "#app-root > main > div.generic-box.panel.stats-panel > section.stats-panel__foot > div.stats-panel__achievements-wrapper > div > div.stats-panel__achievements-bar-wrapper > div > div.progress-bar__bar",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.2) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
+        background: "var(--gradient-white-dark)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
         position: "absolute",
         height: "1.55rem",
         bottom: "0.1rem",
@@ -5038,10 +4480,10 @@ export const styles = () => {
       selector: ".lang-selector__list",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)"
       }
     },
 
@@ -5050,7 +4492,7 @@ export const styles = () => {
       selector: ".lang-selector__list-item",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)"
+        background: "var(--gradient-transparent)"
       }
     },
 
@@ -5149,11 +4591,11 @@ export const styles = () => {
       selector: ".Common-flexCenterAlignCenterColumn.TierItemComponentStyle-receivedItemPremium",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 204, 0, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent-light)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-gold-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -5162,11 +4604,11 @@ export const styles = () => {
       selector: ".Common-flexCenterAlignCenterColumn.TierItemComponentStyle-tierPremium",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 204, 0, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-gold-light)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         height: "11.92rem"
       }
     },
@@ -5174,27 +4616,13 @@ export const styles = () => {
     { /* стилизация разделов с челленджами */
       tag: ["QSA", "BHV", "fade"],
       selector: ".Common-flexCenterAlignCenterColumn.TierItemComponentStyle-receivedItem",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация разделов с челленджами */
       tag: ["QS", "BHV", "fade"],
       selector: ".Common-flexCenterAlignCenterColumn.TierItemComponentStyle-getItemNow",
-      styles:
-      {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
-      }
+      styles: bsGlass("light", "dark", "md")
     },
 
     { /* стилизация разделов с челленджами */
@@ -5202,11 +4630,11 @@ export const styles = () => {
       selector: ".Common-flexCenterAlignCenterColumn.TierItemComponentStyle-tierCommon",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)",
         height: "11.92rem"
       }
     },
@@ -5216,11 +4644,11 @@ export const styles = () => {
       selector: ".ChallengePurchaseComponentStyle-buttonBattlePass",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -5229,11 +4657,11 @@ export const styles = () => {
       selector: ".ChallengeTierComponentStyle-blockTier .Common-flexCenterAlignCenterColumn",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 204, 0, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)"
+        background: "var(--gradient-transparent)",
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-gold-medium)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-dark)"
       }
     },
 
@@ -5278,10 +4706,10 @@ export const styles = () => {
       selector: "#root > div.Common-container > div.Common-entranceGradient > div.Common-flexStartAlignStartColumn",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(176, 176, 176, 0.7) 0%, rgba(176, 176, 176, 0.7) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "1.2rem",
-        boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-gray-medium)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-inset-dark)",
         top: "auto",
         bottom: "3em",
         right: "3em",
@@ -5294,10 +4722,10 @@ export const styles = () => {
       selector: ".PaintsCollectionComponentStyle-favoriteIconContainer",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "2rem",
-        boxShadow: "inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+        background: "var(--gradient-transparent-dark)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-round)",
+        boxShadow: "var(--shadow-inset-dark)",
         width: "1.5rem",
         height: "1.5rem"
       }
@@ -5318,7 +4746,7 @@ export const styles = () => {
       selector: ".TableMainQuestComponentStyle-timerTable, .ContractCardComponentStyle-timer, .TimeLeftComponentStyle-timeLeftContainer, .ShowcaseItemComponentStyle-discountContainer > p",
       styles:
       {
-        background: "rgba(255, 255, 255, 1)",
+        background: "var(--color-white)",
         borderRadius: "0.7rem",
         color: "black"
       }
@@ -5329,7 +4757,7 @@ export const styles = () => {
       selector: ".MainQuestComponentStyle-timer",
       styles:
       {
-        background: "rgba(255, 255, 255, 1)",
+        background: "var(--color-white)",
         borderRadius: "0.7rem"
       }
     },
@@ -5339,7 +4767,7 @@ export const styles = () => {
       selector: ".Common-headerTimer",
       styles:
       {
-        background: "rgba(255, 255, 255, 1)",
+        background: "var(--color-white)",
         borderRadius: "0.7rem"
       }
     },
@@ -5354,36 +4782,36 @@ export const styles = () => {
       }
     },
 
-          { /* стилизация чата в битве */
-              cssStyles: `
-                  .BattleChatComponentStyle-inputContainerAll.slideIn > input {
-                      flex-grow: 0.8 !important;
-                  }
-              `
+    { /* стилизация чата в битве */
+      cssStyles: `
+        .BattleChatComponentStyle-inputContainerAll.slideIn > input {
+            flex-grow: 0.8 !important;
+        }
+      `
     },
 
-          { /* стилизация чата в битве */
-              cssStyles: `
-                  .BattleChatComponentStyle-inputContainerAllies > input {
-                      flex-grow: 0.1 !important;
-                  }
-              `
-          },
+    { /* стилизация чата в битве */
+      cssStyles: `
+        .BattleChatComponentStyle-inputContainerAllies > input {
+            flex-grow: 0.1 !important;
+        }
+      `
+    },
 
-          { /* стилизация чата в битве */
-              cssStyles: `
-                  .BattleChatComponentStyle-inputContainerAll > input {
-                      flex-grow: 0.4 !important;
-                  }
-              `
-          },
+    { /* стилизация чата в битве */
+      cssStyles: `
+        .BattleChatComponentStyle-inputContainerAll > input {
+            flex-grow: 0.4 !important;
+        }
+      `
+    },
 
-          { /* стилизация раздела создания битвы */
-              cssStyles: `
-                  #root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle > div:hover {
-                      scrollbar-width: thin !important;
-                  }
-              `
+    { /* стилизация раздела создания битвы */
+      cssStyles: `
+        #root > div > div.BattleCreateComponentStyle-mainContainer > div.ProBattlesComponentStyle-rightPanel.Common-flexSpaceBetween > div > div.MainSectionComponentStyle-commonBlockCheckBoxCreateBattle.ProBattleCommonStyleMobile-commonBlockCheckBoxCreateBattle > div:hover {
+            scrollbar-width: thin !important;
+        }
+      `
     },
 
     { /* стилизация закупа припасов в гараже */
@@ -5391,8 +4819,8 @@ export const styles = () => {
       selector: ".SaleByKitStyle-commonBlockModal",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        borderRight: "0.15rem solid rgba(255, 255, 255, 0.1)"
+        background: "var(--gradient-transparent)",
+        borderRight: "var(--border-width) solid var(--border-color-medium)"
       }
     },
 
@@ -5401,37 +4829,37 @@ export const styles = () => {
       selector: ".SaleByKitStyle-commonCard",
       styles:
       {
-        background: "radial-gradient(50% 100% at 50% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 0%)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.1)",
-        borderRadius: "2rem",
+        background: "var(--gradient-transparent)",
+        border: "var(--border-width) solid var(--border-color-medium)",
+        borderRadius: "var(--border-radius-round)",
         boxShadow: "none"
       }
     },
 
-          { /* стилизация чата в битве/стилизация списка никнеймов в друзьях/инвайтах/списка битв */
-              cssStyles: `
-                  .UserGroupTitleButtonComponentStyle-commonBlockGroup, .FriendListComponentStyle-nickName, .InvitationWindowsComponentStyle-usersScroll > div > div > div:nth-child(2), .ProBattleCommonStyleMobile-blockModesFilter > div.Common-flexCenterAlignCenter > div.Common-flexStartAlignCenter > p, .BattleModesComponentStyle-button > div.Common-flexStartAlignCenter.BattleModesComponentStyle-fund > div.Common-flexStartAlignCenter:nth-child(2), .BattleModesComponentStyle-button > .Common-flexCenterAlignCenter, .BattleCreateComponentStyle-mainContainer.ProBattlesComponentStyle-mainContainer.Common-flexStartAlignStart > div.Common-flexStartAlignCenterColumn > div, .MapCardComponentStyle-message > span, .MapCardComponentStyle-imgSelectCard {
-                      filter: saturate(0) !important;
-                  }
+    { /* стилизация чата в битве/стилизация списка никнеймов в друзьях/инвайтах/списка битв */
+      cssStyles: `
+        .UserGroupTitleButtonComponentStyle-commonBlockGroup, .FriendListComponentStyle-nickName, .InvitationWindowsComponentStyle-usersScroll > div > div > div:nth-child(2), .ProBattleCommonStyleMobile-blockModesFilter > div.Common-flexCenterAlignCenter > div.Common-flexStartAlignCenter > p, .BattleModesComponentStyle-button > div.Common-flexStartAlignCenter.BattleModesComponentStyle-fund > div.Common-flexStartAlignCenter:nth-child(2), .BattleModesComponentStyle-button > .Common-flexCenterAlignCenter, .BattleCreateComponentStyle-mainContainer.ProBattlesComponentStyle-mainContainer.Common-flexStartAlignStart > div.Common-flexStartAlignCenterColumn > div, .MapCardComponentStyle-message > span, .MapCardComponentStyle-imgSelectCard {
+            filter: var(--filter-saturate-none) !important;
+        }
 
         .FriendListComponentStyle-greenTextOnline, .InvitationWindowsComponentStyle-onlineLabel, .ProBattlesComponentStyle-createBattleButton > p, .FormatsSectionComponentStyle-selectedCard.cardImg > div.Common-flexCenterAlignCenterColumn > h2, .ClosedContainerStyle-moreButton > span, #root > div > div > div.BattleRewardsComponentStyle-commonBlockButtonRewards > div > div > div > div.Common-flexCenterAlignCenter > h2 {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
 
         .FormatsSectionComponentStyle-unSelectedCard:hover > div:nth-child(4) > h2 {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
-              `
-          },
+      `
+    },
 
     { /* стилизация раздела с битвами/раздела званий/карточек/гаража */
       cssStyles: `
         .ProBattleCommonStyleMobile-blockModesFilter .Common-maskImageContain, .ProBattlesComponentStyle-cellName span, .UserProgressComponentStyle-rankScore, .UserProgressComponentStyle-rankProgressBarContainerLegend, .BattlePickComponentStyle-blockForCrystalXP > div:nth-child(2), .Common-backgroundImageCover.modeLimitIcon > div.Common-flexSpaceBetweenAlignStretch > div > div > img, td.Common-flexSpaceBetweenAlignCenter.ProBattlesComponentStyle-cellName > div.Common-flexStartAlignCenter > img, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-flexSpaceBetweenAlignStretch, .Common-flexCenterAlignCenterColumn.blockCard, .ProBattlesComponentStyle-commonBlockHotkeyV > div > div, .ProBattlesComponentStyle-chatIcon, .SkinCellStyle-nameDevices {
-          filter: saturate(0) !important;
+          filter: var(--filter-saturate-none) !important;
         }
 
         .MainQuestComponentStyle-messageReward {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
 
         .iconsMission:hover .MainQuestComponentStyle-messageReward {
@@ -5470,7 +4898,7 @@ export const styles = () => {
     { /* стилизация раздела с заданками */
       cssStyles: `
         .MainQuestComponentStyle-progress, .TableMainQuestComponentStyle-progressTableMission {
-          filter: saturate(0) drop-shadow(0rem 0rem 0.2rem rgba(255, 255, 255, 1));
+          filter: var(--filter-saturate-none) drop-shadow(0rem 0rem 0.2rem var(--color-white));
         }
 
         .MainQuestComponentStyle-scrollContainer {
@@ -5482,11 +4910,11 @@ export const styles = () => {
     { /* стилизация ммной статы/кнопок навигации/челленджа/према */
       cssStyles: `
         .BattleResultQuestProgressComponentStyle-progressContainer, .BlockResultTankComponentStyle-gsContainer > img, .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn, .BattleResultUserInfoComponentStyle-xp > img, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td > img, .BattleResultNavigationComponentStyle-button > img, .HeaderComponentStyle-backArrowBlock, .BreadcrumbsComponentStyle-rightButtonsContainer > .Common-flexCenterAlignCenter > .Common-backgroundImageContain, .BreadcrumbsComponentStyle-iconLogout, .IconStyle-iconBackArrow, .IconStyle-iconLogOff, .TierItemComponentStyle-receivedItem > .TierIconComponentStyle-icons, .TierHeaderComponentStyle-descriptionTier {
-          filter: saturate(0) !important;
+          filter: var(--filter-saturate-none) !important;
         }
 
         .BattleResultQuestProgressComponentStyle-text:nth-child(2), .BattleResultUserInfoComponentStyle-rankNameContainer > span, .BattleResultUserInfoComponentStyle-xp > span, .BattleRewardsComponentStyle-commonBlockButtonRewards > div > table > tr > td:nth-child(2) > span, .BasePaymentComponentStyle-buttonContainer > div > span, .PaymentInfoComponentStyle-currency, .SuccessfulPurchaseComponentStyle-container > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-content > .Common-flexCenterAlignCenter > span, .SuccessfulPurchaseComponentStyle-reward > .Common-flexEndAlignStartColumn > span, .ChallengePurchaseComponentStyle-spanStyleWidthHotKey > span, .UserTitleComponentStyle-premiumButton > span {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
 
         .BattleResultUserInfoComponentStyle-containerProgress > .Common-displayFlexColumn::after {
@@ -5500,7 +4928,7 @@ export const styles = () => {
       selector: ".MainQuestComponentStyle-cardPlay > div > h4, .MainQuestComponentStyle-commonDescriptionProgress > div > h4, .MainQuestComponentStyle-commonCard > div > h4, .ClanCommonStyle-onlineNickName, .ClanInfoComponentStyle-buttonEditProfile > span, .ClanMembersListComponentStyle-buyClanPlaceButton > span, .ClanCommonStyle-buttonInvite > span, .TutorialModalComponentStyle-mediaContainer.MainQuestComponentStyle-mediaContainer > div > h2, .MainQuestComponentStyle-buttonContainer > span, .ClanStatisticsComponentStyle-areCommonSpanOnline, .ClanInvitationsComponentStyle-sendButton > span, .ClanInfoComponentStyle-clanForeignActions > div.Common-flexCenterAlignCenter:nth-child(3) > span",
       styles:
       {
-        color: "rgba(222, 184, 135, 1)"
+        color: "var(--color-primary)"
       }
     },
 
@@ -5509,7 +4937,7 @@ export const styles = () => {
       selector: ".GameSettingsStyle-button > span, .SettingsComponentStyle-slider > p > span, .TwitchSettingsRendersStyle-button > span, .TwitchSettingsRendersStyle-nick, .ChatComponentStyle-chatRegularUser, .MainQuestComponentStyle-cardRewardCompleted.iconsMission.MainQuestComponentStyle-animationImgHover> div.Common-flexCenterAlignCenterColumn > h4, .SuperMissionComponentStyle-buttonCollect > span, .SecuritySettingsComponentStyle-button > span, .SecuritySettingsComponentStyle-activation2FaButton > span",
       styles:
       {
-        color: "rgba(222, 184, 135, 1)"
+        color: "var(--color-primary)"
       }
     },
 
@@ -5538,7 +4966,7 @@ export const styles = () => {
       selector: ".GarageItemComponentStyle-descriptionDevice > h2, .GarageCommonStyle-animatedBlurredRightBlock > div > div > h2:nth-child(2)",
       styles:
       {
-        color: "rgba(222, 184, 135, 1)",
+        color: "var(--color-primary)",
         textShadow: "rgb(255, 204, 0) 0px 0px 0.375em",
         zIndex: "9"
       }
@@ -5549,14 +4977,14 @@ export const styles = () => {
       selector: ".SquarePriceButtonComponentStyle-commonBlockButton > .Common-flexEndAlignEnd > span, .ItemDescriptionComponentStyle-textModal > a > u, .TutorialModalComponentStyle-navigationButton > span, .GarageCommonStyle-animatedBlurredRightBlock > div.Common-displayFlexColumn > div > span.Font-bold.Common-flexEnd.Common-whiteSpaceNoWrap, .TanksPartComponentStyle-tankPartUpgrades.GarageCommonStyle-animatedBlurredRightBlock > div > div > span",
       styles:
       {
-        color: "rgba(222, 184, 135, 1)"
+        color: "var(--color-primary)"
       }
     },
 
     { /* стилизация контекстного меню/чата/клана */
       cssStyles: `
         .ContextMenuStyle-menuItem.ContextMenuStyle-menuItemRank > div > div > div > span, #root > div > div.ProBattlesComponentStyle-mainContainer > div.Common-flexStartAlignCenterColumn > div.Common-flexStartAlignStretchColumn > div.Common-flexStartAlignCenter > div > span, .ChatComponentStyle-channelSelect {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
 
         .ClanCommonStyle-offlineNickName {
@@ -5568,13 +4996,13 @@ export const styles = () => {
     { /* стилизация раздела с контами */
       cssStyles: `
         .DeviceButtonComponentStyle-blockAlterations > div > span {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
 
         .ContainersComponentStyle-countBlock > div, .TanksPartComponentStyle-amountItems {
-          box-shadow: rgba(222, 184, 135, 1) 0em 0em 1em 0em !important;
-          background: rgba(222, 184, 135, 1);
-          background-color: rgba(222, 184, 135, 1) !important;
+          box-shadow: var(--color-primary) 0em 0em 1em 0em !important;
+          background: var(--color-primary);
+          background-color: var(--color-primary) !important;
         }
       `
     },
@@ -5584,7 +5012,7 @@ export const styles = () => {
       selector: ".JoinToBattleComponentStyle-buttonJoin > span, .NotificationViewStyle-blockButtonAndTimer > div > div > span, .NotificationViewStyle-descriptionNotification > div > span:nth-child(2), .BattleSelectDialogComponentStyle-container > span > a > u, .UserProgressComponentStyle-buttonOk > div > h2, .PopupMessageComponentStyle-buttonsContainer > .Common-flexCenterAlignCenter:nth-child(2) > span",
       styles:
       {
-        color: "rgba(222, 184, 135, 1)"
+        color: "var(--color-primary)"
       }
     },
 
@@ -5599,11 +5027,11 @@ export const styles = () => {
     { /* стилизация карточек в режимах битв/рег меню/финальной статистики/контейнеров */
       cssStyles: `
         .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(1) > h2, .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > span, .HeaderComponentStyle-siteLink.menuItemClass:hover > .EntranceComponentStyle-fontStyleLabel, .HeaderComponentStyle-siteLink.menuItemClass:hover > .HeaderComponentStyle-textLink > span, .ButtonComponentStyle-disabled.BattleResultNavigationComponentStyle-disabledButtonWithTimer.BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter > span, .BattleResultNavigationComponentStyle-buttonNextWithTimer.BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter > span {
-          color: rgba(222, 184, 135, 1) !important;
+          color: var(--color-primary) !important;
         }
 
         .Common-flexSpaceBetweenAlignCenterColumn.descriptionMode.blockCard:hover > div:nth-child(2), .HeaderComponentStyle-siteLink.menuItemClass:hover > .Common-flexCenterAlignCenter, .BattleResultNavigationComponentStyle-buttonWithTimer.Common-flexCenterAlignCenterColumn.Common-displayFlexColumn.Common-displayFlex.Common-alignCenter > img, .TableComponentStyle-thead, .ContainersComponentStyle-chatIcon {
-          filter: saturate(0);
+          filter: var(--filter-saturate-none);
         }
       `
     },
@@ -5630,7 +5058,7 @@ export const styles = () => {
       cssStyles: `
         .BreadcrumbsComponentStyle-headerContainer > div.BreadcrumbsComponentStyle-rightButtonsContainer > div.Common-flexCenterAlignCenter > div, .UserScoreComponentStyle-blockRightPanel > .Common-flexCenterAlignCenter > .Common-maskImage.Common-maskImageContain, div.ProBattlesComponentStyle-mainContainer > div.Common-flexCenterAlignStart.Common-alignSelfStart.Common-flexStartAlignStart.Common-flexWrapNowrap.Common-scrollBarVisible > div > table > thead {
           border-radius: 0rem !important;
-          filter: saturate(0) !important;
+          filter: var(--filter-saturate-none) !important;
         }
       `
     },
@@ -5639,7 +5067,7 @@ export const styles = () => {
       cssStyles: `
         .NewBattleCreateInputStyle-settings .Common-backgroundImageContain {
           z-index: 1 !important;
-          filter: saturate(0) !important;
+          filter: var(--filter-saturate-none) !important;
         }
 
         .ProBattlesComponentStyle-borderLineCell.ProBattlesComponentStyle-cellPlayers.ProBattlesComponentStyle-fontCellRegular, .BattleCardComponentStyle-battleInfo {
@@ -5699,11 +5127,11 @@ export const styles = () => {
           height: "3.3rem",
           minHeight: "0",
           width: "23rem",
-          border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-          borderRadius: "1.2rem",
-          backdropFilter: "blur(0.2rem)",
+          border: "var(--border-width) solid var(--border-color-dark)",
+          borderRadius: "var(--border-radius-xl)",
+          backdropFilter: "var(--blur-sm)",
           marginBottom: "0.5rem",
-          boxShadow: "0rem 0rem 0.5rem 0.05rem rgba(0, 0, 0, 0.55), inset 0rem 0rem 0.5rem 0.15rem rgba(0,0,0,0.3)",
+          boxShadow: "var(--shadow-medium), var(--shadow-inset-dark)",
         }
     },
 
@@ -5733,8 +5161,8 @@ export const styles = () => {
       styles:
         {
           backgroundColor: "rgba(255, 255, 255, 0.5)",
-          backdropFilter: "blur(0.3rem)",
-          borderRadius: "1.2rem"
+          backdropFilter: "var(--blur-md)",
+          borderRadius: "var(--border-radius-xl)"
         }
     },
 
@@ -5754,10 +5182,10 @@ export const styles = () => {
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.5rem",
-        boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xxl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
     
@@ -5767,9 +5195,9 @@ export const styles = () => {
       styles:
       {
         background: "rgba(255, 255, 255, 0.1)",
-        backdropFilter: "blur(0.2rem)",
-        borderRadius: "1.5rem",
-        boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-sm)",
+        borderRadius: "var(--border-radius-xxl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -5779,17 +5207,17 @@ export const styles = () => {
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1rem",
-        boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-md)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
     { /* стилизация раздела с магазом*/
       cssStyles: `
         .LargeSingleCardComponentStyle-commonBlock > .Common-flexCenterAlignCenterColumn.Common-backgroundImageCover {
-          border-radius: 1.5rem !important;
+          border-radius: var(--border-radius-xxl) !important;
           box-shadow: rgba(0, 0, 0, 0.5) 0rem 0rem 1rem 0.1rem, rgba(0, 0, 0, 0.3) 0rem 0rem 0.25rem 0.05rem inset !important;
         }
       `
@@ -5801,10 +5229,10 @@ export const styles = () => {
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -5814,10 +5242,10 @@ export const styles = () => {
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
-        backdropFilter: "blur(0.2rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.5rem",
-        boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-sm)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xxl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -5827,10 +5255,10 @@ export const styles = () => {
       styles:
       {
         background: "black",
-        border: "0.150rem solid rgba(255, 255, 255, 0.3)",
-        borderRadius: "1.1rem",
+        border: "var(--border-width) solid var(--border-color-darker)",
+        borderRadius: "var(--border-radius-lg)",
         transform: "scale(1)",
-        boxShadow: "0rem 0rem 0rem 0rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -5867,10 +5295,10 @@ export const styles = () => {
       styles:
       {
         background: "rgba(0, 0, 0, 0.2)",
-        backdropFilter: "blur(0.5rem)",
-        border: "0.150rem solid rgba(255, 255, 255, 0.2)",
-        borderRadius: "1.2rem",
-        boxShadow: "0rem 0rem 1rem 0.10rem rgba(0, 0, 0, 0), inset 0rem 0rem 0.250rem 0.05rem rgba(0,0,0,0.3)"
+        backdropFilter: "var(--blur-lg)",
+        border: "var(--border-width) solid var(--border-color-dark)",
+        borderRadius: "var(--border-radius-xl)",
+        boxShadow: "var(--shadow-none), var(--shadow-inset-light)"
       }
     },
 
@@ -5879,7 +5307,7 @@ export const styles = () => {
       selector: ".ShopBuyButtonComponentStyle-container > .Common-flexStartAlignCenter > div, .ShopBuyButtonComponentStyle-container > h4, .ConverterDialogComponentStyle-sliderButton > img, .SquarePriceButtonComponentStyle-paddingPriceStyleButton, .GarageCommonStyle-bigActionButton.MountedItemsComponentStyleMobile-widthHeightButtonGarage > .Common-flexCenterAlignCenter > .Common-backgroundImage",
       styles:
       {
-        filter: "invert(1) saturate(0)"
+        filter: "invert(1) var(--filter-saturate-none)"
       }
     },
 
@@ -5910,6 +5338,8 @@ export const styles = () => {
     }
   ];
 
+  if (!cssStyles) {cssStyles = document.createElement('style'); document.head.appendChild(cssStyles);} cssStyles.textContent = cssVariables + '\n';
+
   elements.forEach((element) => {
     let selectedElements;
 
@@ -5927,6 +5357,5 @@ export const styles = () => {
             el.addEventListener('mouseleave', () => {el.classList.remove('is-hovered'); resetTransform(el);});}}});}
 
     if (element.cssStyles) {
-      if (!cssStyles) {cssStyles = document.createElement('style'); document.head.appendChild(cssStyles);}
-        if (!cssStyles.textContent.includes(element.cssStyles)) {cssStyles.textContent += element.cssStyles;}}});
+      if (!cssStyles.textContent.includes(element.cssStyles)) {cssStyles.textContent += element.cssStyles;}}});
 };

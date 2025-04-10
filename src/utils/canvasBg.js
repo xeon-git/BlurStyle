@@ -1,83 +1,82 @@
-import {saveToLocalStorage, getFromLocalStorage} from '../utils/storage';
+import {saveToLocalStorage, getFromLocalStorage} from './storage';
+
+let activeCanvases = new Map();
+let globalObserver = null;
 
 export const canvasBg = () => {
   let spaceAnim = getFromLocalStorage('spaceAnim', true);
 
-  const styleBlock = document.createElement('style'); styleBlock.innerHTML = `
-    .ApplicationLoaderComponentStyle-container {position: fixed; overflow: hidden;}
-    .canvasWrapper {position: fixed; top: 0; left: 0; z-index: 99;}
-    canvas {display: block; position: fixed;}`; document.head.appendChild(styleBlock);
+  const styleBlock = document.createElement('style'); 
+    styleBlock.textContent = `.ApplicationLoaderComponentStyle-container {position: fixed; overflow: hidden;} .bs-canvas-wrapper {position: fixed; top: 0; left: 0; z-index: 99;}.bs-star-canvas {display: block; position: fixed;}`; document.head.appendChild(styleBlock);
+
+  const createStar = (canvas) => {
+    const star = {canvas, X: canvas.width / 2, Y: canvas.height / 2, SX: Math.random() * 10 - 5, SY: Math.random() * 10 - 5, W: 1, H: 1, age: 0, dies: 500, C: '#ffffff',
+      draw: () => {
+        if (!star.canvas) return;
+
+        const ctx = star.canvas.getContext('2d'); star.X += star.SX; star.Y += star.SY; star.SX += star.SX / 50; star.SY += star.SY / 50; star.age++;
+          if (star.age === 50 || star.age === 150 || star.age === 300) {star.W++; star.H++;} ctx.fillStyle = star.C; ctx.fillRect(star.X, star.Y, star.W, star.H);},
+      
+      isOutOfBounds: () => {
+        return (star.X + star.W < 0 || star.X > star.canvas.width || star.Y + star.H < 0 || star.Y > star.canvas.height);}};
+
+    const start = star.canvas.width > star.canvas.height ? star.canvas.width : star.canvas.height; star.X += (star.SX * start) / 10; star.Y += (star.SY * start) / 10;
+      return star;};
 
   const applyAnimationToBackground = (loadBg) => {
-    if (!loadBg) return;
+    if (!loadBg || !spaceAnim || activeCanvases.has(loadBg)) return;
 
-    if (loadBg.dataset.animationInitialized) return; loadBg.dataset.animationInitialized = true;
-
-    const canvas = document.createElement('canvas'); canvas.id = 'field';
-
-    const canvasWrapper = document.createElement('div'); canvasWrapper.className = 'canvasWrapper'; loadBg.appendChild(canvasWrapper); canvasWrapper.appendChild(canvas); canvas.width = loadBg.clientWidth; canvas.height = loadBg.clientHeight;
-
+    const canvasWrapper = document.createElement('div'); canvasWrapper.className = 'bs-canvas-wrapper'; loadBg.appendChild(canvasWrapper);
+    const canvas = document.createElement('canvas'); canvas.className = 'bs-star-canvas'; canvas.width = loadBg.clientWidth; canvas.height = loadBg.clientHeight; canvasWrapper.appendChild(canvas);
     const stars = [];
     const starsToDraw = (canvas.width * canvas.height) / 5000;
 
-    let animationInterval;
-
     const draw = () => {
-      if (!spaceAnim || !loadBg || !canvas || !canvas.getContext) {clearInterval(animationInterval);
-        return;}
-
+      if (!spaceAnim || !activeCanvases.has(loadBg)) return;
       if (canvas.width !== loadBg.clientWidth) {canvas.width = loadBg.clientWidth;}
-
       if (canvas.height !== loadBg.clientHeight) {canvas.height = loadBg.clientHeight;}
 
       const ctx = canvas.getContext('2d'); ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        while (stars.length < starsToDraw) {stars.push(createStar(canvas));}
+          for (let i = stars.length - 1; i >= 0; i--) {
+            const star = stars[i]; star.draw();
+              if (star.isOutOfBounds()) {stars.splice(i, 1);}}};
 
-      while (stars.length < starsToDraw) {stars.push(new Star(canvas));} stars.forEach((star, index) => {star.draw();
-        if (star.isOutOfBounds()) {stars.splice(index, 1);}});};
-
-    class Star {
-      constructor(canvas) {this.canvas = canvas; this.X = canvas.width / 2; this.Y = canvas.height / 2; this.SX = Math.random() * 10 - 5; this.SY = Math.random() * 10 - 5;
-        const start = canvas.width > canvas.height ? canvas.width : canvas.height; this.X += (this.SX * start) / 10; this.Y += (this.SY * start) / 10; this.W = 1; this.H = 1; this.age = 0; this.dies = 500; this.C = '#ffffff';}
-
-      draw() {
-        if (!this.canvas) return;
-
-        const ctx = this.canvas.getContext('2d'); this.X += this.SX; this.Y += this.SY; this.SX += this.SX / 50; this.SY += this.SY / 50; this.age++;
-
-        if (this.age === 50 || this.age === 150 || this.age === 300) {this.W++; this.H++;} ctx.fillStyle = this.C; ctx.fillRect(this.X, this.Y, this.W, this.H);}
-
-      isOutOfBounds() {
-        return (this.X + this.W < 0 || this.X > this.canvas.width || this.Y + this.H < 0 || this.Y > this.canvas.height);}}
-
-    animationInterval = setInterval(draw, 20); loadBg.dataset.animationInterval = animationInterval; loadBg.dataset.canvasId = canvas.id;};
+    const animationInterval = setInterval(draw, 20); activeCanvases.set(loadBg, {wrapper: canvasWrapper, interval: animationInterval});};
 
   const removeAnimationFromBackground = (loadBg) => {
-    if (!loadBg) return;
+    if (!loadBg || !activeCanvases.has(loadBg)) return;
 
-    const animationInterval = loadBg.dataset.animationInterval;
-    const canvasId = loadBg.dataset.canvasId;
+    const {wrapper, interval} = activeCanvases.get(loadBg); clearInterval(interval); wrapper && wrapper.remove(); activeCanvases.delete(loadBg);};
 
-    clearInterval(animationInterval);
+    const toggleAnimation = () => {spaceAnim = !spaceAnim;
+      if (!spaceAnim) {
+        activeCanvases.forEach((_, loadBg) => {removeAnimationFromBackground(loadBg);}); activeCanvases.clear();}
+          else {
+            document.querySelectorAll('.ApplicationLoaderComponentStyle-container').forEach((node) => {applyAnimationToBackground(node);});} saveToLocalStorage('spaceAnim', spaceAnim);
+              document.dispatchEvent(new CustomEvent('bs-settings-change', {detail: {key: 'spaceAnim', value: spaceAnim}}));
+                return spaceAnim;};
 
-    if (canvasId) {
-      const canvasElement = document.getElementById(canvasId);
-        if (canvasElement) {canvasElement.parentNode.remove();}}
-          delete loadBg.dataset.animationInterval; delete loadBg.dataset.canvasId; delete loadBg.dataset.animationInitialized;};
+  window.toggleStarAnimation = toggleAnimation;
 
-  const toggleAnimation = () => {
-    if (spaceAnim) {document.querySelectorAll('.ApplicationLoaderComponentStyle-container').forEach((node) => {removeAnimationFromBackground(node);});}
-     else {document.querySelectorAll('.ApplicationLoaderComponentStyle-container').forEach((node) => {applyAnimationToBackground(node);});}
-      spaceAnim = !spaceAnim; saveToLocalStorage('spaceAnim', spaceAnim);};
+  if (globalObserver) {globalObserver.disconnect(); globalObserver = null;}
 
-  const observer = new MutationObserver((mutations) => {mutations.forEach((mutation) => {mutation.addedNodes.forEach((node) => {
-    if (node.nodeType === 1 && node.classList.contains('ApplicationLoaderComponentStyle-container')) {applyAnimationToBackground(node);}});
-      mutation.removedNodes.forEach((node) => {
-        if (node.nodeType === 1 && node.classList.contains('ApplicationLoaderComponentStyle-container')) {removeAnimationFromBackground(node);}});});});
+  globalObserver = new MutationObserver((mutations) => {
+    mutations.forEach(mutation => {
+      Array.from(mutation.addedNodes)
+        .filter(node => node.nodeType === 1 && node.classList?.contains('ApplicationLoaderComponentStyle-container'))
+        .forEach(node => spaceAnim && applyAnimationToBackground(node));
+      
+      Array.from(mutation.removedNodes)
+        .filter(node => node.nodeType === 1 && node.classList?.contains('ApplicationLoaderComponentStyle-container'))
+        .forEach(node => removeAnimationFromBackground(node));});});
   
-  observer.observe(document.body, {childList: true, subtree: true});
-
-  document.querySelectorAll('.ApplicationLoaderComponentStyle-container').forEach((node) => {applyAnimationToBackground(node);});
+  globalObserver.observe(document.body, {childList: true, subtree: true, attributes: false, characterData: false});
+  document.querySelectorAll('.ApplicationLoaderComponentStyle-container')
+    .forEach(node => spaceAnim && applyAnimationToBackground(node));
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Insert') {toggleAnimation();}});
+    const hotkey = getFromLocalStorage('hotkey_toggleSpaceAnim', 'Insert');
+    const hotkeysEnabled = getFromLocalStorage('hotkeysEnabled', true);
+      if (event.code === hotkey && hotkeysEnabled) {toggleAnimation();}});
 };

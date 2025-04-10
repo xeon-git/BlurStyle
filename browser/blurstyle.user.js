@@ -1,9 +1,10 @@
 // ==UserScript==
 // @name 		 Blurstyle
-// @version 	 4.3.5
+// @version 	 5.0.0
 // @description  better user experience
 // @author		 xeon | xxnn
-// @match        https://*.tankionline.com/*
+// @match        https://tankionline.com/play/*
+// @match        https://ratings.tankionline.com/*
 // @icon         https://hierophant.host/logo/blurstyle.png
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==

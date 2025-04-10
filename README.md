@@ -10,6 +10,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 - Логистика, стилизация интерфейса: [VK](https://vk.com/id468802366) | DS - <code>.hierophant.</code>
 - Дизайн, моделлинг: [VK](https://vk.com/id362783176) | DS - <code>opium5834</code>
+- Тестирование проекта, идеи для улучшения: [VK](https://vk.com/id855075302) | DS - <code>neontechfox</code>
 - Помощь в выгрузке необходимых скинов, тестирование проекта: [VK](https://vk.com/id259582649) | DS - <code>squirtatrise</code>
 
 ## ![image](https://hierophant.host/logo/download.svg) Установка для браузера
@@ -27,6 +28,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 ## ![image](https://hierophant.host/logo/hotkeys.svg) Горячие клавиши
 
+- <code>Home</code> - Вызов/скрытие меню
 - <code>\\</code> - Отключение/включение фильтра насыщенности и контрастности
 - <code>=</code> - Включение/отключение другой вариации таба с показом резистов
 - <code>]</code> - Отключение/включение анимированного фона в разделах игры
@@ -34,7 +36,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - <code>-</code> - Активация фейковых значений FPS
 - <code>F12</code> - Активация девтулс на клиенте
 
-*(Важное примечание: настройки горячих клавиш сохраняются после перезагрузки)*
+*(Важное примечание: горячие клавиши можно переназначить через меню в разделе "Горячие клавиши")*
 
 ## ![image](https://hierophant.host/logo/plan.svg) В планах реализовать/в разработке
 
@@ -51,6 +53,21 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Баг с дублированием бордера после покупки слота под резист в гараже, если аккаунт новый
 
 ## ![image](https://hierophant.host/logo/changelog.svg) Список изменений
+
+**changelog version 4.3.5 === 5.0.0:**
+- Глобальная переработка стилей и в коем то веке переезд на переменные
+- Глобальный рефакторинг важной логики различных утилит
+- Глобальный хотфикс многих косяков
+- Наконец-то реализовано меню, содержащее в себе огромное количество крутилок и возможностей кастомизации и настройки
+- Реализованы некоторые модальные окна и тултип индикация различных действий для более приятного UX
+- Фейк фпс теперь включается/выключается исключительно через меню и автоматом активируется в битве, если стоит галка в меню
+- Улучшена и дописана логика кастомных ресурсов, теперь можно включать/отключать выборочные ресурсы или вообще все, если кого-то что-то не устраивает
+- Улучшена и переписана логика горячих клавиш, теперь их можно переназначить или вообще отключить, оставив управление чисто тумблерами в настройках
+- Реализована и модернизирована логика для кастомизации через множество переменных
+- Значительно улучшена производительность благодаря рефакторингу логики
+- Чейнджлог и прочая инфа теперь находятся еще и в меню
+- Модернизирована и дописана логика импорта, экспорта и сброса настроек в формате .json прямо с локалки
+- Наконец-то вернулись кастомные бс скины для пушек и корпусов, в данном случае внедрен кастом хр хт, который, в случае чего, можно отключить во вкладке ресурсов
 
 **changelog version 4.3.0 === 4.3.5:**
 - Фиксы и улучшения интерфейса практически во всех разделах игры
@@ -286,6 +303,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 - Logistics, interface styling: [VK](https://vk.com/id468802366) | DS - <code>.hierophant.</code>
 - Design, modeling: [VK](https://vk.com/id362783176) | DS - <code>opium5834</code>
+- Testing the project, ideas for improvement: [VK](https://vk.com/id855075302) | DS - <code>neontechfox</code>
 - Help in uploading necessary skins, testing the project: [VK](https://vk.com/id259582649) | DS - <code>squirtatrise</code>
 
 ## ![image](https://hierophant.host/logo/download.svg) Browser installation
@@ -303,6 +321,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 ## ![image](https://hierophant.host/logo/hotkeys.svg) Hotkeys
 
+- <code>Home</code> - Opening/closing the menu
 - <code>\\</code> - Disable/enable saturation and contrast filter
 - <code>=</code> - Enable/disable another variation of the tab with resists shown
 - <code>]</code> - Disable/enable animated backgrounds
@@ -310,7 +329,7 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - <code>-</code> - Activation of fake FPS values
 - <code>F12</code> - Activate devtools on the client
 
-*(Important note: hotkey settings are retained after reboot)*
+*(Important note: hotkeys can be reassigned via the menu under “Hotkeys”)*
 
 ## ![image](https://hierophant.host/logo/plan.svg) Planned/in development
 
@@ -327,6 +346,21 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
 ## ![image](https://hierophant.host/logo/changelog.svg) List of changes
+
+**changelog version 4.3.5 === 5.0.0:**
+- Global reworking of styles and at some point moving to variables
+- Global refactoring of important logic of various utilities
+- Global hotfix of many bugs
+- Finally implemented the menu, which contains a huge number of twists and opportunities for customization and configuration
+- Implemented some modal windows and tooltip indication of various actions for a more pleasant UX
+- Fake fps is now enabled/disabled exclusively through the menu and is automatically activated in battle if the menu is checked
+- Improved and rewritten custom resources logic, now you can enable/disable selective resources or all of them if someone is not satisfied with something
+- Improved and rewritten the logic of hotkeys, now they can be reassigned or disabled, leaving the control of purely toggle switches in the settings
+- Implemented and modernized logic for customization through multiple variables
+- Significantly improved performance through logic refactoring
+- Changelog and other information is now also in menus
+- Modernized and refactored the logic for importing, exporting and resetting settings in .json format directly from the local area
+- Finally returned custom bs skins for cannons and hulls, in this case custom xp ht is implemented, which, if necessary, can be disabled in the resources tab
 
 **changelog version 4.3.0 === 4.3.5:**
 - Interface fixes and improvements in almost all sections of the game
