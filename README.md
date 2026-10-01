@@ -1,4 +1,4 @@
-## ![image](https://hierophant.host/logo/mini.svg) О проекте
+## ![image](https://hierophant.it/logo/mini.svg) О проекте
 
 BlurStyle — проект, нацеленный на улучшение взаимодействия с игрой "Танки Онлайн", обеспечивающий регулярные обновления пользовательского интерфейса и функционала игры
 
@@ -6,27 +6,27 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 **Видеообзор**: [жмать сюда](https://youtu.be/eIjW4-D2_sw)
 
-## ![image](https://hierophant.host/logo/team.svg) Участвовали в разработке
+## ![image](https://hierophant.it/logo/team.svg) Участвовали в разработке
 
-- Логистика, стилизация интерфейса: [VK](https://vk.com/id468802366) | DS - <code>.hierophant.</code>
-- Дизайн, моделлинг: [VK](https://vk.com/id362783176) | DS - <code>opium5834</code>
-- Тестирование проекта, идеи для улучшения: [VK](https://vk.com/id855075302) | DS - <code>neontechfox</code>
-- Помощь в выгрузке необходимых скинов, тестирование проекта: [VK](https://vk.com/id259582649) | DS - <code>squirtatrise</code>
+- Логистика, стилизация интерфейса: [TG](https://t.me/hierophant_it) | DS - <code>.hierophant.</code>
+- Дизайн, моделлинг: [TG](https://t.me/physicopfizeeeeer) | DS - <code>opium5834</code>
+- Тестирование проекта, идеи для улучшения: [TG](https://t.me/NeonTechFox) | DS - <code>neontechfox</code>
+- Помощь в выгрузке необходимых скинов, тестирование проекта: [TG](https://t.me/squirtatrise) | DS - <code>squirtatrise</code>
 
-## ![image](https://hierophant.host/logo/download.svg) Установка для браузера
+## ![image](https://hierophant.it/logo/download.svg) Установка для браузера
 
 1. Установите/обновите расширение Tampermonkey: [жмать сюда](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://hierophant.host/blurStyle/browser/blurstyle.user.js) | [зеркало](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/browser/blurstyle.user.js)
+2. Установите/обновите скрипт с темой BlurStyle: [жмать сюда](https://hierophant.it/blurStyle/browser/blurstyle.user.js) | [зеркало](https://raw.githubusercontent.com/hierophant-it/BlurStyle/refs/heads/main/mirror/browser/blurstyle.user.js)
 3. Перезагрузите вкладку с игрой, если она открыта
 
-## ![image](https://hierophant.host/logo/download.svg) Установка для клиента
+## ![image](https://hierophant.it/logo/download.svg) Установка для клиента
 
 1. Установите/обновите официальный клиент Танков Онлайн: [жмать сюда](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://hierophant.host/blurStyle/client/app.asar) | [зеркало](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/client/app.asar)
+2. Скачайте/обновите файл с темой app.asar: [жмать сюда](https://hierophant.it/blurStyle/client/app.asar) | [зеркало](https://raw.githubusercontent.com/hierophant-it/BlurStyle/refs/heads/main/mirror/client/app.asar)
 3. После установки клиента и скачивания файла app.asar найдите ярлык с клиентом на рабочем столе, кликните правой кнопкой мыши, перейдите по расположению файла и по папке "resources"
 4. Перенесите с заменой файл app.asar и перезапустите клиент, если он открыт
 
-## ![image](https://hierophant.host/logo/hotkeys.svg) Горячие клавиши
+## ![image](https://hierophant.it/logo/hotkeys.svg) Горячие клавиши
 
 - <code>Home</code> - Вызов/скрытие меню
 - <code>\\</code> - Отключение/включение фильтра насыщенности и контрастности
@@ -38,21 +38,21 @@ BlurStyle — проект, нацеленный на улучшение вза�
 
 *(Важное примечание: горячие клавиши можно переназначить через меню в разделе "Горячие клавиши")*
 
-## ![image](https://hierophant.host/logo/plan.svg) В планах реализовать/в разработке
+## ![image](https://hierophant.it/logo/plan.svg) В планах реализовать/в разработке
 
 - Многофункциональное меню темы, содержащее различные пресеты настроек, крутилки, переключалки для большей модульности и лучшей интеракции с игровым интерфейсом
 - Скинчейнджер, включающий не только все существующие игровые скины, но и кастомные модели из ТХ
 - Конструктор лобби, чтобы каждый мог настроить лобби на свой вкус и цвет
 - Реализовать тему в формате расширения для браузера
 
-## ![image](https://hierophant.host/logo/warning.svg) Список багов, про которые уже известно
+## ![image](https://hierophant.it/logo/warning.svg) Список багов, про которые уже известно
 
 - Отсутствие ховер анимации на кнопке премиума в лобби
 - Рваная трансформация карточек при наведении курсора
 - Проблемы с залипанием ховера в списке битв *(проблемы не с моей стороны)*
 - Баг с дублированием бордера после покупки слота под резист в гараже, если аккаунт новый
 
-## ![image](https://hierophant.host/logo/changelog.svg) Список изменений
+## ![image](https://hierophant.it/logo/changelog.svg) Список изменений
 
 **changelog version 4.3.5 === 5.0.0:**
 - Глобальная переработка стилей и в коем то веке переезд на переменные
@@ -291,7 +291,7 @@ BlurStyle — проект, нацеленный на улучшение вза�
 - Полностью переработан список игроков
 - Абсолютно новые анимации для множества элементов с плавными переходами
 
-## ![image](https://hierophant.host/logo/mini.svg) About project
+## ![image](https://hierophant.it/logo/mini.svg) About project
 
 BlurStyle — is a project aimed at improving interaction with the game "Tanki Online", providing regular updates to the user interface and functionality of the game
 
@@ -299,27 +299,27 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 **Videoreview**: [click here](https://youtu.be/eIjW4-D2_sw)
 
-## ![image](https://hierophant.host/logo/team.svg) Participated in development
+## ![image](https://hierophant.it/logo/team.svg) Participated in development
 
-- Logistics, interface styling: [VK](https://vk.com/id468802366) | DS - <code>.hierophant.</code>
-- Design, modeling: [VK](https://vk.com/id362783176) | DS - <code>opium5834</code>
-- Testing the project, ideas for improvement: [VK](https://vk.com/id855075302) | DS - <code>neontechfox</code>
-- Help in uploading necessary skins, testing the project: [VK](https://vk.com/id259582649) | DS - <code>squirtatrise</code>
+- Logistics, interface styling: [TG](https://t.me/hierophant_it) | DS - <code>.hierophant.</code>
+- Design, modeling: [TG](https://t.me/physicopfizeeeeer) | DS - <code>opium5834</code>
+- Testing the project, ideas for improvement: [TG](https://t.me/NeonTechFox) | DS - <code>neontechfox</code>
+- Help in uploading necessary skins, testing the project: [TG](https://t.me/squirtatrise) | DS - <code>squirtatrise</code>
 
-## ![image](https://hierophant.host/logo/download.svg) Browser installation
+## ![image](https://hierophant.it/logo/download.svg) Browser installation
 
 1. Install/update Tampermonkey extension: [click here](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-2. Install/update the BlurStyle theme script: [click here](https://hierophant.host/blurStyle/browser/blurstyle.user.js) | [mirror](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/browser/blurstyle.user.js)
+2. Install/update the BlurStyle theme script: [click here](https://hierophant.it/blurStyle/browser/blurstyle.user.js) | [mirror](https://raw.githubusercontent.com/hierophant-it/BlurStyle/refs/heads/main/mirror/browser/blurstyle.user.js)
 3. Reload the game tab if it is open
 
-## ![image](https://hierophant.host/logo/download.svg) Client Installation
+## ![image](https://hierophant.it/logo/download.svg) Client Installation
 
 1. Install/update the official Tanks Online client: [click here](https://tankionline.com/desktop/TankiOnlineSetup.exe)
-2. Download/update the theme file app.asar: [click here](https://hierophant.host/blurStyle/client/app.asar) | [mirror](https://raw.githubusercontent.com/xeon-git/BlurStyle/refs/heads/main/mirror/client/app.asar)
+2. Download/update the theme file app.asar: [click here](https://hierophant.it/blurStyle/client/app.asar) | [mirror](https://raw.githubusercontent.com/hierophant-it/BlurStyle/refs/heads/main/mirror/client/app.asar)
 3. After installing the client and downloading the app.asar file, find the shortcut with the client on your desktop, right click, navigate to the file location and the "resources" folder
 4. Transfer the app.asar file with replacement and restart the client if it is open
 
-## ![image](https://hierophant.host/logo/hotkeys.svg) Hotkeys
+## ![image](https://hierophant.it/logo/hotkeys.svg) Hotkeys
 
 - <code>Home</code> - Opening/closing the menu
 - <code>\\</code> - Disable/enable saturation and contrast filter
@@ -331,21 +331,21 @@ BlurStyle — is a project aimed at improving interaction with the game "Tanki O
 
 *(Important note: hotkeys can be reassigned via the menu under “Hotkeys”)*
 
-## ![image](https://hierophant.host/logo/plan.svg) Planned/in development
+## ![image](https://hierophant.it/logo/plan.svg) Planned/in development
 
 - Multifunctional theme menu, containing various settings presets, twiddles, toggles for more modularity and better interaction with the game interface
 - Skinchanger, including not only all existing game skins, but also custom models from TX
 - Lobby builder so that everyone can customize the lobby to their own taste and color
 - Implement theme in browser extension format
 
-## ![image](https://hierophant.host/logo/warning.svg) List of bugs that are already known about
+## ![image](https://hierophant.it/logo/warning.svg) List of bugs that are already known about
 
 - No hover animation on the premium button in the lobby
 - Ripped transformation of cards on mouseover
 - Problems with hover sticking in the battle list *(problems aren't on my side)*
 - Bug with duplication of Borderer after buying a slot for resist in the garage, if the account is new
 
-## ![image](https://hierophant.host/logo/changelog.svg) List of changes
+## ![image](https://hierophant.it/logo/changelog.svg) List of changes
 
 **changelog version 4.3.5 === 5.0.0:**
 - Global reworking of styles and at some point moving to variables
